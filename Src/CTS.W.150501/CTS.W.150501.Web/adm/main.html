@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="app" data-ng-controller="MainCtrl">
+<head>
+    <!-------------------------- Icon   ---------------------------------->
+    <!-- Icon -->
+    <link rel="icon" href="/res/com/img/icon.gif" />
+    <!-------------------------- Meta Tag -------------------------------->
+    <!-- Meta Tag -->
+    <meta name="fragment" content="!" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="CTSoft" />
+    <!-------------------------- Minifer (JSS) --------------------------->
+    <script type="text/javascript" src="/cts/res/jss/base.min.js"></script>
+    <script type="text/javascript" src="/cts/res/jss/base-ext.min.js"></script>
+    <script type="text/javascript" src="/cts/res/lib-ext/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript" src="/cts/res/jss/cts-res.min.js"></script>
+    <script type="text/javascript" src="/cts/res/jss/cts-plugin.min.js"></script>
+    <!-------------------------- Minifer (CSS) --------------------------->
+    <link rel="stylesheet" type="text/css" href="/cts/res/css/base-adm.min.css" />
+
+    <!-------------------------- JSS (Com) ------------------------------->
+    <!-- Com Resources -->
+    <script type="text/javascript" src="/res/com/jss/i18n/messages.js"></script>
+    <script type="text/javascript" src="/res/com/jss/i18n/names.js"></script>
+    <!-- Customize (AngularJS, CTS) -->
+    <script type="text/javascript" src="/res/com/jss/com-cts.js"></script>
+    <!-------------------------- JSS (Adm) ------------------------------->
+    <!-- Adm Resources -->
+    <script type="text/javascript" src="/res/adm/jss/i18n/messages.js"></script>
+    <script type="text/javascript" src="/res/adm/jss/i18n/names.js"></script>
+    <!-- Config -->
+    <script type="text/javascript" src="/res/adm/jss/angular-config.js"></script>
+    <script type="text/javascript" src="/res/adm/jss/route-configs.js"></script>
+    <!-------------------------- JSS (Ctrls) ----------------------------->
+    <script type="text/javascript" src="/res/adm/jss/ctrls/main.js"></script>
+    <!-------------------------- CSS (Adm) ------------------------------->
+    <link rel="stylesheet" type="text/css" href="/res/adm/css/main-style.css" />
+    <!----------------------------------- Title -------------------------->
+    <title>{{$nm('ADM.MAIN.Title')}}</title>
+</head>
+<body>
+    <div id="mainPane" data-ng-show="data.HasAuth">
+        <div id="logoPane">
+            <img src="/res/com/img/logo.gif" style="width: 160px; margin: 10px 30px" />
+        </div>
+        <div id="navBarPane">
+            <treecontrol
+                class="tree-classic"
+                tree-model="treeNavBar.ListData"
+                options="treeNavBar.Options">
+                <a ng-if="node.Path" ui-sref="{{node.Path}}(node.Args)">
+                    <span class="{{node.Icon}}"></span> {{node.MenuName}}
+                </a>
+                <a ng-if="!node.Path">
+                    <span class="{{node.Icon}}"></span> {{node.MenuName}}
+                </a>
+            </treecontrol>
+        </div>
+        <div id="contentPane">
+            <div id="headerContent">
+                <div id="menuIcon">
+                    <span class="glyphicon glyphicon-th-list" ng-click="showHideLeftPane()"></span>
+                </div>
+                <div id="userPane">
+                    {{$nm('ADM.MAIN.Hi')}}, {{data.UserContext.UserName}} | <a href="/adm/users/profile">{{$nm('ADM.MAIN.Profile')}}</a> | <a href ng-click="logout()">{{$nm('ADM.MAIN.Logout')}}</a>
+                </div>
+            </div>
+            <div id="mainContent" ui-view="main"></div>
+        </div>
+    </div>
+    <div class="cts-loading"></div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="app" data-ng-controller="LoginCtrl">
+<head>
+    <!-------------------------- Icon   ---------------------------------->
+    <!-- Icon -->
+    <link rel="icon" href="/res/com/img/icon.gif" />
+    <!-------------------------- Meta Tag -------------------------------->
+    <!-- Meta Tag -->
+    <meta name="fragment" content="!" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="CTSoft" />
+    <!-------------------------- Minifer (JSS) --------------------------->
+    <script type="text/javascript" src="/cts/res/jss/base.min.js"></script>
+    <script type="text/javascript" src="/cts/res/jss/base-ext.min.js"></script>
+    <script type="text/javascript" src="/cts/res/lib-ext/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript" src="/cts/res/jss/cts-res.min.js"></script>
+    <script type="text/javascript" src="/cts/res/jss/cts-plugin.min.js"></script>
+    <!-------------------------- Minifer (CSS) --------------------------->
+    <link rel="stylesheet" type="text/css" href="/cts/res/css/base-adm.min.css" />
+    <!-------------------------- JSS (Com) ------------------------------->
+    <!-- Com Resources -->
+    <script type="text/javascript" src="/res/com/jss/i18n/messages.js"></script>
+    <script type="text/javascript" src="/res/com/jss/i18n/names.js"></script>
+    <!-- Customize (AngularJS, CTS) -->
+    <script type="text/javascript" src="/res/com/jss/com-cts.js"></script>
+    <!-------------------------- JSS (Adm) ------------------------------->
+    <!-- Adm Resources -->
+    <script type="text/javascript" src="/res/adm/jss/i18n/messages.js"></script>
+    <script type="text/javascript" src="/res/adm/jss/i18n/names.js"></script>
+    <!-- Config -->
+    <script type="text/javascript" src="/res/adm/jss/angular-config.js"></script>
+    <script type="text/javascript" src="/res/adm/jss/route-configs.js"></script>
+    <!-------------------------- JSS (Ctrls) ----------------------------->
+    <script type="text/javascript" src="/res/adm/jss/ctrls/login.js"></script>
+    <!-------------------------- CSS (Adm) ------------------------------->
+    <link rel="stylesheet" type="text/css" href="/res/adm/css/login-style.css" />
+    <!----------------------------------- Title -------------------------->
+    <title>{{$nm('ADM.LOGIN.Title')}}</title>
+</head>
+<body>
+    <cts-form-pane id="pnLogin">
+        <div id="pnInfo" style="width: 100%; height: 80px;">
+            <cts-image class="top-1 left-2" src="'/res/adm/img/login.png'" alt="{{$nm('ADM.LOGIN.Login')}}" border="false" transparent="true" style="width: 64px; height: 64px;"></cts-image>
+            <div id="logo" class="left-7">
+                <img src="/res/com/img/logo.gif" style="width: 105px;" />
+            </div>
+            <hr class="top-4 left-1" style="width: 330px;" />
+        </div>
+        <cts-label class="top-5 left-2" text="{{$nm('ADM.LOGIN.Account')}}"></cts-label>
+        <cts-text class="top-5 left-6 width-17" id="txtUser" model="data.UserName" tabindex="10" ui-keypress="{'enter':'auth($event)'}"></cts-text>
+        <cts-label class="top-6 left-2" text="{{$nm('ADM.LOGIN.Password')}}"></cts-label>
+        <cts-password class="top-6 left-6 width-17" id="pwdPass" model="data.Password" tabindex="20" ui-keypress="{'enter':'auth($event)'}"></cts-password>
+        <cts-button class="top-7 left-6" onclick="auth()" tabindex="30" text="{{$nm('ADM.LOGIN.Login')}}"></cts-button>
+    </cts-form-pane>
+</body>
+</html>

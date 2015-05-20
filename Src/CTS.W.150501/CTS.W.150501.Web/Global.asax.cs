@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.SessionState;
+using CTS.W._150501.Models;
 
 namespace CTS.W._150501.Web
 {
@@ -13,7 +9,7 @@ namespace CTS.W._150501.Web
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
-
+            W150501.ApplyResources();
         }
 
         void Application_End(object sender, EventArgs e)
