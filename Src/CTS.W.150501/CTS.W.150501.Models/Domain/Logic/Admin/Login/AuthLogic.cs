@@ -50,7 +50,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Login
             // Khởi tạo biến cục bộ
             var getResult = new AuthDataModel();
             var userCom = new UserCom();
-            var ajaxCom = new AjaxCom();
+            var pageCom = new PageCom();
             // Map dữ liệu
             DataHelper.CopyObject(inputObject, getResult);
             // Lấy thông tin xác thực
@@ -69,7 +69,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Login
                 AppCd = DataLogics.CD_APP_CD_ADM
             };
             // Cập nhật user context
-            ajaxCom.LoadUserContext(context);
+            pageCom.LoadUserContext(context);
             // Kết quả trả về
             return getResult;
         }
