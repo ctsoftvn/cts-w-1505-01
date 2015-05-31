@@ -125,5 +125,57 @@
   <data name="ADM_LOGIN_00002" xml:space="preserve">
     <value>Mật khẩu</value>
   </data>
-  
+
+  <!-- adm/users/profile -->
+  <data name="ADM_USERS_PROFILE_00001" xml:space="preserve">
+    <value>Mật khẩu</value>
+  </data>
+  <data name="ADM_USERS_PROFILE_00002" xml:space="preserve">
+    <value>Mật khẩu mới</value>
+  </data>
+
+  <!-- adm/ma/items/entry -->
+  <data name="ADM_MA_ITEMS_ENTRY_00001" xml:space="preserve">
+    <value>Sản phẩm</value>
+  </data>
+  <data name="ADM_MA_ITEMS_ENTRY_00002" xml:space="preserve">
+    <value>Mã sản phẩm</value>
+  </data>
+  <data name="ADM_MA_ITEMS_ENTRY_00003" xml:space="preserve">
+    <value>Tên sản phẩm</value>
+  </data>
+  <data name="ADM_MA_ITEMS_ENTRY_00004" xml:space="preserve">
+    <value>Tên tìm kiếm</value>
+  </data>
+  <data name="ADM_MA_ITEMS_ENTRY_00005" xml:space="preserve">
+    <value>Tên liên kết</value>
+  </data>
+  <data name="ADM_MA_ITEMS_ENTRY_00006" xml:space="preserve">
+    <value>Loại sản phẩm</value>
+  </data>
+  <data name="ADM_MA_ITEMS_ENTRY_00007" xml:space="preserve">
+    <value>Ảnh sản phẩm</value>
+  </data>
+  <data name="ADM_MA_ITEMS_ENTRY_00008" xml:space="preserve">
+    <value>Nội dung</value>
+  </data>
+  <data name="ADM_MA_ITEMS_ENTRY_00009" xml:space="preserve">
+    <value>Thứ tự</value>
+  </data>
+  <data name="ADM_MA_ITEMS_ENTRY_00010" xml:space="preserve">
+    <value>Phiên bản</value>
+  </data>
+  <data name="ADM_MA_ITEMS_ENTRY_00011" xml:space="preserve">
+    <value>Trạng thái</value>
+  </data>
+  <data name="ADM_MA_ITEMS_ENTRY_00012" xml:space="preserve">
+    <value>Ngôn ngữ</value>
+  </data>
+  <data name="ADM_MA_ITEMS_ENTRY_00013" xml:space="preserve">
+    <value>Danh sách ngôn ngữ</value>
+  </data>
+  <data name="ADM_MA_ITEMS_ENTRY_00014" xml:space="preserve">
+    <value>Số dòng</value>
+  </data>
+
 </root>

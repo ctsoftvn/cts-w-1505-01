@@ -99,12 +99,11 @@
   <Table Name="dbo.APSEOInfos" Member="APSEOInfos">
     <Type Name="APSEOInfo">
       <Column Name="LocaleCd" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="SEOCd" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SEOCd" Type="System.String" DbType="VarChar(250) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="GroupCd" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="MetaTitle" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="MetaDesc" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="MetaKeys" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="SortKey" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="VersionNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="CreateUser" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -219,7 +218,8 @@
       <Column Name="LocaleCd" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="CategoryCd" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="CategoryName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="SearchName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SearchName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="LinkName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="Notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="SortKey" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="VersionNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
@@ -270,7 +270,8 @@
       <Column Name="LocaleCd" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ItemCd" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ItemName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="SearchName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SearchName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="LinkName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="CategoryCd" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="FileCd" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />

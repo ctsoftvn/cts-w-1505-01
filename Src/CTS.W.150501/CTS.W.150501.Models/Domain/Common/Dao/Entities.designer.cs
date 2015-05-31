@@ -2253,8 +2253,6 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 		
 		private string _MetaKeys;
 		
-		private System.Nullable<decimal> _SortKey;
-		
 		private System.Nullable<decimal> _VersionNo;
 		
 		private string _CreateUser;
@@ -2283,8 +2281,6 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
     partial void OnMetaDescChanged();
     partial void OnMetaKeysChanging(string value);
     partial void OnMetaKeysChanged();
-    partial void OnSortKeyChanging(System.Nullable<decimal> value);
-    partial void OnSortKeyChanged();
     partial void OnVersionNoChanging(System.Nullable<decimal> value);
     partial void OnVersionNoChanged();
     partial void OnCreateUserChanging(string value);
@@ -2324,7 +2320,7 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SEOCd", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SEOCd", DbType="VarChar(250) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string SEOCd
 		{
 			get
@@ -2420,26 +2416,6 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 					this._MetaKeys = value;
 					this.SendPropertyChanged("MetaKeys");
 					this.OnMetaKeysChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SortKey", DbType="Decimal(18,0)")]
-		public System.Nullable<decimal> SortKey
-		{
-			get
-			{
-				return this._SortKey;
-			}
-			set
-			{
-				if ((this._SortKey != value))
-				{
-					this.OnSortKeyChanging(value);
-					this.SendPropertyChanging();
-					this._SortKey = value;
-					this.SendPropertyChanged("SortKey");
-					this.OnSortKeyChanged();
 				}
 			}
 		}
@@ -4617,6 +4593,8 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 		
 		private string _SearchName;
 		
+		private string _LinkName;
+		
 		private string _Notes;
 		
 		private System.Nullable<decimal> _SortKey;
@@ -4645,6 +4623,8 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
     partial void OnCategoryNameChanged();
     partial void OnSearchNameChanging(string value);
     partial void OnSearchNameChanged();
+    partial void OnLinkNameChanging(string value);
+    partial void OnLinkNameChanged();
     partial void OnNotesChanging(string value);
     partial void OnNotesChanged();
     partial void OnSortKeyChanging(System.Nullable<decimal> value);
@@ -4728,7 +4708,7 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SearchName", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SearchName", DbType="VarChar(255)")]
 		public string SearchName
 		{
 			get
@@ -4744,6 +4724,26 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 					this._SearchName = value;
 					this.SendPropertyChanged("SearchName");
 					this.OnSearchNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LinkName", DbType="VarChar(255)")]
+		public string LinkName
+		{
+			get
+			{
+				return this._LinkName;
+			}
+			set
+			{
+				if ((this._LinkName != value))
+				{
+					this.OnLinkNameChanging(value);
+					this.SendPropertyChanging();
+					this._LinkName = value;
+					this.SendPropertyChanged("LinkName");
+					this.OnLinkNameChanged();
 				}
 			}
 		}
@@ -5667,6 +5667,8 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 		
 		private string _SearchName;
 		
+		private string _LinkName;
+		
 		private string _CategoryCd;
 		
 		private string _FileCd;
@@ -5699,6 +5701,8 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
     partial void OnItemNameChanged();
     partial void OnSearchNameChanging(string value);
     partial void OnSearchNameChanged();
+    partial void OnLinkNameChanging(string value);
+    partial void OnLinkNameChanged();
     partial void OnCategoryCdChanging(string value);
     partial void OnCategoryCdChanged();
     partial void OnFileCdChanging(string value);
@@ -5786,7 +5790,7 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SearchName", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SearchName", DbType="VarChar(255)")]
 		public string SearchName
 		{
 			get
@@ -5802,6 +5806,26 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 					this._SearchName = value;
 					this.SendPropertyChanged("SearchName");
 					this.OnSearchNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LinkName", DbType="VarChar(255)")]
+		public string LinkName
+		{
+			get
+			{
+				return this._LinkName;
+			}
+			set
+			{
+				if ((this._LinkName != value))
+				{
+					this.OnLinkNameChanging(value);
+					this.SendPropertyChanging();
+					this._LinkName = value;
+					this.SendPropertyChanged("LinkName");
+					this.OnLinkNameChanged();
 				}
 			}
 		}

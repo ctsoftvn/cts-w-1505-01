@@ -7,5 +7,7 @@ namespace CTS.W._150501.Models.Domain.Common.Constants
     public class W150501Logics
     {
         public const string CD_ROLE_CD_ADM_MAIN = "adm.main";
+
+        public const string GRPSEO_MA_ITEMS = "seo.ma.items";
     }
 }
