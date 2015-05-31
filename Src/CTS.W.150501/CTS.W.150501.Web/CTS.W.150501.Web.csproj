@@ -225,7 +225,8 @@
     <Content Include="cts\res\lib-ext\tinymce\themes\modern\theme.min.js" />
     <Content Include="cts\res\lib-ext\tinymce\tinymce.min.js" />
     <Content Include="Global.asax" />
-    <Content Include="main.html" />
+    <Content Include="item-detail.aspx" />
+    <Content Include="items.aspx" />
     <Content Include="res\adm\css\base.css" />
     <Content Include="res\adm\css\login-style.css" />
     <Content Include="res\adm\css\main-style.css" />
@@ -237,8 +238,56 @@
     <Content Include="res\adm\jss\i18n\names.js" />
     <Content Include="res\adm\jss\route-configs.js" />
     <Content Include="res\cln\css\base.css" />
+    <Content Include="res\cln\css\mmenu-mb.all.css" />
+    <Content Include="res\cln\css\resize.css" />
+    <Content Include="res\cln\css\style-common.css" />
+    <Content Include="res\cln\css\style-grid.css" />
+    <Content Include="res\cln\fonts\opensans-bold-demo.html" />
+    <Content Include="res\cln\fonts\OpenSans-Light-webfont.svg" />
+    <Content Include="res\cln\fonts\PlayRegular.svg" />
+    <Content Include="res\cln\fonts\UTM American Sans.svg" />
+    <Content Include="res\cln\fonts\UTM Caviar.svg" />
+    <Content Include="res\cln\fonts\VNF-ACaslonPro-Regular.html" />
+    <Content Include="res\cln\fonts\VNF-ACaslonPro-Regular.svg" />
+    <Content Include="res\cln\images\graphics\15.gif" />
+    <Content Include="res\cln\images\graphics\ajax-loader.gif" />
+    <Content Include="res\cln\images\graphics\bg-dk.jpg" />
+    <Content Include="res\cln\images\graphics\bg-nav-top.png" />
+    <Content Include="res\cln\images\graphics\bg-nav.png" />
+    <Content Include="res\cln\images\graphics\bg-top.png" />
+    <Content Include="res\cln\images\graphics\facebook.png" />
+    <Content Include="res\cln\images\graphics\google2.png" />
+    <Content Include="res\cln\images\graphics\h-sub0.png" />
+    <Content Include="res\cln\images\graphics\h-sub1.png" />
+    <Content Include="res\cln\images\graphics\h-sub2.png" />
+    <Content Include="res\cln\images\graphics\h-sub3.png" />
+    <Content Include="res\cln\images\graphics\h-sub4.png" />
+    <Content Include="res\cln\images\graphics\hotline-1.gif" />
+    <Content Include="res\cln\images\graphics\img1.jpg" />
+    <Content Include="res\cln\images\graphics\linh1.png" />
+    <Content Include="res\cln\images\graphics\linh2.jpg" />
+    <Content Include="res\cln\images\graphics\linh3.jpg" />
+    <Content Include="res\cln\images\graphics\linh4.jpg" />
+    <Content Include="res\cln\images\graphics\linh5.jpg" />
+    <Content Include="res\cln\images\graphics\linh6.jpg" />
+    <Content Include="res\cln\images\graphics\logo-edit.png" />
+    <Content Include="res\cln\images\graphics\logo.png" />
+    <Content Include="res\cln\images\graphics\map.png" />
+    <Content Include="res\cln\images\graphics\qc.png" />
+    <Content Include="res\cln\images\graphics\sprite.png" />
+    <Content Include="res\cln\images\graphics\test1.jpg" />
+    <Content Include="res\cln\images\graphics\test2.jpg" />
+    <Content Include="res\cln\images\graphics\twitter.png" />
+    <Content Include="res\cln\images\graphics\up.png" />
+    <Content Include="res\cln\images\icon.gif" />
+    <Content Include="res\cln\jss\flaunt.js" />
     <Content Include="res\cln\jss\i18n\messages.js" />
     <Content Include="res\cln\jss\i18n\names.js" />
+    <Content Include="res\cln\jss\jquery-1.8.0.min.js" />
+    <Content Include="res\cln\jss\jquery-grid.js" />
+    <Content Include="res\cln\jss\jquery-loading.js" />
+    <Content Include="res\cln\jss\jquery.mmenu.min.all.js" />
+    <Content Include="res\cln\jss\script-common.js" />
     <Content Include="res\com\css\base.css" />
     <Content Include="res\com\img\icon.gif" />
     <Content Include="res\com\img\logo.gif" />
@@ -272,12 +321,34 @@
     </Compile>
     <Compile Include="cts\com\ajx\ucs\dialog-upload.aspx.cs">
       <DependentUpon>dialog-upload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="cts\com\ajx\ucs\dialog-upload.aspx.designer.cs">
       <DependentUpon>dialog-upload.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="index.Master.cs">
+      <DependentUpon>index.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.Master.designer.cs">
+      <DependentUpon>index.Master</DependentUpon>
+    </Compile>
+    <Compile Include="item-detail.aspx.cs">
+      <DependentUpon>item-detail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="item-detail.aspx.designer.cs">
+      <DependentUpon>item-detail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="items.aspx.cs">
+      <DependentUpon>items.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="items.aspx.designer.cs">
+      <DependentUpon>items.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -309,6 +380,31 @@
     <None Include="cts\res\lib-ext\tinymce\skins\lightgray\fonts\tinymce.eot" />
     <None Include="cts\res\lib-ext\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <None Include="cts\res\lib-ext\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="index.Master" />
+    <None Include="res\cln\fonts\ElleFutura-Bold.eot" />
+    <None Include="res\cln\fonts\ElleFutura-Bold.ttf" />
+    <None Include="res\cln\fonts\ElleFutura-Bold.woff" />
+    <None Include="res\cln\fonts\opensans-bold-webfont.eot" />
+    <None Include="res\cln\fonts\opensans-bold-webfont.ttf" />
+    <None Include="res\cln\fonts\opensans-bold-webfont.woff" />
+    <None Include="res\cln\fonts\OpenSans-Light-webfont.eot" />
+    <None Include="res\cln\fonts\OpenSans-Light-webfont.ttf" />
+    <None Include="res\cln\fonts\OpenSans-Light-webfont.woff" />
+    <None Include="res\cln\fonts\PlayRegular.eot" />
+    <None Include="res\cln\fonts\PlayRegular.ttf" />
+    <None Include="res\cln\fonts\PlayRegular.woff" />
+    <None Include="res\cln\fonts\PlayRegular.woff2" />
+    <None Include="res\cln\fonts\UTM American Sans.eot" />
+    <None Include="res\cln\fonts\UTM American Sans.otf" />
+    <None Include="res\cln\fonts\UTM American Sans.ttf" />
+    <None Include="res\cln\fonts\UTM American Sans.woff" />
+    <None Include="res\cln\fonts\UTM Caviar.eot" />
+    <None Include="res\cln\fonts\UTM Caviar.otf" />
+    <None Include="res\cln\fonts\UTM Caviar.ttf" />
+    <None Include="res\cln\fonts\UTM Caviar.woff" />
+    <None Include="res\cln\fonts\VNF-ACaslonPro-Regular.eot" />
+    <None Include="res\cln\fonts\VNF-ACaslonPro-Regular.ttf" />
+    <None Include="res\cln\fonts\VNF-ACaslonPro-Regular.woff" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

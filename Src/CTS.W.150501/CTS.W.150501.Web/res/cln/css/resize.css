@@ -1,0 +1,98 @@
+@media screen and (max-width: 1190px){  /*  start responsive     */
+.container{ width:100%; float:left; }
+.contact-form label{ width:5%; }
+.nav-item a { padding:0px 10px;}
+.info-kontakt { width:100%;}
+footer{  padding:3% 0; float:left}
+}
+
+@media screen and (max-width: 1024px){	
+.wr-nav { display:none;}  /*   hide main menu     */
+.show-menumb-icon{ display:block;}  /*   show left menu    */
+.container.bg{ background: url(/res/cln/images/graphics/bg-nav.png) no-repeat right bottom; min-height:100px;}
+header .logo h1 { color:#fff;}
+header .logo h2 { color:#fbe6fe;}
+header { min-height:100px; float:left;
+
+background: #ef58f1; /* e226caOld browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmNWRiMSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlZjAxN2MiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #ef58f1 0%, #af1eb1 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ef58f1), color-stop(100%,#af1eb1)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #ef58f1 0%,#af1eb1 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #ef58f1 0%,#af1eb1 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #ef58f1 0%,#af1eb1 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #ef58f1 0%,#af1eb1 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ef58f1', endColorstr='#af1eb1',GradientType=0 ); /* IE6-8 */
+}
+
+header .logo a { margin-top:20px;}
+header .logo img { height:auto; }
+.wr_search_social { display:none;}
+.wr-info-bottom { display:block}
+.sb-search {display:none}
+.desk { display:block;}
+
+}
+
+@media screen and (max-width: 930px){
+.wr-ct-footer { display:inline-block; text-align:center; padding-top:7px;}
+.menu-ft { width:100%; margin:0;}
+.menu-ft li { display:inline; margin-top:5px;}
+.menu-ft li a {padding: 0px 10px 0px; margin-bottom:5px;}
+.txt-ft-r { margin:0px; width:100%; text-align:center;}
+.txt-ft-r div { clear: both; float: left; margin-bottom: 10px;  text-align: center;  width: 100%;}
+.wr-lienhe { width:65%; margin-top:-50px;}
+.thongtin p span { width:70px;}
+}
+@media screen and (max-width: 800px){
+/*   will remove when dev make image for banner   */
+#owl-demo .item img { height:315px!important;  }
+
+}
+@media screen and (max-width: 768px){
+.homepage { padding:0}
+.wr-qc { display:block}
+.wr-ct-footer { padding-bottom:120px;}
+.info-kontakt ul li { width:100%!important; font-size:14px; margin-bottom:5px; padding:5px 0px!important; text-align:center!important}
+.social { margin:0 auto;}
+.contact-form { width:50%;}
+.wr-chitiet .col-left .wr-img img { width:100%; margin:0 auto;}
+.wr-chitiet { margin-bottom:0px;}
+.wr-chitiet .title { line-height:28px; font-size:24px; padding-bottom:10px; }
+.wr-chitiet .col-left h2 {  line-height:28px;  font-size:18px; }
+}
+@media screen and (max-width: 767px){
+	.wr-chitiet .col-left { float:left; width:100%; margin-bottom:20px;}
+	.wr-chitiet .col-right { float:left; width:98%; clear:both}
+}
+@media screen and (max-width: 680px){
+}
+@media screen and (max-width: 640px){	
+.wr-ct-footer { padding-bottom: 105px; }
+}
+@media screen and (max-width: 585px){
+header .logo { background-position: center 10px; float: left;  left: 0; margin-left: 0; padding: 10px 0; position: relative; width: 100%;}
+header .logo h1 { padding-top:78px;}
+header .logo h2 { padding-bottom:10px;}
+.wr-lienhe { width:75%; margin-top:-50px;}
+}
+@media screen and (max-width: 510px){
+	.fixhotline { margin-left:30px; width:auto}
+}
+@media screen and (max-width: 500px){
+	.wr-datlich { width:90%; padding:5%; border-radius:0; margin:0 auto; min-height:404px;}	
+	.wr-datlich h4{ font-size:32px; line-height:35px;}
+	.wr-lienhe { width:80%;}
+	.thongtin h2 { font-size:18px;}
+}
+@media screen and (max-width: 480px){	
+.wr-ct-footer {padding-bottom: 90px;}
+body{ background-image:none}
+/*   will remove when dev make image for banner   */
+#owl-demo .item img { height:150px!important;  }
+}
+@media screen and (max-width: 440px){.menufooter { display:none;}.socialfooter { display:block; float:right; margin-right:5px;}}
+@media screen and (max-width: 360px){.wr-ct-footer { padding-bottom: 80px;}}
+@media screen and (max-width: 318px){
+.socialfooter { display:none;}}
