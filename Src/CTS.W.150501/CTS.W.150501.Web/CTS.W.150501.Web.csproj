@@ -256,6 +256,8 @@
     <Content Include="res\cln\images\graphics\bg-nav.png" />
     <Content Include="res\cln\images\graphics\bg-top.png" />
     <Content Include="res\cln\images\graphics\facebook.png" />
+    <Content Include="res\cln\images\graphics\flag_EN.png" />
+    <Content Include="res\cln\images\graphics\flag_VI.png" />
     <Content Include="res\cln\images\graphics\google2.png" />
     <Content Include="res\cln\images\graphics\h-sub0.png" />
     <Content Include="res\cln\images\graphics\h-sub1.png" />

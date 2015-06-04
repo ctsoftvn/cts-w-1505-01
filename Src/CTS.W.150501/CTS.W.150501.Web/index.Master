@@ -1,5 +1,7 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="index.master.cs" Inherits="CTS.W._150501.Web.index" %>
 
+<%@ Import Namespace="CTS.Web.Com.Domain.Helper" %>
+<%@ Import Namespace="CTS.Com.Domain.Model" %>
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
@@ -29,7 +31,6 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    
     <div class="wr_all_page">
         <a class="show-menumb-icon" href="#menu_mb_ll"><span>Meny</span></a>
         <form id="form1" runat="server">
@@ -41,33 +42,47 @@
                     <h2>
                         Nơi mang lại niềm tin và vẻ đẹp hoàn mỹ</h2>
                 </a>
+               
+                <div id="dd" class="flag wrapper-dropdown-1" tabindex="1">
+                    <span><a id="selectedlang" href="javaScript:void(0);">
+                        <%--<img src="/res/cln/images/graphics/<%=Icon%>" />--%>
+                        <asp:Literal ID="ltrLang" runat="server" Text='<%# WebContextHelper.LocaleCd %>'></asp:Literal>
+                    </a></span>
+                    <asp:Repeater ID="rptLanguages" runat="server" >
+                        <HeaderTemplate>
+                            <ul class="dropdown" tabindex="1">
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <li>
+                                <asp:Literal ID="ltrLang" runat="server" Text='<%# WebContextHelper.LocaleCd %>'></asp:Literal>
+                                <%-- <asp:LinkButton ID="lbtnLanguage" OnCommand="lbtnLanguage_Command" runat="server"
+                                    ToolTip=''>
+                                   <asp:Image ID="imgIcon" runat="server" Visible="false" alt="" />
+                                    OnItemDataBound="rptLanguages_Databound"
+                                </asp:LinkButton>--%>
+                            </li>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </ul>
+                        </FooterTemplate>
+                    </asp:Repeater>
+                </div>
                 <div class="wr-nav">
                     <nav>
-                        <ul class="nav-list">
-                            <li class="nav-item"><a href="index.html" title="Hjem">Căng da chỉ vàng</a> </li>
-                            <li class="nav-item"><a href="om-oss.html" title="Om oss">Trẻ hóa âm đạo Trắng hồng
-                                nhũ hoa </a></li>
-                            <li class="nav-item"><a href="om-oss.html">Thon gọn cơ thể</a>
-                                <ul class="nav-submenu">
-                                    <li class="nav-submenu-item"><a href="#">Sub Thon gọn cơ thể</a>
-                                        <ul class="nav-submenu2">
-                                            <li class="nav-submenu-item2"><a href="#">Sub Thon gọn cơ thể</a> </li>
-                                            <li class="nav-submenu-item2"><a href="#">Sub Thon gọn cơ thể</a> </li>
-                                            <li class="nav-submenu-item2"><a href="#">Sub Thon gọn cơ thể</a> </li>
-                                            <li class="nav-submenu-item2"><a href="#">Sub Thon gọn cơ thể</a> </li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-submenu-item"><a href="#">Sub Thon gọn cơ thể</a> </li>
-                                    <li class="nav-submenu-item"><a href="#">Sub Thon gọn cơ thể</a> </li>
-                                    <li class="nav-submenu-item"><a href="#">Sub Thon gọn cơ thể</a> </li>
+                        <asp:Repeater ID="rptCategories" runat="server">
+                            <HeaderTemplate>
+                                <ul class="nav-list">
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <li class="nav-item"><a href='<%# "/" + WebContextHelper.LocaleCd + "/items/" + ((HashMap)Container.DataItem)["LinkName"] %>'
+                                    title='<%# ((HashMap)Container.DataItem)["CategoryName"] %>'>
+                                    <asp:Label runat="server" ID="lbcatename" Text='<%# ((HashMap)Container.DataItem)["CategoryName"] %>' />
+                                </a></li>
+                            </ItemTemplate>
+                            <FooterTemplate>
                                 </ul>
-                            </li>
-                            <li class="nav-item"><a href="om-oss.html" class="active">Nâng mũi Sline - Tạo mặt Vline
-                            </a></li>
-                            <li class="nav-item"><a href="om-oss.html">Phun xăm Hàn Quốc</a></li>
-                            <li class="nav-item last"><a href="kontakt-oss.html" class="last" title="Kontakt oss">
-                                Sản Phẩm</a></li>
-                        </ul>
+                            </FooterTemplate>
+                        </asp:Repeater>
                     </nav>
                     <!-- /nav -->
                 </div>
@@ -109,9 +124,10 @@
                 <div class="fixhotline">
                     <div class="custom hotline">
                         <p>
-                            <strong>&nbsp;<img src="/res/cln/images/graphics/15.gif" alt="googleplus">&nbsp;<span style="color: #ffffff;"><a
-                                href="tel:0907500020"><span style="color: #ffffff;">0907 500 020 - </span></a><a
-                                    href="tel:0902500020"><span style="color: #ffffff;">0902 5000 20</span></a></span></strong></p>
+                            <strong>&nbsp;<img src="/res/cln/images/graphics/15.gif" alt="googleplus">&nbsp;<span
+                                style="color: #ffffff;"><a href="tel:0907500020"><span style="color: #ffffff;">0907
+                                    500 020 - </span></a><a href="tel:0902500020"><span style="color: #ffffff;">0902 5000
+                                        20</span></a></span></strong></p>
                     </div>
                 </div>
                 <div class="menufooter">
@@ -187,6 +203,5 @@
             <li><a href="#">Sản Phẩm</a></li>
         </ul>
     </nav>
-    
 </body>
 </html>
