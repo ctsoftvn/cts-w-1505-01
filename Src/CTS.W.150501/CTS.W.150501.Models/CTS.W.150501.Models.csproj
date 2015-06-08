@@ -132,7 +132,6 @@
     <EmbeddedResource Include="Resources\Dao\Admin\MasterItemsDao_Update.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
     <None Include="Domain\Common\Dao\Entities.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Entities.designer.cs</LastGenOutput>
