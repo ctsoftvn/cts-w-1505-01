@@ -1,5 +1,4 @@
-﻿
-namespace CTS.W._150501.Models.Domain.Common.Constants
+﻿namespace CTS.W._150501.Models.Domain.Common.Constants
 {
     /// <summary>
     /// W150501Logics
