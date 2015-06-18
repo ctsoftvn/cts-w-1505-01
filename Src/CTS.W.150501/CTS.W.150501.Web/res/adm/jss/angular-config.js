@@ -15,8 +15,7 @@ var ctrls = angular.module('controllers', []);
 var app = angular.module('app', [
     'cts.angular',
     'cts.ccs',
-    'controllers',
-    'treeControl'
+    'controllers'
 ]);
 // -----------------------------------------------------------------
 // Định nghĩa các config

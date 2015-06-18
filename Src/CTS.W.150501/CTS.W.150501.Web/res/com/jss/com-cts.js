@@ -39,6 +39,9 @@ var $gridHelper = cts.helper.GridHelper;
 // Định nghĩa DialogHelper
 // -----------------------------------------------------------------
 var $dialogHelper = cts.helper.DialogHelper;
+// -----------------------------------------------------------------
+// Định nghĩa các function helper
+// -----------------------------------------------------------------
 /** 
 * Lấy chuỗi resource name
 * @param s: chuỗi id
@@ -52,8 +55,8 @@ var $nm = function (s) {
 * @param s: chuỗi id
 * @returns chuỗi resource message
 */
-var $ms = function (s) {
-    return cts.helper.ResourceHelper.getMessage(s);
+var $ms = function (m) {
+    return cts.helper.ResourceHelper.getMessage(m);
 };
 /** 
 * Xử lý chính

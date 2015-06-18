@@ -1,5 +1,5 @@
-﻿// LoginCtrl
-ctrls.controller('LoginCtrl', ['$scope', '$state', '$window', function ($scope, $state, $window) {
+﻿// UsersProfileCtrl
+ctrls.controller('UsersProfileCtrl', ['$scope', '$state', '$window', function ($scope, $state, $window) {
     /* Định nghĩa biến toàn cục */
     $scope.data = {};
     $scope.style = {};
@@ -9,28 +9,28 @@ ctrls.controller('LoginCtrl', ['$scope', '$state', '$window', function ($scope, 
     // Xử lý init
     $scope.init = function () {
         $pc({
-            url: '/ajx/adm-login.aspx/InitLayout',
+            url: '/ajx/adm/users/profile.aspx/InitLayout',
             data: {},
             success: function (data) {
-                if (data.HasAuth === true) {
+                if (data.HasAuth === false) {
                     $window.open('/adm/main.html', '_self');
                 } else {
                     $scope.data = data;
-                    $ti('txtUser');
+                    $ti();
                 }
             }
         });
     };
-    // Xử lý xác thực
-    $scope.auth = function () {
+    // Xử lý save
+    $scope.save = function () {
         $pc({
-            url: '/ajx/adm-login.aspx/Auth',
+            url: '/ajx/adm/users/profile.aspx/Save',
             data: {
-                UserName: $scope.data.UserName,
-                Password: $scope.data.Password
+                Password: $scope.data.Password,
+                NewPassword: $scope.data.NewPassword,
+                ConfirmPassword: $scope.data.ConfirmPassword
             },
             success: function (data) {
-                $window.open('/adm/main.html', '_self');
             }
         });
     };

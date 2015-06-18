@@ -18,7 +18,6 @@
     <script type="text/javascript" src="/cts/res/jss/cts-plugin.min.js"></script>
     <!-------------------------- Minifer (CSS) --------------------------->
     <link rel="stylesheet" type="text/css" href="/cts/res/css/base-adm.min.css" />
-
     <!-------------------------- JSS (Com) ------------------------------->
     <!-- Com Resources -->
     <script type="text/javascript" src="/res/com/jss/i18n/messages.js"></script>
@@ -34,6 +33,9 @@
     <script type="text/javascript" src="/res/adm/jss/route-configs.js"></script>
     <!-------------------------- JSS (Ctrls) ----------------------------->
     <script type="text/javascript" src="/res/adm/jss/ctrls/main.js"></script>
+    <script type="text/javascript" src="/res/adm/jss/ctrls/users-profile.js"></script>
+    <script type="text/javascript" src="/res/adm/jss/ctrls/ma-items-list.js"></script>
+    <script type="text/javascript" src="/res/adm/jss/ctrls/ma-items-entry.js"></script>
     <!-------------------------- CSS (Adm) ------------------------------->
     <link rel="stylesheet" type="text/css" href="/res/adm/css/main-style.css" />
     <!----------------------------------- Title -------------------------->
@@ -63,7 +65,7 @@
                     <span class="glyphicon glyphicon-th-list" ng-click="showHideLeftPane()"></span>
                 </div>
                 <div id="userPane">
-                    {{$nm('ADM.MAIN.Hi')}}, {{data.UserContext.UserName}} | <a href="/adm/users/profile">{{$nm('ADM.MAIN.Profile')}}</a> | <a href ng-click="logout()">{{$nm('ADM.MAIN.Logout')}}</a>
+                    {{$nm('ADM.MAIN.Hi')}}, {{data.UserContext.UserName}} | <a ui-sref="users_profile">{{$nm('ADM.MAIN.Profile')}}</a> | <a href ng-click="logout()">{{$nm('ADM.MAIN.Logout')}}</a>
                 </div>
             </div>
             <div id="mainContent" ui-view="main"></div>

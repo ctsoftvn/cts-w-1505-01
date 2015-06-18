@@ -65,7 +65,7 @@ ctrls.controller('MainCtrl', ['$scope', '$state', '$window', function ($scope, $
     // Xử lý thay đổi kích thước element
     $scope.resize = function () {
         $pc(function () {
-            $('#navBarPane').height($(window).height() - 120);
+            $('#navBarPane').height($(document).height() - 120);
         });
     };
     // Ẩn/Hiện cửa sổ chính
