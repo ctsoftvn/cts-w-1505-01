@@ -1,9 +1,21 @@
-﻿//menu mobi
+﻿
+//menu mobi
 jQuery.noConflict();
 jQuery(function () {
     jQuery('nav#menu_mb_ll').mmenu();
 });
+jQuery(document).ready(function () {
+    jQuery('.flags').prepend(jQuery('.flags li:last'));
+    menu_cate();
+});
+function menu_cate() {
+    jQuery('.nav-list li').each(function (i) {
+        var html = jQuery(this).html();
+        html = "<li class='mn_top_mb-item'>" + html + "</li>";
+        jQuery('#mm-0').append(html);
 
+    });
+}
 function DropDown(el) {
     this.dd = el;
     this.placeholder = this.dd.children('span');

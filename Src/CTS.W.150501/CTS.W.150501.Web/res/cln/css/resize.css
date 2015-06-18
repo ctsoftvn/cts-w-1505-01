@@ -1,3 +1,6 @@
+@media screen and (max-width: 1300px){  /*  start responsive     */
+.wr-lienhe ul label,.wr-datlich ul label{width:100%}
+}
 @media screen and (max-width: 1190px){  /*  start responsive     */
 .container{ width:100%; float:left; }
 .contact-form label{ width:5%; }
@@ -11,9 +14,9 @@ footer{  padding:3% 0; float:left}
 .show-menumb-icon{ display:block;}  /*   show left menu    */
 .container.bg{ background: url(/res/cln/images/graphics/bg-nav.png) no-repeat right bottom; min-height:100px;}
 header .logo h1 { color:#fff;}
+input[type="text"], input[type="password"], input[type="email"], input[type="tel"], input[type="search"], textarea{width:85%}
 header .logo h2 { color:#fbe6fe;}
 header { min-height:100px; float:left;
-
 background: #ef58f1; /* e226caOld browsers */
 /* IE9 SVG, needs conditional override of 'filter' to 'none' */
 background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmNWRiMSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlZjAxN2MiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
@@ -42,7 +45,7 @@ header .logo img { height:auto; }
 .menu-ft li a {padding: 0px 10px 0px; margin-bottom:5px;}
 .txt-ft-r { margin:0px; width:100%; text-align:center;}
 .txt-ft-r div { clear: both; float: left; margin-bottom: 10px;  text-align: center;  width: 100%;}
-.wr-lienhe { width:65%; margin-top:-50px;}
+.wr-lienhe { width:65%; /*margin-top:-50px;*/}
 .thongtin p span { width:70px;}
 }
 @media screen and (max-width: 800px){
@@ -75,7 +78,7 @@ header .logo img { height:auto; }
 header .logo { background-position: center 10px; float: left;  left: 0; margin-left: 0; padding: 10px 0; position: relative; width: 100%;}
 header .logo h1 { padding-top:78px;}
 header .logo h2 { padding-bottom:10px;}
-.wr-lienhe { width:75%; margin-top:-50px;}
+.wr-lienhe { width:75%; /*margin-top:-50px;*/}
 }
 @media screen and (max-width: 510px){
 	.fixhotline { margin-left:30px; width:auto}
