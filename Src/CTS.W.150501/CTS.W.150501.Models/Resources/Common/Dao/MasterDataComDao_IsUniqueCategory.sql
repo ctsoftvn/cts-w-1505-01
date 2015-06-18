@@ -1,5 +1,5 @@
 SELECT
-	*
+	COUNT(*)
 FROM [MACategories]
 WHERE
 	[CategoryCd] <> @CategoryCd

@@ -1,5 +1,5 @@
 SELECT
-	*
+	COUNT(*)
 FROM [MAItems]
 WHERE
 	[ItemCd] <> @ItemCd
