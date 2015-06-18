@@ -81,126 +81,135 @@ namespace CTS.W._150501.Models.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Sản phẩm.
         /// </summary>
-        internal static string ADM_MA_ITEMS_ENTRY_00001 {
+        internal static string ADM_MA_ITEMS_00001 {
             get {
-                return ResourceManager.GetString("ADM_MA_ITEMS_ENTRY_00001", resourceCulture);
+                return ResourceManager.GetString("ADM_MA_ITEMS_00001", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Mã sản phẩm.
         /// </summary>
-        internal static string ADM_MA_ITEMS_ENTRY_00002 {
+        internal static string ADM_MA_ITEMS_00002 {
             get {
-                return ResourceManager.GetString("ADM_MA_ITEMS_ENTRY_00002", resourceCulture);
+                return ResourceManager.GetString("ADM_MA_ITEMS_00002", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Tên sản phẩm.
         /// </summary>
-        internal static string ADM_MA_ITEMS_ENTRY_00003 {
+        internal static string ADM_MA_ITEMS_00003 {
             get {
-                return ResourceManager.GetString("ADM_MA_ITEMS_ENTRY_00003", resourceCulture);
+                return ResourceManager.GetString("ADM_MA_ITEMS_00003", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Tên tìm kiếm.
         /// </summary>
-        internal static string ADM_MA_ITEMS_ENTRY_00004 {
+        internal static string ADM_MA_ITEMS_00004 {
             get {
-                return ResourceManager.GetString("ADM_MA_ITEMS_ENTRY_00004", resourceCulture);
+                return ResourceManager.GetString("ADM_MA_ITEMS_00004", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Tên liên kết.
         /// </summary>
-        internal static string ADM_MA_ITEMS_ENTRY_00005 {
+        internal static string ADM_MA_ITEMS_00005 {
             get {
-                return ResourceManager.GetString("ADM_MA_ITEMS_ENTRY_00005", resourceCulture);
+                return ResourceManager.GetString("ADM_MA_ITEMS_00005", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Loại sản phẩm.
         /// </summary>
-        internal static string ADM_MA_ITEMS_ENTRY_00006 {
+        internal static string ADM_MA_ITEMS_00006 {
             get {
-                return ResourceManager.GetString("ADM_MA_ITEMS_ENTRY_00006", resourceCulture);
+                return ResourceManager.GetString("ADM_MA_ITEMS_00006", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Ảnh sản phẩm.
         /// </summary>
-        internal static string ADM_MA_ITEMS_ENTRY_00007 {
+        internal static string ADM_MA_ITEMS_00007 {
             get {
-                return ResourceManager.GetString("ADM_MA_ITEMS_ENTRY_00007", resourceCulture);
+                return ResourceManager.GetString("ADM_MA_ITEMS_00007", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Nội dung.
         /// </summary>
-        internal static string ADM_MA_ITEMS_ENTRY_00008 {
+        internal static string ADM_MA_ITEMS_00008 {
             get {
-                return ResourceManager.GetString("ADM_MA_ITEMS_ENTRY_00008", resourceCulture);
+                return ResourceManager.GetString("ADM_MA_ITEMS_00008", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Thứ tự.
         /// </summary>
-        internal static string ADM_MA_ITEMS_ENTRY_00009 {
+        internal static string ADM_MA_ITEMS_00009 {
             get {
-                return ResourceManager.GetString("ADM_MA_ITEMS_ENTRY_00009", resourceCulture);
+                return ResourceManager.GetString("ADM_MA_ITEMS_00009", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Phiên bản.
         /// </summary>
-        internal static string ADM_MA_ITEMS_ENTRY_00010 {
+        internal static string ADM_MA_ITEMS_00010 {
             get {
-                return ResourceManager.GetString("ADM_MA_ITEMS_ENTRY_00010", resourceCulture);
+                return ResourceManager.GetString("ADM_MA_ITEMS_00010", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Trạng thái.
         /// </summary>
-        internal static string ADM_MA_ITEMS_ENTRY_00011 {
+        internal static string ADM_MA_ITEMS_00011 {
             get {
-                return ResourceManager.GetString("ADM_MA_ITEMS_ENTRY_00011", resourceCulture);
+                return ResourceManager.GetString("ADM_MA_ITEMS_00011", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Ngôn ngữ.
         /// </summary>
-        internal static string ADM_MA_ITEMS_ENTRY_00012 {
+        internal static string ADM_MA_ITEMS_00012 {
             get {
-                return ResourceManager.GetString("ADM_MA_ITEMS_ENTRY_00012", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Danh sách ngôn ngữ.
-        /// </summary>
-        internal static string ADM_MA_ITEMS_ENTRY_00013 {
-            get {
-                return ResourceManager.GetString("ADM_MA_ITEMS_ENTRY_00013", resourceCulture);
+                return ResourceManager.GetString("ADM_MA_ITEMS_00012", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Số dòng.
         /// </summary>
-        internal static string ADM_MA_ITEMS_ENTRY_00014 {
+        internal static string ADM_MA_ITEMS_00013 {
             get {
-                return ResourceManager.GetString("ADM_MA_ITEMS_ENTRY_00014", resourceCulture);
+                return ResourceManager.GetString("ADM_MA_ITEMS_00013", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Danh sách ngôn ngữ.
+        /// </summary>
+        internal static string ADM_MA_ITEMS_00014 {
+            get {
+                return ResourceManager.GetString("ADM_MA_ITEMS_00014", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Danh sách.
+        /// </summary>
+        internal static string ADM_MA_ITEMS_00015 {
+            get {
+                return ResourceManager.GetString("ADM_MA_ITEMS_00015", resourceCulture);
             }
         }
         
@@ -219,6 +228,24 @@ namespace CTS.W._150501.Models.Resources.Strings {
         internal static string ADM_USERS_PROFILE_00002 {
             get {
                 return ResourceManager.GetString("ADM_USERS_PROFILE_00002", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thông tin liên hệ khách hàng.
+        /// </summary>
+        internal static string CLN_CONTACT_00001 {
+            get {
+                return ResourceManager.GetString("CLN_CONTACT_00001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đặt lịch tư vấn.
+        /// </summary>
+        internal static string CLN_ITEMDETAIL_00001 {
+            get {
+                return ResourceManager.GetString("CLN_ITEMDETAIL_00001", resourceCulture);
             }
         }
     }
