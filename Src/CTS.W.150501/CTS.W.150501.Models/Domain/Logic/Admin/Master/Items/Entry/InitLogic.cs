@@ -52,7 +52,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
             // Trường hợp status là edit
             if (inputObject.IsEdit) {
                 if (DataCheckHelper.IsNull(inputObject.ItemCd)) {
-                    msgs.Add(MessageHelper.GetMessage("E_MSG_00013", "ADM_MA_ITEMS_ENTRY_00002"));
+                    msgs.Add(MessageHelper.GetMessage("E_MSG_00013", "ADM_MA_ITEMS_00002"));
                 }
                 // Kiểm tra danh sách lỗi
                 if (!DataCheckHelper.IsNull(msgs)) {
@@ -61,7 +61,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
                 // Kiểm tra dữ liệu tồn tại
                 var isExist = masterDataCom.IsExistItem(basicLocale, inputObject.ItemCd, true);
                 if (!isExist) {
-                    msgs.Add(MessageHelper.GetMessage("E_MSG_00016", "ADM_MA_ITEMS_ENTRY_00001"));
+                    msgs.Add(MessageHelper.GetMessage("E_MSG_00016", "ADM_MA_ITEMS_00001"));
                 }
                 // Kiểm tra danh sách lỗi
                 if (!DataCheckHelper.IsNull(msgs)) {
@@ -125,6 +125,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
                 localeModel.DataInfo.ItemCd = string.Empty;
                 localeModel.DataInfo.ItemName = string.Empty;
                 localeModel.DataInfo.LocaleCd = basicLocale;
+                localeModel.DataInfo.SortKey = decimal.One;
                 localeModel.ListLocale.Clear();
             }
             // Lấy danh sách code
@@ -137,11 +138,11 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
             var cbDeleteFlag = DataHelper.ToComboItems(listDeleteFlag, localeModel.DataInfo.DeleteFlag);
             // Gán giá trị trả về
             getResult.LocaleModel = localeModel;
-            getResult.ListCategories = cbCategories.ListItems;
+            getResult.CboCategories = cbCategories.ListItems;
             getResult.LocaleModel.DataInfo.CategoryCd = cbCategories.SeletedValue;
-            getResult.ListLocales = cbLocales.ListItems;
-            getResult.SeletedValueLocales = cbLocales.SeletedValue;
-            getResult.ListDeleteFlag = cbDeleteFlag.ListItems;
+            getResult.CboLocales = cbLocales.ListItems;
+            getResult.CboLocalesSeleted = cbLocales.SeletedValue;
+            getResult.CboDeleteFlag = cbDeleteFlag.ListItems;
             getResult.LocaleModel.DataInfo.DeleteFlag = cbDeleteFlag.SeletedValueBoolean;
 
             // Kết quả trả về

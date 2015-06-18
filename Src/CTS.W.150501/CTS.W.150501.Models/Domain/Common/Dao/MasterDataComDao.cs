@@ -27,9 +27,9 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
                 LinkName = linkName
             };
             // Kết quả trả về
-            var info = GetObjectByFile<MAItem>(MASTERDATACOMDAO_ISUNIQUEITEM_SQL, param);
+            var count = GetCountByFile(MASTERDATACOMDAO_ISUNIQUEITEM_SQL, param);
             // Kết quả trả về
-            return info == null;
+            return count == 0;
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
                 LinkName = linkName
             };
             // Kết quả trả về
-            var info = GetObjectByFile<MACategory>(MASTERDATACOMDAO_ISUNIQUECATEGORY_SQL, param);
+            var count = GetCountByFile(MASTERDATACOMDAO_ISUNIQUECATEGORY_SQL, param);
             // Kết quả trả về
-            return info == null;
+            return count == 0;
         }
 
         /// <summary>

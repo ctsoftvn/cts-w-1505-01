@@ -56,19 +56,19 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
             var listLocale = inputObject.LocaleModel.ListLocale;
             // Kiểm tra bắt buộc
             if (DataCheckHelper.IsNull(dataInfo.LocaleCd)) {
-                msgs.Add(MessageHelper.GetMessage("E_MSG_00001", "ADM_MA_ITEMS_ENTRY_00012"));
+                msgs.Add(MessageHelper.GetMessage("E_MSG_00001", "ADM_MA_ITEMS_00012"));
             }
             if (DataCheckHelper.IsNull(dataInfo.ItemCd)) {
-                msgs.Add(MessageHelper.GetMessage("E_MSG_00001", "ADM_MA_ITEMS_ENTRY_00002"));
+                msgs.Add(MessageHelper.GetMessage("E_MSG_00001", "ADM_MA_ITEMS_00002"));
             }
             if (DataCheckHelper.IsNull(dataInfo.ItemName)) {
-                msgs.Add(MessageHelper.GetMessage("E_MSG_00001", "ADM_MA_ITEMS_ENTRY_00003"));
+                msgs.Add(MessageHelper.GetMessage("E_MSG_00001", "ADM_MA_ITEMS_00003"));
             }
             if (DataCheckHelper.IsNull(dataInfo.LinkName)) {
-                msgs.Add(MessageHelper.GetMessage("E_MSG_00001", "ADM_MA_ITEMS_ENTRY_00005"));
+                msgs.Add(MessageHelper.GetMessage("E_MSG_00001", "ADM_MA_ITEMS_00005"));
             }
             if (DataCheckHelper.IsNull(dataInfo.CategoryCd)) {
-                msgs.Add(MessageHelper.GetMessage("E_MSG_00001", "ADM_MA_ITEMS_ENTRY_00006"));
+                msgs.Add(MessageHelper.GetMessage("E_MSG_00001", "ADM_MA_ITEMS_00006"));
             }
             // Kiểm tra danh sách lỗi
             if (!DataCheckHelper.IsNull(msgs)) {
@@ -87,11 +87,11 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
             var isExistSEO = seoCom.IsExist(dataInfo.LocaleCd, dataInfo.ItemCd, W150501Logics.GRPSEO_MA_ITEMS, true);
             // Kiểm tra dữ liệu tồn tại trường hợp status là add
             if (inputObject.IsAdd && (isExist || isExistSEO)) {
-                msgs.Add(MessageHelper.GetMessage("E_MSG_00017", "ADM_MA_ITEMS_ENTRY_00001"));
+                msgs.Add(MessageHelper.GetMessage("E_MSG_00017", "ADM_MA_ITEMS_00001"));
             }
             // Kiểm tra dữ liệu tồn tại trường hợp status là edit
             if (inputObject.IsEdit && (!isExist || !isExistSEO)) {
-                msgs.Add(MessageHelper.GetMessage("E_MSG_00016", "ADM_MA_ITEMS_ENTRY_00001"));
+                msgs.Add(MessageHelper.GetMessage("E_MSG_00016", "ADM_MA_ITEMS_00001"));
             }
             // Kiểm tra danh sách lỗi
             if (!DataCheckHelper.IsNull(msgs)) {
@@ -101,7 +101,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
             var isUnique = masterDataCom.IsUniqueItem(dataInfo.ItemCd, dataInfo.LinkName);
             // Kiểm tra giá trị duy nhất
             if (!isUnique) {
-                msgs.Add(MessageHelper.GetMessage("E_MSG_00017", "ADM_MA_ITEMS_ENTRY_00005"));
+                msgs.Add(MessageHelper.GetMessage("E_MSG_00017", "ADM_MA_ITEMS_00005"));
             }
             // Kiểm tra danh sách lỗi
             if (!DataCheckHelper.IsNull(msgs)) {
@@ -118,12 +118,12 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
                 if (DataCheckHelper.IsNull(info.LocaleCd)) {
                     flagError = true;
                     msgs.Add(MessageHelper.GetMessageForList(
-                        "ADM_MA_ITEMS_ENTRY_00013", i, "E_MSG_00001", "ADM_MA_ITEMS_ENTRY_00012"));
+                        "ADM_MA_ITEMS_00014", i, "E_MSG_00001", "ADM_MA_ITEMS_00012"));
                 }
                 if (DataCheckHelper.IsNull(info.ItemName)) {
                     flagError = true;
                     msgs.Add(MessageHelper.GetMessageForList(
-                        "ADM_MA_ITEMS_ENTRY_00013", i, "E_MSG_00001", "ADM_MA_ITEMS_ENTRY_00003"));
+                        "ADM_MA_ITEMS_00014", i, "E_MSG_00001", "ADM_MA_ITEMS_00003"));
                 }
                 // Trường hợp lỗi thì đi đến record tiếp theo
                 if (flagError) {
@@ -140,7 +140,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
                 if (dataInfo.LocaleCd == info.LocaleCd || listLocale.Contains(info, comparer)) {
                     flagError = true;
                     msgs.Add(MessageHelper.GetMessageForList(
-                        "ADM_MA_ITEMS_ENTRY_00013", i, "E_MSG_00017", "ADM_MA_ITEMS_ENTRY_00012"));
+                        "ADM_MA_ITEMS_00014", i, "E_MSG_00017", "ADM_MA_ITEMS_00012"));
                 }
                 // Trường hợp lỗi thì đi đến record tiếp theo
                 if (flagError) {
@@ -168,13 +168,19 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
             // Khởi tạo biến cục bộ
             var saveResult = new SaveDataModel();
             var processDao = new MasterItemsDao();
-            var masterDataCom = new MasterDataCom();
             var seoCom = new SEOCom();
             // Map dữ liệu
             DataHelper.CopyObject(inputObject, saveResult);
             // Lấy đối tượng dữ liệu
             var dataInfo = inputObject.LocaleModel.DataInfo;
             var listLocale = inputObject.LocaleModel.ListLocale;
+            // Lấy danh sách dữ liệu đa ngôn ngữ
+            var listLocaleDb = processDao.GetListLocale(dataInfo.ItemCd);
+            // Khởi tạo comparer
+            var comparer = new KeyEqualityComparer<ItemObject>((k1, k2) =>
+                k1.ItemCd == k2.ItemCd
+                && k1.LocaleCd == k2.LocaleCd
+            );
             // Xử lý tạo transaction
             var transaction = processDao.CreateTransaction();
             // Lưu đối tượng dữ liệu
@@ -207,7 +213,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
                     info.SortKey = dataInfo.SortKey;
                     info.DeleteFlag = dataInfo.DeleteFlag;
                     // Trường hợp không tồn tại dữ liệu
-                    if (masterDataCom.IsExistItem(info.LocaleCd, info.ItemCd, true)) {
+                    if (listLocaleDb.Contains(info, comparer)) {
                         // Xử lý update đối tượng dữ liệu
                         processDao.Update(info, transaction);
                         seoCom.Update(GetSEOInfo(info), transaction);

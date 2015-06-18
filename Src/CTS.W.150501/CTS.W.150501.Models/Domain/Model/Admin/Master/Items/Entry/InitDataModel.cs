@@ -12,12 +12,12 @@ namespace CTS.W._150501.Models.Domain.Model.Admin.Master.Items.Entry
         [OutputObject(IgnoreAttribute = false)]
         public LocaleModel<ItemObject> LocaleModel { get; set; }
         [OutputList(IgnoreAttribute = true)]
-        public IList<ComboItem> ListCategories { get; set; }
+        public IList<ComboItem> CboCategories { get; set; }
         [OutputList(IgnoreAttribute = true)]
-        public IList<ComboItem> ListDeleteFlag { get; set; }
+        public IList<ComboItem> CboDeleteFlag { get; set; }
         [OutputList(IgnoreAttribute = true)]
-        public IList<ComboItem> ListLocales { get; set; }
+        public IList<ComboItem> CboLocales { get; set; }
         [OutputText]
-        public string SeletedValueLocales { get; set; }
+        public string CboLocalesSeleted { get; set; }
     }
 }
