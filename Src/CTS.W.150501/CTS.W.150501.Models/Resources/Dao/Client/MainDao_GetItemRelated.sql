@@ -1,10 +1,8 @@
 
 select * from [MAItems]
-where [ItemCd] != @ItemCd
+where [ItemCd] != @ItemCd and [CategoryCd] = @CategoryCd
 and [LocaleCd] = @LocaleCd
 and [DeleteFlag] = 0
 order by UpdateDate	desc	
 
-select * from [MAItems]
-where [LinkName] = @LinkName
 

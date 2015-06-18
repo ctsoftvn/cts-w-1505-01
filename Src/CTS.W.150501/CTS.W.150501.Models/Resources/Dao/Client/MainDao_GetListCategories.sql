@@ -2,8 +2,8 @@ SELECT
     *
 FROM [MACategories]
 WHERE
-	[LocaleCd] = @LocaleCd and
-	[DeleteFlag] = 0
+	[LocaleCd] = @LocaleCd
+	and [DeleteFlag] = 0
 
 
 
