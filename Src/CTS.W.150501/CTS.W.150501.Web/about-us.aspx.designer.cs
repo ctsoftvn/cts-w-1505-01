@@ -10,15 +10,15 @@
 namespace CTS.W._150501.Web {
     
     
-    public partial class items {
+    public partial class about_us {
         
         /// <summary>
-        /// rptItems control.
+        /// ltDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptItems;
+        protected global::System.Web.UI.WebControls.Literal ltDescription;
     }
 }

@@ -4,44 +4,35 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using CTS.Web.Com.Domain.Model;
-using CTS.W._150501.Models.Domain.Logic.Client.ItemDetail;
 using CTS.Web.Com.Domain.Controller;
-using CTS.Com.Domain.Model;
-using CTS.Web.Com.Domain.Helper;
+using CTS.W._150501.Models.Domain.Logic.Client.ContactUs;
+using CTS.Web.Com.Domain.Model;
 using Resources;
 
 namespace CTS.W._150501.Web
 {
-    public partial class item_detail : PageBase
+    public partial class contact_us : PageBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Page.IsPostBack) return;
-            var request = new BasicRequest();
-            request.Add("LinkName", Request["name"]);
             var logic = new InitOperateLogic();
-            var response = PageCom.Invoke(logic, request);
-            if (response.ResultFlag)
-            {
-                var item = PageCom.GetValue<HashMap>(response, "Item");
-                ltDescription.Text = PageCom.GetValue<string>(item, "Notes");
-                ltTitle.Text = PageCom.GetValue<string>(item, "ItemName");
-                var listItems = PageCom.GetValue<IList<object>>(response, "ListRelations");
-                rptItemsRelated.DataSource = listItems;
-                rptItemsRelated.DataBind();
+            var response = PageCom.Invoke(logic, null);
 
-                Page.Title = PageCom.GetValue<string>(response, "MetaTitle");
-                Page.MetaKeywords = PageCom.GetValue<string>(response, "MetaKey");
-                Page.MetaDescription = PageCom.GetValue<string>(response, "MetaDescription");
+            
+            ltCompanyName.Text = PageCom.GetValue<string>(response, "CompanyName"); 
+            ltAdderess1.Text = PageCom.GetValue<string>(response, "Address1"); 
+            ltAdderess2.Text = PageCom.GetValue<string>(response, "Address2"); 
+            ltPhone.Text = PageCom.GetValue<string>(response, "Phone"); 
 
-                btnSubmit.Text = Strings.CLN_BTN_SUBMIT;
-                btnReset.Text = Strings.CLN_BTN_RESER;
-            }
-            else
-            {
-                Response.Redirect("/" + WebContextHelper.LocaleCd + "/trang-chu");
-            }
+            ltEmail.Text = PageCom.GetValue<string>(response, "EmailAddress"); 
+            ltWebsite.Text = PageCom.GetValue<string>(response, "Website"); 
+            Page.Title = PageCom.GetValue<string>(response, "MetaTitle"); 
+            Page.MetaKeywords = PageCom.GetValue<string>(response, "MetaKey"); 
+            Page.MetaDescription = PageCom.GetValue<string>(response, "MetaDescription");
+            btnSubmit.Text = Strings.CLN_BTN_SUBMIT;
+            btnReset.Text = Strings.CLN_BTN_RESER;
+
         }
         protected void btnSubmit_Command(object sender, CommandEventArgs e)
         {
@@ -56,7 +47,9 @@ namespace CTS.W._150501.Web
             {
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "clientscript", "<script> alert('" + Strings.CLN_ALERT_SUCCESS + "'); </script>");
                 clearControls();
-            }else{
+            }
+            else
+            {
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "clientscript", "<script> alert('" + Strings.CLN_ALERT_ERROR + "'); </script>");
             }
 
@@ -65,7 +58,7 @@ namespace CTS.W._150501.Web
         {
             clearControls();
         }
-        
+
         private void clearControls()
         {
             txtName.Text = "";

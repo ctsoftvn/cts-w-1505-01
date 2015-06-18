@@ -2,6 +2,7 @@
 
 <%@ Import Namespace="CTS.Web.Com.Domain.Helper" %>
 <%@ Import Namespace="CTS.Com.Domain.Model" %>
+<%@ Import Namespace="Resources" %>
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
@@ -32,41 +33,33 @@
 </head>
 <body>
     <div class="wr_all_page">
-        <a class="show-menumb-icon" href="#menu_mb_ll"><span>Meny</span></a>
+        <a class="show-menumb-icon" href="#menu_mb_ll"><span>
+            <%= Strings.CLN_MASTER_MENU_MOBI_NAME %></span></a>
         <form id="form1" runat="server">
         <header>
             <div class="container bg">
-                <a class="logo" href="#" title="Logo">
+                <asp:HyperLink runat="server" ID="lkHome" CssClass="logo">
                     <h1>
-                        Bệnh Viện Thẩm Mỹ Ngọc Phú</h1>
+                        <asp:Literal runat="server" ID="ltCompanyName"></asp:Literal></h1>
                     <h2>
-                        Nơi mang lại niềm tin và vẻ đẹp hoàn mỹ</h2>
-                </a>
-               
-                <div id="dd" class="flag wrapper-dropdown-1" tabindex="1">
-                    <span><a id="selectedlang" href="javaScript:void(0);">
-                        <%--<img src="/res/cln/images/graphics/<%=Icon%>" />--%>
-                        <asp:Literal ID="ltrLang" runat="server" Text='<%# WebContextHelper.LocaleCd %>'></asp:Literal>
-                    </a></span>
-                    <asp:Repeater ID="rptLanguages" runat="server" >
-                        <HeaderTemplate>
-                            <ul class="dropdown" tabindex="1">
-                        </HeaderTemplate>
-                        <ItemTemplate>
-                            <li>
-                                <asp:Literal ID="ltrLang" runat="server" Text='<%# WebContextHelper.LocaleCd %>'></asp:Literal>
-                                <%-- <asp:LinkButton ID="lbtnLanguage" OnCommand="lbtnLanguage_Command" runat="server"
-                                    ToolTip=''>
-                                   <asp:Image ID="imgIcon" runat="server" Visible="false" alt="" />
-                                    OnItemDataBound="rptLanguages_Databound"
-                                </asp:LinkButton>--%>
-                            </li>
-                        </ItemTemplate>
-                        <FooterTemplate>
-                            </ul>
-                        </FooterTemplate>
-                    </asp:Repeater>
-                </div>
+                        <asp:Literal runat="server" ID="ltSlogan"></asp:Literal></h2>
+                </asp:HyperLink>
+                <asp:Repeater ID="rptLanguages" runat="server">
+                    <HeaderTemplate>
+                        <ul class="flags">
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <li>
+                            <asp:LinkButton ID="lbtnLanguage" OnCommand="lbtnLanguage_Command" CommandArgument='<%# ((HashMap)Container.DataItem)["Code"] %>'
+                                runat="server" ToolTip='<%# ((HashMap)Container.DataItem)["Name"] %>'>
+                                <img src='<%# "/res/cln/images/graphics/" + ((HashMap)Container.DataItem)["Code"] + ".png" %>' />
+                            </asp:LinkButton>
+                        </li>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </ul>
+                    </FooterTemplate>
+                </asp:Repeater>
                 <div class="wr-nav">
                     <nav>
                         <asp:Repeater ID="rptCategories" runat="server">
@@ -74,7 +67,7 @@
                                 <ul class="nav-list">
                             </HeaderTemplate>
                             <ItemTemplate>
-                                <li class="nav-item"><a href='<%# "/" + WebContextHelper.LocaleCd + "/items/" + ((HashMap)Container.DataItem)["LinkName"] %>'
+                                <li class="nav-item"><a href='<%# "/" + WebContextHelper.LocaleCd + "/dich-vu/danh-sach/" + ((HashMap)Container.DataItem)["LinkName"] %>'
                                     title='<%# ((HashMap)Container.DataItem)["CategoryName"] %>'>
                                     <asp:Label runat="server" ID="lbcatename" Text='<%# ((HashMap)Container.DataItem)["CategoryName"] %>' />
                                 </a></li>
@@ -96,24 +89,19 @@
         <!-- /main -->
         <footer>
             <div class="wr-qc">
-                <a href="#" title="">
-                    <img src="/res/cln/images/graphics/qc.png" alt="qc"></a>
+                <asp:HyperLink runat="server" ID="hplAdvertising" Target="_blank">
+                    <asp:ImageButton runat="server" ID="imgAdvertising" />
+                </asp:HyperLink>
             </div>
             <div class="wr-ct-footer">
-                <ul class="menu-ft">
-                    <li class="active"><a href="/">Trang chủ</a></li>
-                    <li><a href="#">Thẩm mỹ da công nghệ cao</a></li>
-                    <li><a href="#">Phẩu thuật thẩm mỹ</a></li>
-                    <li><a href="#">Trị rụng tóc</a></li>
-                </ul>
                 <!-- /social -->
                 <div class="txt-ft-r">
                     <p>
-                        Copyright &copy; 2015 <a href="#">Bệnh Viện Thẩm Mỹ Ngọc Phú</a>. All Rights Reserved.</p>
+                        <asp:Literal ID="ltCopyright" runat="server" /></p>
                     <div>
-                        <a href="#" target="_blank">316C Phạm Hùng,Phường 5,Quận 8,Tp.Hồ Chí Minh</a></div>
+                        <asp:Literal ID="ltAdderess1" runat="server" /></div>
                     <div>
-                        <a href="#" target="_blank">56 Cao Thắng, Phường 5, Quận 3, Tp.Hồ Chí Minh</a></div>
+                        <asp:Literal ID="ltAdderess2" runat="server" /></div>
                 </div>
                 <!-- /copyright -->
             </div>
@@ -125,83 +113,46 @@
                     <div class="custom hotline">
                         <p>
                             <strong>&nbsp;<img src="/res/cln/images/graphics/15.gif" alt="googleplus">&nbsp;<span
-                                style="color: #ffffff;"><a href="tel:0907500020"><span style="color: #ffffff;">0907
-                                    500 020 - </span></a><a href="tel:0902500020"><span style="color: #ffffff;">0902 5000
-                                        20</span></a></span></strong></p>
+                                style="color: #ffffff;"><asp:Literal ID="ltHotline" runat="server"></asp:Literal></span></strong></p>
                     </div>
                 </div>
                 <div class="menufooter">
                     <ul class="menu">
-                        <li class="active"><a href="index.html">Trang chủ</a></li>
-                        <li class=""><a href="sub.html">Giới thiệu</a></li>
-                        <li class=""><a href="lienhe.html">Liên hệ</a></li>
+                        <li class="active">
+                            <asp:HyperLink runat="server" ID="lkFhome"><%= Strings.CLN_MASTER_HOMEPAGE %></asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink runat="server" ID="lkFaboutUs"><%= Strings.CLN_MASTER_ABOUTUS %></asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink runat="server" ID="lkFcontactUs"><%= Strings.CLN_MASTER_CONTACTUS%></asp:HyperLink>
+                        </li>
                     </ul>
                 </div>
                 <div class="socialfooter">
                     <div class="tz_social">
                         <ul class="social">
-                            <li><a title="" href="#" target="_blank" class="twitter">twitter </a></li>
-                            <li><a title="" href="#" target="_blank" class="facebook">facebook </a></li>
-                            <li><a title="" href="#" target="_blank" class="google">google </a></li>
+                            <li>
+                                <asp:HyperLink ID="lkTwitter" runat="server" class="twitter" ToolTip="Twitter" Target="_blank">twitter</asp:HyperLink>
+                            </li>
+                            <li>
+                                <asp:HyperLink ID="lkfacebook" runat="server" class="facebook" ToolTip="Facebook"
+                                    Target="_blank">facebook</asp:HyperLink></li>
+                            <li>
+                                <asp:HyperLink ID="lkGoogle" runat="server" class="google" ToolTip="Google" Target="_blank">google</asp:HyperLink></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </footer>
         <!-- /footer -->
+        <!-- menu top left -->
+        <nav id="menu_mb_ll">
+            <ul>
+                <li>
+                    <asp:HyperLink runat="server" ID="lkMhome"><%= Strings.CLN_MASTER_HOMEPAGE %></asp:HyperLink></li>
+            </ul>
+        </nav>
         </form>
     </div>
-    <!-- menu top left -->
-    <nav id="menu_mb_ll">
-        <ul>
-            <li><a href="index.html">Trang chủ</a></li>
-            <li><a href="sub.html">Thẩm mỹ da công nghệ cao</a>
-                <ul>
-                    <li><a href="#">Thẩm mỹ da công nghệ cao 1</a>
-                        <ul>
-                            <li><a href="#">Thẩm mỹ da công nghệ cao 1.1</a>
-                                <ul>
-                                    <li><a href="#">Thẩm mỹ da công nghệ cao 1.1.1</a></li>
-                                    <li><a href="#">Thẩm mỹ da công nghệ cao 1.1.2</a></li>
-                                    <li><a href="#">Thẩm mỹ da công nghệ cao 1.1.3</a></li>
-                                    <li><a href="#">Thẩm mỹ da công nghệ cao 1.1.4</a></li>
-                                    <li><a href="#">Thẩm mỹ da công nghệ cao 1.1.5</a></li>
-                                    <li><a href="#">Thẩm mỹ da công nghệ cao 1.1.6</a></li>
-                                    <li><a href="#">Thẩm mỹ da công nghệ cao 1.1.7</a></li>
-                                    <li><a href="#">Thẩm mỹ da công nghệ cao 1.1.8</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Thẩm mỹ da công nghệ cao 1.2</a></li>
-                            <li><a href="#">Thẩm mỹ da công nghệ cao 1.3</a></li>
-                            <li><a href="#">Thẩm mỹ da công nghệ cao 1.4</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Thẩm mỹ da công nghệ cao 2</a>
-                        <ul>
-                            <li><a href="#">Thẩm mỹ da công nghệ cao 2.1</a></li>
-                            <li><a href="#">Thẩm mỹ da công nghệ cao 2.2</a></li>
-                            <li><a href="#">Thẩm mỹ da công nghệ cao 2.3</a></li>
-                            <li><a href="#">Thẩm mỹ da công nghệ cao 2.4</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Thẩm mỹ da công nghệ cao 3</a></li>
-                    <li><a href="#">Thẩm mỹ da công nghệ cao 4</a>
-                        <ul>
-                            <li><a href="#">Thẩm mỹ da công nghệ cao 4.1</a></li>
-                            <li><a href="#">Thẩm mỹ da công nghệ cao 4.2</a></li>
-                            <li><a href="#">Thẩm mỹ da công nghệ cao 4.3</a></li>
-                            <li><a href="#">Thẩm mỹ da công nghệ cao 4.4</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Thẩm mỹ da công nghệ cao 5</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Trẻ hóa âm đạo Trắng hồng nhũ hoa</a></li>
-            <li><a href="#">Thon gọn cơ thể</a></li>
-            <li><a href="#">Nâng mũi Sline - Tạo mặt Vline </a></li>
-            <li><a href="#">Phun xăm Hàn Quốc</a></li>
-            <li><a href="#">Sản Phẩm</a></li>
-        </ul>
-    </nav>
 </body>
 </html>
