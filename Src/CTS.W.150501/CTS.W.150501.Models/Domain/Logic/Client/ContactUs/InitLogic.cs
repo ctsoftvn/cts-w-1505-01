@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CTS.W._150501.Models.Domain.Model.Client.Main;
+using CTS.W._150501.Models.Domain.Model.Client.ContactUs;
 using CTS.Com.Domain.Helper;
 using CTS.W._150501.Models.Domain.Object.Client.Main;
 using CTS.W._150501.Models.Domain.Dao.Client;
 using CTS.Data.APLocales.Domain.Utils;
 using CTS.Data.Domain.Constants;
-using CTS.Com.Domain.Constants;
 using CTS.Web.Com.Domain.Helper;
 using CTS.W._150501.Models.Domain.Common.Constants;
+using CTS.Data.APStorageFiles.Domain.Utils;
+using CTS.Com.Domain.Constants;
+using CTS.Com.Domain.Exceptions;
+using CTS.Com.Domain.Model;
 using CTS.Data.MACompanyInfos.Domain.Utils;
 using CTS.W._150501.Models.Resources.Strings;
-using CTS.Data.APStorageFiles.Domain.Utils;
+using CTS.Data.APSEOInfos.Domain.Utils;
 
-namespace CTS.W._150501.Models.Domain.Logic.Client.Main
+namespace CTS.W._150501.Models.Domain.Logic.Client.ContactUs
 {
     /// <summary>
     /// InitLogic
@@ -46,6 +49,8 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.Main
         /// <param name="inputObject">DataModel</param>
         private void Check(InitDataModel inputObject)
         {
+        
+            
         }
 
         /// <summary>
@@ -55,59 +60,47 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.Main
         /// <returns>DataModel</returns>
         private InitDataModel GetInfo(InitDataModel inputObject)
         {
+            
             // Khởi tạo biến cục bộ
             var getResult = new InitDataModel();
             var processDao = new MainDao();
-            var localeCom = new LocaleCom();
             var companyCom = new CompanyCom();
-            var storageFileCom = new StorageFileCom();
+            var seoCom = new SEOCom();
+            var seoInfo = new BaseSEO();
             // Map dữ liệu
             DataHelper.CopyObject(inputObject, getResult);
-            // Lấy ngôn ngữ chuẩn
-            var basicLocale = Logics.LOCALE_DEFAULT;
-            // Lấy danh sách ngôn ngữ
-            var listLocales = localeCom.GetDiv(DataLogics.CD_APP_CD_CLN, null, false, false);
-            // Lấy danh sách menu
-            var listMenu = processDao.GetListCategories(WebContextHelper.LocaleCd);
-            // Lấy giá trị combo
-            var cbLocales = DataHelper.ToComboItems(listLocales, basicLocale);
             // Lấy field
             var companyName = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_COMPANY_NAME, false);
-            //var copyright = string.Format(Names.CLN_MASTER_COPYRIGHT, companyName);
-
-            var advertisingFileCd = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_ADVERTISING_FILE, false);
-            var advertisingImage = storageFileCom.GetFileName(
-                    WebContextHelper.LocaleCd,
-                    advertisingFileCd,
-                    false);
-            var advertisingFileUrl = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_ADVERTISING_URL, false);
+            
 
             var address1 = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_ADDRESS_1, false);
             var address2 = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_ADDRESS_2, false);
 
-            var slogan = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_SLOGAN, false);
-            var hotline = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_HOTLINE, false);
+            var emailAddress = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_EMAIL_ADDRESS, false);
+            
 
-            var twitterUrl = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_TWITTER_URL, false);
-            var googleUrl = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_GOOGLE_URL, false);
-            var facebookUrl = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_FACEBOOK_URL, false);
+            var phone = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_PHONE, false);
+            
+            var website = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_WEBSITE, false);
+            // Lấy thông tin seo
+
+            var infoSeo = seoCom.GetInfo(WebContextHelper.LocaleCd, W150501Logics.CD_SEO_CD_PAGE_CONTACT, W150501Logics.GRPSEO_CLN_PAGES, false);
+            seoInfo.MetaTitle = infoSeo.MetaTitle;
+            seoInfo.MetaKeys = infoSeo.MetaKeys;
+            seoInfo.MetaDesc = infoSeo.MetaDesc;
             // Gán giá trị trả về
-            getResult.CboLocales = cbLocales.ListItems;
-            getResult.CboLocalesSeleted = cbLocales.SeletedValue;
-            getResult.ListMenu = listMenu;
-
             getResult.CompanyName = companyName;
-            getResult.AdvertisingFileCd = advertisingImage;
-            getResult.AdvertisingFileUrl = advertisingFileUrl;
             getResult.Address1 = address1;
             getResult.Address2 = address2;
-            getResult.Slogan = slogan;
-            getResult.Hotline = hotline;
-            getResult.TwitterUrl = twitterUrl;
-            getResult.FacebookUrl = facebookUrl;
-            getResult.GoogleUrl = googleUrl;
+            getResult.EmailAddress = emailAddress;
+            getResult.Phone = phone;
+            getResult.Website = website;
+            getResult.MetaTitle = seoInfo.MetaTitle;
+            getResult.MetaKey = seoInfo.MetaKeys;
+            getResult.MetaDescription = seoInfo.MetaDesc;
             // Kết quả trả về
             return getResult;
+           
         }
         #endregion
     }

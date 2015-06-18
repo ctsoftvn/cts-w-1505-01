@@ -21,5 +21,10 @@ namespace CTS.W._150501.Models.Domain.Object.Client.Main
         public string Notes { get; set; }
         [OutputText]
         public string LinkName { get; set; }
+        [OutputText]
+        public string FileCd { get; set; }
+        [OutputText]
+        public string ItemImage { get; set; }
+
     }
 }

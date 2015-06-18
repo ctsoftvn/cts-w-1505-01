@@ -6,23 +6,20 @@ using CTS.Com.Domain.Model;
 using CTS.Com.Domain.Attr;
 using CTS.W._150501.Models.Domain.Object.Client.Main;
 
-namespace CTS.W._150501.Models.Domain.Model.Client.Items
+namespace CTS.W._150501.Models.Domain.Model.Client.AboutUs
 {
     /// <summary>
     /// InitDataModel
     /// </summary>
     public class InitDataModel : BasicInfoModel
     {
-        [InputText]
-        public string LinkName { get; set; }
-        [OutputList(IgnoreAttribute = false)]
-        public IList<ItemObject> ListItems { get; set; }
+        [OutputText]
+        public string AboutUsDescription { get; set; }
         [OutputText]
         public string MetaKey { get; set; }
         [OutputText]
         public string MetaTitle { get; set; }
         [OutputText]
         public string MetaDescription { get; set; }
-
     }
 }

@@ -15,6 +15,7 @@ namespace CTS.W._150501.Models.Domain.Dao.Client
         public const string MAINDAO_GETLISTITEMS_SQL = "MainDao_GetListItems.sql";
         public const string MAINDAO_GETITEMDETAIL_SQL = "MainDao_GetItemDetail.sql";
         public const string MAINDAO_GETITEMRELATED_SQL = "MainDao_GetItemRelated.sql";
+        public const string MAINDAO_GETCATEGORYINFO_SQL = "MainDao_GetCategoryInfo.sql";
 
         /// <summary>
         /// Lấy danh sách dữ liệu đa ngôn ngữ
@@ -29,6 +30,19 @@ namespace CTS.W._150501.Models.Domain.Dao.Client
             // Kết quả trả về
             return GetListByFile<CategoryObject>(MAINDAO_GETLISTCATEGORIES_SQL, param);
         }
+
+        public CategoryObject GetCategoryInfo(string localeCd, string linkName)
+        {
+            // Tạo tham số
+            var param = new
+            {
+                LocaleCd = localeCd,
+                LinkName = linkName
+            };
+            // Kết quả trả về
+            return GetObjectByFile<CategoryObject>(MAINDAO_GETCATEGORYINFO_SQL, param);
+        }
+
         public IList<ItemObject> GetListItems(String localeCd, String categoryCd)
         {
             // Tạo tham số
@@ -40,26 +54,30 @@ namespace CTS.W._150501.Models.Domain.Dao.Client
             // Kết quả trả về
             return GetListByFile<ItemObject>(MAINDAO_GETLISTITEMS_SQL, param);
         }
-        public ItemObject GetItems(String localeCd, String itemCd)
+        public ItemObject GetItemDetail(String localeCd, String linkName)
         {
             // Tạo tham số
             var param = new
             {
                 LocaleCd = localeCd,
-                ItemCd = itemCd
+                LinkName = linkName
             };
             // Kết quả trả về
             return GetObjectByFile<ItemObject>(MAINDAO_GETITEMDETAIL_SQL, param);
         }
-        public IList<ItemObject> GetListRelations(ItemObject item )
+        public IList<ItemObject> GetListRelations(String localeCd,String itemCd,String categoryCd)
         {
             // Tạo tham số
             var param = new
             {
-                
+                LocaleCd = localeCd,
+                ItemCd = itemCd,
+                CategoryCd = categoryCd
             };
             // Kết quả trả về
             return GetListByFile<ItemObject>(MAINDAO_GETITEMRELATED_SQL, param);
         }
+
+       
     }
 }

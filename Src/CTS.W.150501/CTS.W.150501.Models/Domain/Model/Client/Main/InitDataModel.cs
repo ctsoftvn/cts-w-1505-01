@@ -16,6 +16,34 @@ namespace CTS.W._150501.Models.Domain.Model.Client.Main
         [OutputList(IgnoreAttribute = false)]
         public IList<CategoryObject> ListMenu { get; set; }
         [OutputList(IgnoreAttribute = true)]
-        public IList<KeyValueObject> ListLocales { get; set; }
+        public IList<ComboItem> CboLocales { get; set; }
+        [OutputText]
+        public string CboLocalesSeleted { get; set; }
+
+        
+        [OutputText]
+        public string CompanyName { get; set; }
+        [OutputText]
+        public string Slogan { get; set; }
+        [OutputText]
+        public string AdvertisingFileCd { get; set; }
+        [OutputText]
+        public string AdvertisingFileUrl { get; set; }
+        [OutputText]
+        public string Copyright{ get; set; }
+        [OutputText]
+        public string Address1 { get; set; }
+        [OutputText]
+        public string Address2 { get; set; }
+        [OutputText]
+        public string Hotline { get; set; }
+        [OutputText]
+        public string TwitterUrl { get; set; }
+        [OutputText]
+        public string GoogleUrl { get; set; }
+        [OutputText]
+        public string FacebookUrl { get; set; }
+        
+
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CTS.W._150501.Models.Domain.Model.Client.ItemDetail;
+using CTS.W._150501.Models.Domain.Model.Client.AboutUs;
 using CTS.Com.Domain.Helper;
 using CTS.W._150501.Models.Domain.Object.Client.Main;
 using CTS.W._150501.Models.Domain.Dao.Client;
@@ -15,9 +15,10 @@ using CTS.Com.Domain.Constants;
 using CTS.Com.Domain.Exceptions;
 using CTS.Com.Domain.Model;
 using CTS.Data.MACompanyInfos.Domain.Utils;
+using CTS.W._150501.Models.Resources.Strings;
 using CTS.Data.APSEOInfos.Domain.Utils;
 
-namespace CTS.W._150501.Models.Domain.Logic.Client.ItemDetail
+namespace CTS.W._150501.Models.Domain.Logic.Client.AboutUs
 {
     /// <summary>
     /// InitLogic
@@ -48,17 +49,8 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.ItemDetail
         /// <param name="inputObject">DataModel</param>
         private void Check(InitDataModel inputObject)
         {
-            // Khởi tạo biến cục bộ
-            var processDao = new MainDao();
-            // Lấy thông tin sản phẩm
-            var item = processDao.GetItemDetail(WebContextHelper.LocaleCd, inputObject.LinkName);
-            // Kiểm tra dữ liệu tồn tại
-            if (item == null)
-            {
-                throw new ExecuteException("I_MSG_00008");
-            }
-
-
+        
+            
         }
 
         /// <summary>
@@ -68,45 +60,33 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.ItemDetail
         /// <returns>DataModel</returns>
         private InitDataModel GetInfo(InitDataModel inputObject)
         {
+            
             // Khởi tạo biến cục bộ
             var getResult = new InitDataModel();
-            var storageFileCom = new StorageFileCom();
             var processDao = new MainDao();
+            var companyCom = new CompanyCom();
             var seoCom = new SEOCom();
             var seoInfo = new BaseSEO();
+            
             // Map dữ liệu
             DataHelper.CopyObject(inputObject, getResult);
-            // Lấy item
-            var item = processDao.GetItemDetail(WebContextHelper.LocaleCd, inputObject.LinkName);
-            // Lấy related item
-            var listRelations = processDao.GetListRelations(WebContextHelper.LocaleCd, item.ItemCd, item.CategoryCd);
-            foreach (var info in listRelations)
-            {
-                info.ItemImage = storageFileCom.GetFileName(
-                    WebContextHelper.LocaleCd,
-                    info.FileCd,
-                    false);
-                if (DataCheckHelper.IsNull(info.ItemImage))
-                {
-                    info.ItemImage = W150501Logics.PATH_DEFAULT_NO_IMAGE;
-                }
-
-            }
+            // Lấy field
+            var aboutUsDescription = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_ABOUTUS_CONTENT, false);
             // Lấy thông tin seo
 
-            var infoSeo = seoCom.GetInfo(WebContextHelper.LocaleCd, item.ItemCd, W150501Logics.GRPSEO_MA_ITEMS, false);
+            var infoSeo = seoCom.GetInfo(WebContextHelper.LocaleCd, W150501Logics.CD_SEO_CD_PAGE_ABOUT, W150501Logics.GRPSEO_CLN_PAGES, false);
             seoInfo.MetaTitle = infoSeo.MetaTitle;
             seoInfo.MetaKeys = infoSeo.MetaKeys;
             seoInfo.MetaDesc = infoSeo.MetaDesc;
-
             // Gán giá trị trả về
-            getResult.Item = item;
-            getResult.ListRelations = listRelations;
+            getResult.AboutUsDescription = aboutUsDescription;
             getResult.MetaTitle = seoInfo.MetaTitle;
             getResult.MetaKey = seoInfo.MetaKeys;
             getResult.MetaDescription = seoInfo.MetaDesc;
+
             // Kết quả trả về
             return getResult;
+            
         }
         #endregion
     }
