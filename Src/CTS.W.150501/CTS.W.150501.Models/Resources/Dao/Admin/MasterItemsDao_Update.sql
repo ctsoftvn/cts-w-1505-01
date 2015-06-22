@@ -13,4 +13,4 @@ SET
 	[DeleteFlag] = @DeleteFlag
 WHERE
 	[LocaleCd] = @LocaleCd
-	AND ItemCd = @ItemCd
+	AND [ItemCd] = @ItemCd
