@@ -57,6 +57,7 @@
         "ADM.MA.ITEMS.ENTRY.MetaKeys": "Từ khóa SEO",
         "ADM.MA.ITEMS.ENTRY.SortKey": "Thứ tự",
         "ADM.MA.ITEMS.ENTRY.DeleteFlag": "Trạng thái",
+        "ADM.MA.ITEMS.ENTRY.GenItemCd": "Mã mới",
         "ADM.MA.ITEMS.ENTRY.UploadImage": "Đăng ảnh",
         "ADM.MA.ITEMS.ENTRY.LocaleCd": "Ngôn ngữ",
         "ADM.MA.ITEMS.ENTRY.FixLocaleInfo": "Cố định",

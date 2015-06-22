@@ -29,7 +29,7 @@ ctrls.controller('MAItemsListCtrl', ['$scope', '$state', '$stateParams', '$windo
                 // Xử lý filter dữ liệu
                 $scope.search();
                 // Áp dụng trình tự di chuyển tab
-                $ti('txtItemCd');
+                $ti('txtItemName');
             }
         });
     };
@@ -42,7 +42,6 @@ ctrls.controller('MAItemsListCtrl', ['$scope', '$state', '$stateParams', '$windo
                 var data = $gridHelper.getPagerData($scope.tblResult);
                 // Gán dữ liệu tìm kiếm
                 data.LocaleCd = $scope.data.HdnLocaleCd;
-                data.ItemCd = $scope.data.HdnItemCd;
                 data.ItemName = $scope.data.HdnItemName;
                 data.LinkName = $scope.data.HdnLinkName;
                 data.CategoryCd = $scope.data.HdnCategoryCd;
@@ -89,13 +88,20 @@ ctrls.controller('MAItemsListCtrl', ['$scope', '$state', '$stateParams', '$windo
     };
     // Xử lý thêm
     $scope.add = function () {
-        $pc(function () {
-            var params = {
-                Status: 'add',
-                CallType: 'init'
-            };
-            $state.go('master_items_list_entry', params);
-        });
+        var fnYes = function () {
+            $pc(function () {
+                var params = {
+                    Status: 'add',
+                    CallType: 'init'
+                };
+                $state.go('master_items_list_entry', params);
+            });
+        };
+        if ($gridHelper.hasDataChanged($scope.tblResult)) {
+            $dialogHelper.showDialogConfirm($ms('I.MSG.00002'), fnYes);
+        } else {
+            fnYes();
+        }
     };
     // Ẩn/Hiện panel tìm kiếm
     $scope.showHideSearchPanel = function () {
@@ -120,7 +126,6 @@ ctrls.controller('MAItemsListCtrl', ['$scope', '$state', '$stateParams', '$windo
         var fnYes = function () {
             $pc(function () {
                 $scope.data.HdnLocaleCd = $scope.data.LocaleCd;
-                $scope.data.HdnItemCd = $scope.data.ItemCd;
                 $scope.data.HdnItemName = $scope.data.ItemName;
                 $scope.data.HdnLinkName = $scope.data.LinkName;
                 $scope.data.HdnCategoryCd = $scope.data.CategoryCd;
@@ -129,7 +134,7 @@ ctrls.controller('MAItemsListCtrl', ['$scope', '$state', '$stateParams', '$windo
             });
         };
         if ($gridHelper.hasDataChanged($scope.tblResult)) {
-            $pageHelper.showDialogConfirm($ms('I.MSG.00002'), fnYes);
+            $dialogHelper.showDialogConfirm($ms('I.MSG.00002'), fnYes);
         } else {
             fnYes();
         }

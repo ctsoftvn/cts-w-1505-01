@@ -1,7 +1,10 @@
-﻿using System.Web.Services;
+﻿using System.Threading;
+using System.Web.Services;
+using CTS.Com.Domain.Helper;
 using CTS.Data.Domain.Constants;
 using CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry;
 using CTS.Web.Com.Domain.Controller;
+using CTS.Web.Com.Domain.Model;
 
 namespace CTS.W._150501.Web.ajx.adm.ma.items
 {
@@ -20,6 +23,18 @@ namespace CTS.W._150501.Web.ajx.adm.ma.items
         {
             var logic = new SaveOperateLogic();
             var response = Ajax.Invoke(logic, request, DataLogics.CD_APP_CD_ADM);
+            return response;
+        }
+
+        [WebMethod]
+        public static object GenItemCd(object request)
+        {
+            var response = new BasicResponse();
+            var param = Ajax.ToRequest(request);
+            if (param.IsAdd) {
+                Thread.Sleep(1000);
+                response.Add("ItemCd", DataHelper.GetUniqueKey());
+            }
             return response;
         }
     }

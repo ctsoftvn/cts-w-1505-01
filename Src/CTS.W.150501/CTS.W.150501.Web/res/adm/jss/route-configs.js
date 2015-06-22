@@ -50,4 +50,34 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             }
         }
     });
+    // Settings|Info
+    $stateProvider.state('settings_info', {
+        url: "/adm/settings/info",
+        views: {
+            main: {
+                templateUrl: "/cts/com/html/ucs/view-company-infos.html",
+                controller: "ViewCompanyInfosCtrl"
+            }
+        }
+    });
+    // Settings|InfoSEO
+    $stateProvider.state('settings_seo', {
+        url: "/adm/settings/seo",
+        views: {
+            main: {
+                templateUrl: "/cts/com/html/ucs/view-seo-infos.html",
+                controller: "ViewSEOInfosCtrl"
+            }
+        }
+    });
+    // Settings|System
+    $stateProvider.state('settings_system', {
+        url: "/adm/settings/system",
+        views: {
+            main: {
+                templateUrl: "/cts/com/html/ucs/view-parameters.html",
+                controller: "ViewParametersCtrl"
+            }
+        }
+    });
 });

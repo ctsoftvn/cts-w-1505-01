@@ -15,6 +15,7 @@ var ctrls = angular.module('controllers', []);
 var app = angular.module('app', [
     'cts.angular',
     'cts.ccs',
+    'cts.ucs',
     'controllers'
 ]);
 // -----------------------------------------------------------------

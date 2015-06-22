@@ -1,5 +1,9 @@
 ﻿using System;
 using CTS.W._150501.Models;
+using CTS.Web.Ucs.CompanyInfos;
+using CTS.Web.Ucs.Parameters;
+using CTS.Web.Ucs.SEOInfos;
+using CTS.Web.Ucs.UploadFile;
 
 namespace CTS.W._150501.Web
 {
@@ -9,6 +13,10 @@ namespace CTS.W._150501.Web
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
+            WebUcsUploadFile.ApplyResources();
+            WebUcsCompanyInfos.ApplyResources();
+            WebUcsParameters.ApplyResources();
+            WebUcsSEOInfos.ApplyResources();
             W150501.ApplyResources();
         }
 

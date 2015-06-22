@@ -7,10 +7,11 @@
     <tab heading="{{$nm('ADM.MA.ITEMS.ENTRY.TabMain')}}">
         <cts-form-pane class="p-height-20" style="height: 502px" cts-tabgroup="true">
             <cts-label class="top-1 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.ENTRY.ItemCd')}}"></cts-label>
-            <cts-text tabindex="10" class="top-1 left-5 width-10" model="objEntry.DataInfo.ItemCd" disabled="variable.BasicInfo.IsEdit" id="txtItemCd"></cts-text>
-            <cts-button tabindex="110" class="top-1 left-10 width-8" text="{{$nm('ADM.MA.ITEMS.ENTRY.UploadImage')}}" onclick="uploadImage(objEntry.DataInfo)"></cts-button>
+            <cts-label class="top-1 left-5 width-10" text="{{objEntry.DataInfo.ItemCd}}"></cts-label>
+            <cts-button class="top-1 left-8 width-8" text="{{$nm('ADM.MA.ITEMS.ENTRY.GenItemCd')}}" onclick="genItemCd()" ng-hide="variable.BasicInfo.IsEdit" disabled="variable.BasicInfo.IsEdit" style="margin-left:-5px"></cts-button>
             <cts-label class="top-2 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.ENTRY.ItemName')}}"></cts-label>
             <cts-text tabindex="20" class="top-2 left-5 width-15" model="objEntry.DataInfo.ItemName" onblur="blurItemName(data, objEntry.DataInfo, true)" id="txtItemName"></cts-text>
+            <cts-button tabindex="110" class="top-2 left-12 width-8" text="{{$nm('ADM.MA.ITEMS.ENTRY.UploadImage')}}" onclick="uploadImage(objEntry.DataInfo)" style="margin-left:-5px"></cts-button>
             <cts-label class="top-3 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.ENTRY.CategoryCd')}}"></cts-label>
             <cts-select tabindex="30" class="top-3 left-5 width-10" model="objEntry.DataInfo.CategoryCd" options="data.CboCategories"></cts-select>
             <cts-label class="top-4 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.ENTRY.LinkName')}}"></cts-label>
@@ -60,7 +61,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="obj in objEntry.ListLocale" ng-click="selectRow($index)">
+                <tr ng-repeat="obj in objEntry.ListLocale" ng-click="selectRow(obj.LocaleCd)">
                     <td>{{obj.LocaleName}}</td>
                     <td>{{obj.ItemName}}</td>
                     <td>{{obj.Notes}}</td>

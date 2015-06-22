@@ -33,18 +33,15 @@ ctrls.controller('MAItemsEntryCtrl', ['$scope', '$state', '$stateParams', '$wind
                     $scope.data = data;
                     $scope.objEntry.DataInfo = data.LocaleModel.DataInfo;
                     $scope.objEntry.ListLocale = data.LocaleModel.ListLocale;
+                    $scope.objLocale.LocaleCd = $scope.data.CboLocalesSeleted;
                     // Trường hợp kết quả trả về không phải mảng
                     if (!$.isArray($scope.objEntry.ListLocale)) {
                         $scope.objEntry.ListLocale = [];
                     }
                     // Xử lý select thông tin dòng đầu tiên
-                    $scope.selectRow(0);
+                    $scope.selectRow($scope.objLocale.LocaleCd);
                     // Xử lý focus
-                    if ($scope.variable.BasicInfo.IsAdd) {
-                        $ti('txtItemCd');
-                    } else {
-                        $ti('txtItemName');
-                    }
+                    $ti('txtItemName');
                 }
             }
         });
@@ -82,6 +79,21 @@ ctrls.controller('MAItemsEntryCtrl', ['$scope', '$state', '$stateParams', '$wind
             $state.go('master_items_list');
         });
     };
+    // Tạo mới mã
+    $scope.genItemCd = function () {
+        $pc({
+            url: '/ajx/adm/ma/items/entry.aspx/GenItemCd',
+            data: {
+                Status: $scope.variable.BasicInfo.Status,
+                CallType: $scope.variable.BasicInfo.CallType
+            },
+            success: function (data) {
+                if ($scope.variable.BasicInfo.IsAdd && data.ItemCd) {
+                    $scope.objEntry.DataInfo.ItemCd = data.ItemCd;
+                }
+            }
+        });
+    };
     // Xử lý tải lên hình ảnh
     $scope.uploadImage = function (obj) {
         $pc(function () {
@@ -103,40 +115,30 @@ ctrls.controller('MAItemsEntryCtrl', ['$scope', '$state', '$stateParams', '$wind
         $pc(function () {
             // Khởi tạo biến cục bộ
             var obj = $scope.objLocale;
+            // Trường hợp là ngôn ngữ chuẩn
+            if ($scope.data.BasicLocale === obj.LocaleCd) {
+                $dialogHelper.showDialogError($resourceHelper.getMessage('E.MSG.00004', 'ADM.MA.ITEMS.ENTRY.LocaleCd'));
+                return;
+            }
             // Cập nhật lại số dòng
             obj.RowNo = $gridHelper.getRowNo(obj.RowNo, $scope.objEntry.ListLocale);
             // Lấy chỉ số dòng trong mảng
-            var rowIdx = $dataHelper.getRowIndex(obj.RowNo, $scope.objEntry.ListLocale, 'RowNo');
+            var rowIdx = $dataHelper.getRowIndex(obj.LocaleCd, $scope.objEntry.ListLocale, 'LocaleCd');
             if (rowIdx === -1) {
-                // Kiểm tra duy nhất
-                var isExist = $checkHelper.isExistData(obj.LocaleCd, $scope.objEntry.ListLocale, 'LocaleCd');
-                if ($scope.data.BasicLocale === obj.LocaleCd || isExist) {
-                    $dialogHelper.showDialogError($resourceHelper.getMessage('E.MSG.00004', 'ADM.MA.ITEMS.ENTRY.LocaleCd'));
-                    return;
-                }
                 // Thêm dữ liệu vào danh sách
                 $scope.objEntry.ListLocale.push(obj);
-                // Clear thông tin dòng
-                $scope.clearRow();
             } else {
-                // Kiểm tra tồn tại
-                if ($scope.objEntry.ListLocale[rowIdx].LocaleCd !== obj.LocaleCd) {
-                    $dialogHelper.showDialogError($resourceHelper.getMessage('E.MSG.00006', 'ADM.MA.ITEMS.ENTRY.LocaleCd'));
-                    return;
-                }
                 // Cập nhật dữ liệu vào danh sách
                 $scope.objEntry.ListLocale[rowIdx] = obj;
-                // Xử lý select thông tin dòng kế tiếp
-                $scope.selectRow(parseInt(rowIdx) + 1);
             }
+            // Xử lý select thông tin dòng
+            $scope.selectRow(obj.LocaleCd);
         });
     };
     // Xử lý clear thông tin dòng
     $scope.clearRow = function () {
         $pc(function () {
-            $scope.objLocale = {};
             $scope.objLocale.RowNo = '';
-            $scope.objLocale.LocaleCd = $scope.data.CboLocalesSeleted;
             $scope.objLocale.ItemName = '';
             $scope.objLocale.FileCd = '';
             $scope.objLocale.HasGen = true;
@@ -144,25 +146,22 @@ ctrls.controller('MAItemsEntryCtrl', ['$scope', '$state', '$stateParams', '$wind
             $scope.objLocale.MetaTitle = '';
             $scope.objLocale.MetaDesc = '';
             $scope.objLocale.MetaKeys = '';
-            $scope.changedLocaleCd($scope.objLocale.LocaleCd);
         });
     };
     // Xử lý select thông tin dòng
-    $scope.selectRow = function (idx) {
+    $scope.selectRow = function (localeCd) {
         $pc(function () {
-            // Clear thông tin dòng
-            $scope.clearRow();
-            // Khởi tạo biến cục bộ
-            var tmp = {};
-            var obj = {};
-            // Kiểm tra chỉ số dòng
-            if ($scope.objEntry.ListLocale.length > idx && idx > -1) {
-                obj = $scope.objEntry.ListLocale[idx];
-                angular.copy(obj, tmp);
-                $scope.objLocale = tmp;
-            } else if ($scope.objEntry.ListLocale.length > 0
-                && $scope.objEntry.ListLocale.length === $scope.data.CboLocales.length) {
-                obj = $scope.objEntry.ListLocale[0];
+            // Lấy chỉ số dòng trong mảng
+            var rowIdx = $dataHelper.getRowIndex(localeCd, $scope.objEntry.ListLocale, 'LocaleCd');
+            // Trường hợp không tồn tại dòng
+            if (rowIdx === -1) {
+                // Xử lý clear thông tin dòng
+                $scope.clearRow();
+            } else {
+                // Khởi tạo biến cục bộ
+                var tmp = {};
+                var obj = $scope.objEntry.ListLocale[rowIdx];
+                // Gán dữ liệu vào đối tượng
                 angular.copy(obj, tmp);
                 $scope.objLocale = tmp;
             }
@@ -193,8 +192,11 @@ ctrls.controller('MAItemsEntryCtrl', ['$scope', '$state', '$stateParams', '$wind
     // Xử lý thay đổi ngôn ngữ
     $scope.changedLocaleCd = function (data) {
         $pc(function () {
+            // Lấy thông tin dữ liệu
             var rowData = $dataHelper.getRowData(data, $scope.data.CboLocales, 'Code');
             $scope.objLocale.LocaleName = rowData.Name;
+            // Xử lý select thông tin dòng
+            $scope.selectRow(rowData.Code);
         });
     };
     // Tạo tự động tên liên kết

@@ -70,7 +70,7 @@
 /* -- adm/ma/items/entry.html -- */
 .ma-items-entry-tblResult .row-fix { height: 100px!important; }
 /* -- adm/ma/items/list.html -- */
-.ma-items-tblResult { top: 252px!important; }
+.ma-items-tblResult { top: 227px!important; }
 .ma-items-tblResult-full { top: 58px!important; }
 .ma-items-tblResult .row-fix { height: 250px!important; }
-.ma-items-tblResult-full .row-fix { height: 444px!important; } /* 252-58+250=444 */
+.ma-items-tblResult-full .row-fix { height: 419px!important; } /* 227-58+250=444 */

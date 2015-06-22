@@ -4,20 +4,18 @@
     <cts-toolbar-item onclick="saveBatch()" class="left-2" src="$res.Icons.SaveBatch" data-original-title="{{$nm('ADM.MA.ITEMS.LIST.Tooltip.SaveBatch')}}" ui-jq="tooltip"></cts-toolbar-item>
     <cts-toolbar-item onclick="showHideSearchPanel()" class="right-1" src="$res.Icons.ShowHide" data-original-title="{{$nm('ADM.MA.ITEMS.LIST.Tooltip.ShowHideSearch')}}" ui-jq="tooltip"></cts-toolbar-item>
 </cts-toolbar>
-<cts-form-pane class="df-fp p-height-7" ng-show="variable.ShowSearchPane" cts-tabgroup="true">
-    <cts-label class="top-1 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.LIST.ItemCd')}}"></cts-label>
-    <cts-text tabindex="10" class="top-1 left-5 width-10" model="data.ItemCd" id="txtItemCd"></cts-text>
-    <cts-label class="top-2 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.LIST.ItemName')}}"></cts-label>
-    <cts-text tabindex="20" class="top-2 left-5 width-15" model="data.ItemName"></cts-text>
-    <cts-label class="top-3 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.LIST.LinkName')}}"></cts-label>
-    <cts-text tabindex="30" class="top-3 left-5 width-15" model="data.LinkName"></cts-text>
-    <cts-label class="top-4 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.LIST.CategoryCd')}}"></cts-label>
-    <cts-select tabindex="40" class="top-4 left-5 width-10" model="data.CategoryCd" options="data.CboCategories"></cts-select>
-    <cts-label class="top-5 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.LIST.LocaleCd')}}"></cts-label>
-    <cts-select tabindex="50" class="top-5 left-5 width-10" model="data.LocaleCd" options="data.CboLocales"></cts-select>
-    <cts-label class="top-6 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.LIST.DeleteFlag')}}"></cts-label>
-    <cts-select tabindex="60" class="top-6 left-5 width-8" model="data.DeleteFlag" options="data.CboDeleteFlag"></cts-select>
-    <cts-button class="top-7 left-5 width-8" id="btnSearch" tabindex="70" text="{{$nm('ADM.MA.ITEMS.LIST.Search')}}" onclick="search()"></cts-button>
+<cts-form-pane class="df-fp p-height-6" ng-show="variable.ShowSearchPane" cts-tabgroup="true">
+    <cts-label class="top-1 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.LIST.ItemName')}}"></cts-label>
+    <cts-text tabindex="10" class="top-1 left-5 width-15" model="data.ItemName" id="txtItemName"></cts-text>
+    <cts-label class="top-2 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.LIST.LinkName')}}"></cts-label>
+    <cts-text tabindex="20" class="top-2 left-5 width-15" model="data.LinkName"></cts-text>
+    <cts-label class="top-3 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.LIST.CategoryCd')}}"></cts-label>
+    <cts-select tabindex="30" class="top-3 left-5 width-10" model="data.CategoryCd" options="data.CboCategories"></cts-select>
+    <cts-label class="top-4 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.LIST.LocaleCd')}}"></cts-label>
+    <cts-select tabindex="40" class="top-4 left-5 width-10" model="data.LocaleCd" options="data.CboLocales"></cts-select>
+    <cts-label class="top-5 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.LIST.DeleteFlag')}}"></cts-label>
+    <cts-select tabindex="50" class="top-5 left-5 width-8" model="data.DeleteFlag" options="data.CboDeleteFlag"></cts-select>
+    <cts-button tabindex="60" class="top-6 left-5 width-8" id="btnSearch" text="{{$nm('ADM.MA.ITEMS.LIST.Search')}}" onclick="search()"></cts-button>
 </cts-form-pane>
 <cts-grid-Pane ng-class="{'ma-items-tblResult': variable.ShowSearchPane, 'ma-items-tblResult-full': !variable.ShowSearchPane}">
     <table dt-options="tblResult.Options" datatable="ng">
@@ -30,7 +28,6 @@
             <td width="30"></td>
             <td width="30"></td>
             <td width="100" text="{{$nm('ADM.MA.ITEMS.LIST.ColLocale')}}"  cts-grid-header="true"></td>
-            <td width="100" text="{{$nm('ADM.MA.ITEMS.LIST.ColItemCd')}}"  cts-grid-header="true"></td>
             <td width="150" text="{{$nm('ADM.MA.ITEMS.LIST.ColItemName')}}"  cts-grid-header="true"></td>
             <td width="150" text="{{$nm('ADM.MA.ITEMS.LIST.ColLinkName')}}"  cts-grid-header="true"></td>
             <td width="150" text="{{$nm('ADM.MA.ITEMS.LIST.ColCategory')}}"  cts-grid-header="true"></td>
@@ -57,7 +54,6 @@
                 <cts-image src="$res.Icons.SEOInfo" onclick="editSEOInfo(obj)" style="width: 16px;" data-original-title="{{$nm('ADM.MA.ITEMS.LIST.Tooltip.SEOInfo')}}" ui-jq="tooltip"></cts-image>
             </td>
             <td>{{obj.LocaleName}}</td>
-            <td>{{obj.ItemCd}}</td>
             <td class="editable">
                 <cts-text model="obj.ItemName" onchange="tblResultChange(data, obj)" onblur="blurItemName(obj)"></cts-text>
             </td>
