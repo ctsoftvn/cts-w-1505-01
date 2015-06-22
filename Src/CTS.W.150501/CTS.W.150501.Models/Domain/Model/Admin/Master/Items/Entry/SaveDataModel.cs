@@ -4,6 +4,9 @@ using CTS.W._150501.Models.Domain.Object.Admin.Master.Items;
 
 namespace CTS.W._150501.Models.Domain.Model.Admin.Master.Items.Entry
 {
+    /// <summary>
+    /// InitDataModel
+    /// </summary>
     public class SaveDataModel : BasicInfoModel
     {
         [InputObject(IgnoreAttribute = false)]

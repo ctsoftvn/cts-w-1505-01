@@ -1,8 +1,9 @@
 ﻿using CTS.Com.Domain.Constants;
 using CTS.Com.Domain.Helper;
-using CTS.Data.APLocales.Domain.Utils;
 using CTS.Data.Domain.Constants;
 using CTS.Data.MACodes.Domain.Utils;
+using CTS.Data.MAParameters.Domain.Utils;
+using CTS.W._150501.Models.Domain.Common.Constants;
 using CTS.W._150501.Models.Domain.Common.Utils;
 using CTS.W._150501.Models.Domain.Model.Admin.Master.Items.List;
 
@@ -50,16 +51,16 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.List
             var getResult = new InitDataModel();
             var masterDataCom = new MasterDataCom();
             var codeCom = new CodeCom();
-            var localeCom = new LocaleCom();
+            var parameterCom = new ParameterCom();
             // Map dữ liệu
             DataHelper.CopyObject(inputObject, getResult);
             // Lấy ngôn ngữ chuẩn
             var basicLocale = Logics.LOCALE_DEFAULT;
             // Lấy giá trị giới hạn trên grid
-            var limit = 20;
+            var limit = parameterCom.GetNumber(W150501Logics.CD_PARAM_CD_ADM_LIMIT, false);
             // Lấy danh sách code
             var listCategories = masterDataCom.GetDivCategory(basicLocale, null, true, false);
-            var listLocales = localeCom.GetDiv(DataLogics.CD_APP_CD_CLN, null, true, false);
+            var listLocales = codeCom.GetDiv(basicLocale, DataLogics.GRPCD_LOCALES, null, true, false);
             var listDeleteFlag = codeCom.GetDivDeleteFlag(basicLocale, true);
             var listCategoriesGrd = masterDataCom.GetDivCategory(basicLocale, null, false, false);
             var listDeleteFlagGrd = codeCom.GetDivDeleteFlag(basicLocale, false);

@@ -587,8 +587,6 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _LocaleCd;
-		
 		private string _ParamCd;
 		
 		private string _ParamName;
@@ -596,6 +594,8 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 		private string _ParamValue;
 		
 		private string _ParamType;
+		
+		private string _Rule;
 		
 		private System.Nullable<bool> _PermitModify;
 		
@@ -619,8 +619,6 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnLocaleCdChanging(string value);
-    partial void OnLocaleCdChanged();
     partial void OnParamCdChanging(string value);
     partial void OnParamCdChanged();
     partial void OnParamNameChanging(string value);
@@ -629,6 +627,8 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
     partial void OnParamValueChanged();
     partial void OnParamTypeChanging(string value);
     partial void OnParamTypeChanged();
+    partial void OnRuleChanging(string value);
+    partial void OnRuleChanged();
     partial void OnPermitModifyChanging(System.Nullable<bool> value);
     partial void OnPermitModifyChanged();
     partial void OnNotesChanging(string value);
@@ -652,26 +652,6 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 		public MAParameter()
 		{
 			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LocaleCd", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string LocaleCd
-		{
-			get
-			{
-				return this._LocaleCd;
-			}
-			set
-			{
-				if ((this._LocaleCd != value))
-				{
-					this.OnLocaleCdChanging(value);
-					this.SendPropertyChanging();
-					this._LocaleCd = value;
-					this.SendPropertyChanged("LocaleCd");
-					this.OnLocaleCdChanged();
-				}
-			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ParamCd", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
@@ -750,6 +730,26 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 					this._ParamType = value;
 					this.SendPropertyChanged("ParamType");
 					this.OnParamTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Rule]", Storage="_Rule", DbType="VarChar(50)")]
+		public string Rule
+		{
+			get
+			{
+				return this._Rule;
+			}
+			set
+			{
+				if ((this._Rule != value))
+				{
+					this.OnRuleChanging(value);
+					this.SendPropertyChanging();
+					this._Rule = value;
+					this.SendPropertyChanged("Rule");
+					this.OnRuleChanged();
 				}
 			}
 		}
@@ -2243,15 +2243,23 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 		
 		private string _LocaleCd;
 		
+		private string _GroupCd;
+		
 		private string _SEOCd;
 		
-		private string _GroupCd;
+		private string _SEOName;
+		
+		private string _SEOType;
 		
 		private string _MetaTitle;
 		
 		private string _MetaDesc;
 		
 		private string _MetaKeys;
+		
+		private string _Notes;
+		
+		private System.Nullable<decimal> _SortKey;
 		
 		private System.Nullable<decimal> _VersionNo;
 		
@@ -2271,16 +2279,24 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
     partial void OnCreated();
     partial void OnLocaleCdChanging(string value);
     partial void OnLocaleCdChanged();
-    partial void OnSEOCdChanging(string value);
-    partial void OnSEOCdChanged();
     partial void OnGroupCdChanging(string value);
     partial void OnGroupCdChanged();
+    partial void OnSEOCdChanging(string value);
+    partial void OnSEOCdChanged();
+    partial void OnSEONameChanging(string value);
+    partial void OnSEONameChanged();
+    partial void OnSEOTypeChanging(string value);
+    partial void OnSEOTypeChanged();
     partial void OnMetaTitleChanging(string value);
     partial void OnMetaTitleChanged();
     partial void OnMetaDescChanging(string value);
     partial void OnMetaDescChanged();
     partial void OnMetaKeysChanging(string value);
     partial void OnMetaKeysChanged();
+    partial void OnNotesChanging(string value);
+    partial void OnNotesChanged();
+    partial void OnSortKeyChanging(System.Nullable<decimal> value);
+    partial void OnSortKeyChanged();
     partial void OnVersionNoChanging(System.Nullable<decimal> value);
     partial void OnVersionNoChanged();
     partial void OnCreateUserChanging(string value);
@@ -2320,6 +2336,26 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupCd", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string GroupCd
+		{
+			get
+			{
+				return this._GroupCd;
+			}
+			set
+			{
+				if ((this._GroupCd != value))
+				{
+					this.OnGroupCdChanging(value);
+					this.SendPropertyChanging();
+					this._GroupCd = value;
+					this.SendPropertyChanged("GroupCd");
+					this.OnGroupCdChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SEOCd", DbType="VarChar(250) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string SEOCd
 		{
@@ -2340,22 +2376,42 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupCd", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string GroupCd
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SEOName", DbType="NVarChar(250)")]
+		public string SEOName
 		{
 			get
 			{
-				return this._GroupCd;
+				return this._SEOName;
 			}
 			set
 			{
-				if ((this._GroupCd != value))
+				if ((this._SEOName != value))
 				{
-					this.OnGroupCdChanging(value);
+					this.OnSEONameChanging(value);
 					this.SendPropertyChanging();
-					this._GroupCd = value;
-					this.SendPropertyChanged("GroupCd");
-					this.OnGroupCdChanged();
+					this._SEOName = value;
+					this.SendPropertyChanged("SEOName");
+					this.OnSEONameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SEOType", DbType="VarChar(250)")]
+		public string SEOType
+		{
+			get
+			{
+				return this._SEOType;
+			}
+			set
+			{
+				if ((this._SEOType != value))
+				{
+					this.OnSEOTypeChanging(value);
+					this.SendPropertyChanging();
+					this._SEOType = value;
+					this.SendPropertyChanged("SEOType");
+					this.OnSEOTypeChanged();
 				}
 			}
 		}
@@ -2416,6 +2472,46 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 					this._MetaKeys = value;
 					this.SendPropertyChanged("MetaKeys");
 					this.OnMetaKeysChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Notes", DbType="NVarChar(MAX)")]
+		public string Notes
+		{
+			get
+			{
+				return this._Notes;
+			}
+			set
+			{
+				if ((this._Notes != value))
+				{
+					this.OnNotesChanging(value);
+					this.SendPropertyChanging();
+					this._Notes = value;
+					this.SendPropertyChanged("Notes");
+					this.OnNotesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SortKey", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> SortKey
+		{
+			get
+			{
+				return this._SortKey;
+			}
+			set
+			{
+				if ((this._SortKey != value))
+				{
+					this.OnSortKeyChanging(value);
+					this.SendPropertyChanging();
+					this._SortKey = value;
+					this.SendPropertyChanged("SortKey");
+					this.OnSortKeyChanged();
 				}
 			}
 		}
@@ -5295,6 +5391,8 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 		
 		private string _InfoType;
 		
+		private string _Rule;
+		
 		private System.Nullable<bool> _PermitModify;
 		
 		private string _Notes;
@@ -5327,6 +5425,8 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
     partial void OnInfoValueChanged();
     partial void OnInfoTypeChanging(string value);
     partial void OnInfoTypeChanged();
+    partial void OnRuleChanging(string value);
+    partial void OnRuleChanged();
     partial void OnPermitModifyChanging(System.Nullable<bool> value);
     partial void OnPermitModifyChanged();
     partial void OnNotesChanging(string value);
@@ -5448,6 +5548,26 @@ namespace CTS.W._150501.Models.Domain.Common.Dao
 					this._InfoType = value;
 					this.SendPropertyChanged("InfoType");
 					this.OnInfoTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Rule]", Storage="_Rule", DbType="VarChar(50)")]
+		public string Rule
+		{
+			get
+			{
+				return this._Rule;
+			}
+			set
+			{
+				if ((this._Rule != value))
+				{
+					this.OnRuleChanging(value);
+					this.SendPropertyChanging();
+					this._Rule = value;
+					this.SendPropertyChanged("Rule");
+					this.OnRuleChanged();
 				}
 			}
 		}

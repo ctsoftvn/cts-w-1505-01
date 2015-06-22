@@ -242,8 +242,9 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
             // Kết quả trả về
             var info = new SEOInfo() {
                 LocaleCd = param.LocaleCd,
-                SEOCd = param.ItemCd,
                 GroupCd = W150501Logics.GRPSEO_MA_ITEMS,
+                SEOCd = param.ItemCd,
+                SEOName = string.Empty,
                 MetaTitle = param.MetaTitle,
                 MetaDesc = param.MetaDesc,
                 MetaKeys = param.MetaKeys,

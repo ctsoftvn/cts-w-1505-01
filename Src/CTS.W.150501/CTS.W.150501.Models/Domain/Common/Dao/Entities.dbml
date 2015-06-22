@@ -17,11 +17,11 @@
   </Table>
   <Table Name="dbo.MAParameters" Member="MAParameters">
     <Type Name="MAParameter">
-      <Column Name="LocaleCd" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ParamCd" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ParamName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="ParamValue" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="ParamType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="[Rule]" Member="Rule" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="PermitModify" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="SortKey" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
@@ -99,11 +99,15 @@
   <Table Name="dbo.APSEOInfos" Member="APSEOInfos">
     <Type Name="APSEOInfo">
       <Column Name="LocaleCd" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="SEOCd" Type="System.String" DbType="VarChar(250) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="GroupCd" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SEOCd" Type="System.String" DbType="VarChar(250) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SEOName" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="SEOType" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="MetaTitle" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="MetaDesc" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="MetaKeys" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SortKey" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="VersionNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="CreateUser" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -254,6 +258,7 @@
       <Column Name="InfoName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="InfoValue" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="InfoType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="[Rule]" Member="Rule" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="PermitModify" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="SortKey" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />

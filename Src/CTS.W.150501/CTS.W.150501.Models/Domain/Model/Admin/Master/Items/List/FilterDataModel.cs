@@ -9,8 +9,6 @@ namespace CTS.W._150501.Models.Domain.Model.Admin.Master.Items.List
     /// </summary>
     public class FilterDataModel : PagerInfoModel<ItemObject>
     {
-        [InputText(RuleName = "code", MessageParam = "ADM_MA_ITEMS_00002")]
-        public string ItemCd { get; set; }
         [InputText(RuleName = "name", MessageParam = "ADM_MA_ITEMS_00003")]
         public string ItemName { get; set; }
         [InputText(RuleName = "linkName", MessageParam = "ADM_MA_ITEMS_00005")]

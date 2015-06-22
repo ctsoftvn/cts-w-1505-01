@@ -2,7 +2,6 @@
 using CTS.Com.Domain.Exceptions;
 using CTS.Com.Domain.Helper;
 using CTS.Com.Domain.Model;
-using CTS.Data.APLocales.Domain.Utils;
 using CTS.Data.APSEOInfos.Domain.Utils;
 using CTS.Data.Domain.Constants;
 using CTS.Data.Domain.Entity;
@@ -82,7 +81,6 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
             var processDao = new MasterItemsDao();
             var masterDataCom = new MasterDataCom();
             var codeCom = new CodeCom();
-            var localeCom = new LocaleCom();
             var localeModel = new LocaleModel<ItemObject>();
             // Map dữ liệu
             DataHelper.CopyObject(inputObject, getResult);
@@ -102,7 +100,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
                 // Duyệt danh sách dữ liệu đa ngôn ngữ
                 foreach (var info in listLocale) {
                     // Lấy thông tin tên
-                    localeName = localeCom.GetName(DataLogics.CD_APP_CD_CLN, info.LocaleCd, false);
+                    localeName = codeCom.GetName(basicLocale, DataLogics.GRPCD_LOCALES, info.LocaleCd, false);
                     // Lấy thông tin SEO
                     metaInfo = seoCom.GetInfo(info.LocaleCd, info.ItemCd, W150501Logics.GRPSEO_MA_ITEMS, true);
                     // Lấy số dòng
@@ -114,6 +112,12 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
                     info.MetaTitle = metaInfo.MetaTitle;
                     info.MetaDesc = metaInfo.MetaDesc;
                     info.MetaKeys = metaInfo.MetaKeys;
+                    // Xóa thông tin khi sao chép
+                    if (inputObject.IsCopy) {
+                        info.ItemName = string.Empty;
+                        info.SearchName = string.Empty;
+                        info.FileCd = string.Empty;
+                    }
                     // Thêm vào danh sách kết quả
                     listData.Add(info);
                 }
@@ -122,15 +126,21 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
             }
             // Khởi tạo giá trị init
             if (inputObject.IsAdd) {
-                localeModel.DataInfo.ItemCd = string.Empty;
+                localeModel.DataInfo.ItemCd = DataHelper.GetUniqueKey();
                 localeModel.DataInfo.ItemName = string.Empty;
+                localeModel.DataInfo.SearchName = string.Empty;
+                localeModel.DataInfo.LinkName = string.Empty;
+                localeModel.DataInfo.FileCd = string.Empty;
                 localeModel.DataInfo.LocaleCd = basicLocale;
                 localeModel.DataInfo.SortKey = decimal.One;
-                localeModel.ListLocale.Clear();
+                localeModel.DataInfo.DeleteFlag = false;
+                if (inputObject.IsAddInit) {
+                    localeModel.ListLocale.Clear();
+                }
             }
             // Lấy danh sách code
             var listCategories = masterDataCom.GetDivCategory(basicLocale, null, false, false);
-            var listLocales = localeCom.GetDiv(DataLogics.CD_APP_CD_CLN, basicLocale, false, false);
+            var listLocales = codeCom.GetDiv(basicLocale, DataLogics.GRPCD_LOCALES, basicLocale, false, false);
             var listDeleteFlag = codeCom.GetDivDeleteFlag(basicLocale, false);
             // Lấy giá trị combo
             var cbCategories = DataHelper.ToComboItems(listCategories, localeModel.DataInfo.CategoryCd);

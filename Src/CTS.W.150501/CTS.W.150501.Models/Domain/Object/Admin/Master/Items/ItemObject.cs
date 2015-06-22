@@ -3,6 +3,9 @@ using CTS.Com.Domain.Model;
 
 namespace CTS.W._150501.Models.Domain.Object.Admin.Master.Items
 {
+    /// <summary>
+    /// ItemObject
+    /// </summary>
     public class ItemObject : BaseSEO
     {
         [OutputText(Format = "{0:N0}")]

@@ -7,95 +7,91 @@ using CTS.Data.Domain.Constants;
 using CTS.Data.Domain.Dao;
 using CTS.W._150501.Models.Domain.Common.Constants;
 using CTS.W._150501.Models.Domain.Common.Dao;
-using CTS.W._150501.Models.Domain.Model.Admin.Master.Items.List;
-using CTS.W._150501.Models.Domain.Object.Admin.Master.Items;
+using CTS.W._150501.Models.Domain.Model.Admin.Master.Categories.List;
+using CTS.W._150501.Models.Domain.Object.Admin.Master.Categories;
 using CTS.Web.Com.Domain.Helper;
 
 namespace CTS.W._150501.Models.Domain.Dao.Admin
 {
     /// <summary>
-    /// MasterItemsDao
+    /// MasterCategoriesDao
     /// </summary>
-    public class MasterItemsDao : GenericDao<EntitiesDataContext>
+    public class MasterCategoriesDao : GenericDao<EntitiesDataContext>
     {
         // Định nghĩa hằng file sql
-        public const string MASTERITEMSDAO_GETPAGERDATA_SQL = "MasterItemsDao_GetPagerData.sql";
-        public const string MASTERITEMSDAO_GETLISTLOCALE_SQL = "MasterItemsDao_GetListLocale.sql";
-        public const string MASTERITEMSDAO_GETLISTOTHERLOCALE_SQL = "MasterItemsDao_GetListOtherLocale.sql";
-        public const string MASTERITEMSDAO_INSERT_SQL = "MasterItemsDao_Insert.sql";
-        public const string MASTERITEMSDAO_UPDATE_SQL = "MasterItemsDao_Update.sql";
+        public const string MASTERCATEGORIESDAO_GETPAGERDATA_SQL = "MasterCategoriesDao_GetPagerData.sql";
+        public const string MASTERCATEGORIESDAO_GETLISTLOCALE_SQL = "MasterCategoriesDao_GetListLocale.sql";
+        public const string MASTERCATEGORIESDAO_GETLISTOTHERLOCALE_SQL = "MasterCategoriesDao_GetListOtherLocale.sql";
+        public const string MASTERCATEGORIESDAO_INSERT_SQL = "MasterCategoriesDao_Insert.sql";
+        public const string MASTERCATEGORIESDAO_UPDATE_SQL = "MasterCategoriesDao_Update.sql";
 
         /// <summary>
         /// Lấy đối tượng pager
         /// </summary>
-        public PagerInfoModel<ItemObject> GetPagerData(FilterDataModel inputObject)
+        public PagerInfoModel<CategoryObject> GetPagerData(FilterDataModel inputObject)
         {
             // Tạo tham số
             var param = new {
                 ContextLocale = WebContextHelper.LocaleCd,
                 LocaleCd = inputObject.LocaleCd,
-                ItemName = inputObject.ItemName,
+                CategoryName = inputObject.CategoryName,
                 LinkName = inputObject.LinkName,
-                CategoryCd = inputObject.CategoryCd,
                 DeleteFlag = inputObject.DeleteFlag,
                 GrpCdLocales = DataLogics.GRPCD_LOCALES,
                 GrpCdDeleteFlag = DataLogics.GRPCD_DELETE_FLAG,
-                GrpSeoMaItems = W150501Logics.GRPSEO_MA_ITEMS
+                GrpSeoMaCategories = W150501Logics.GRPSEO_MA_CATEGORIES
             };
             // Tạo đối tượng pager
-            var pagerInfo = new PagerInfoModel<ItemObject>();
+            var pagerInfo = new PagerInfoModel<CategoryObject>();
             // Sao chép thông tin pager
             DataHelper.CopyPagerInfo(inputObject, pagerInfo);
             // Gán tham số
             pagerInfo.Critial = param;
             // Kết quả trả về
-            return GetPagerByFile<ItemObject>(MASTERITEMSDAO_GETPAGERDATA_SQL, pagerInfo);
+            return GetPagerByFile<CategoryObject>(MASTERCATEGORIESDAO_GETPAGERDATA_SQL, pagerInfo);
         }
 
         /// <summary>
         /// Lấy danh sách dữ liệu đa ngôn ngữ
         /// </summary>
-        public IList<ItemObject> GetListLocale(string itemCd)
+        public IList<CategoryObject> GetListLocale(string categoryCd)
         {
             // Tạo tham số
             var param = new {
-                ItemCd = itemCd
+                CategoryCd = categoryCd
             };
             // Kết quả trả về
-            return GetListByFile<ItemObject>(MASTERITEMSDAO_GETLISTLOCALE_SQL, param);
+            return GetListByFile<CategoryObject>(MASTERCATEGORIESDAO_GETLISTLOCALE_SQL, param);
         }
 
         /// <summary>
         /// Lấy danh sách dữ liệu đa ngôn ngữ
         /// </summary>
-        public IList<ItemObject> GetListOtherLocale(string localeCd, string itemCd)
+        public IList<CategoryObject> GetListOtherLocale(string localeCd, string categoryCd)
         {
             // Tạo tham số
             var param = new {
                 LocaleCd = localeCd,
-                ItemCd = itemCd
+                CategoryCd = categoryCd
             };
             // Kết quả trả về
-            return GetListByFile<ItemObject>(MASTERITEMSDAO_GETLISTOTHERLOCALE_SQL, param);
+            return GetListByFile<CategoryObject>(MASTERCATEGORIESDAO_GETLISTOTHERLOCALE_SQL, param);
         }
 
         /// <summary>
         /// Thêm thông tin dữ liệu
         /// </summary>
-        public int Insert(ItemObject param, DbTransaction transaction)
+        public int Insert(CategoryObject param, DbTransaction transaction)
         {
             // Khởi tạo biến cục bộ
             var sysDate = DateTime.Now;
             // Tạo tham số
             var insertObj = new {
                 LocaleCd = param.LocaleCd,
-                ItemCd = param.ItemCd,
-                ItemName = param.ItemName,
+                CategoryCd = param.CategoryCd,
+                CategoryName = param.CategoryName,
                 SearchName = param.SearchName,
                 LinkName = param.LinkName,
-                FileCd = param.FileCd,
-                CategoryCd = param.CategoryCd,
-                Notes = param.Notes,
                 SortKey = param.SortKey,
                 CreateUser = WebContextHelper.UserName,
                 CreateDate = sysDate,
@@ -104,33 +100,30 @@ namespace CTS.W._150501.Models.Domain.Dao.Admin
                 DeleteFlag = param.DeleteFlag
             };
             // Tiến hành thêm đối tượng dữ liệu
-            return UpdateByFile(MASTERITEMSDAO_INSERT_SQL, insertObj, transaction);
+            return UpdateByFile(MASTERCATEGORIESDAO_INSERT_SQL, insertObj, transaction);
         }
 
         /// <summary>
         /// Cập nhật thông tin dữ liệu
         /// </summary>
-        public int Update(ItemObject param, DbTransaction transaction)
+        public int Update(CategoryObject param, DbTransaction transaction)
         {
             // Khởi tạo biến cục bộ
             var sysDate = DateTime.Now;
             // Tạo tham số
             var updateObj = new {
                 LocaleCd = param.LocaleCd,
-                ItemCd = param.ItemCd,
-                ItemName = param.ItemName,
+                CategoryCd = param.CategoryCd,
+                CategoryName = param.CategoryName,
                 SearchName = param.SearchName,
                 LinkName = param.LinkName,
-                FileCd = param.FileCd,
-                CategoryCd = param.CategoryCd,
-                Notes = param.Notes,
                 SortKey = param.SortKey,
                 UpdateUser = WebContextHelper.UserName,
                 UpdateDate = sysDate,
                 DeleteFlag = param.DeleteFlag
             };
             // Tiến hành thêm đối tượng dữ liệu
-            return UpdateByFile(MASTERITEMSDAO_UPDATE_SQL, updateObj, transaction);
+            return UpdateByFile(MASTERCATEGORIESDAO_UPDATE_SQL, updateObj, transaction);
         }
     }
 }

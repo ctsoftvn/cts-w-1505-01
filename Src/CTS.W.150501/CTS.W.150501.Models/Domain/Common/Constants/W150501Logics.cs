@@ -34,5 +34,10 @@
         public const string CD_INFO_CD_TWITTER_URL = "ma.company-infos.twitter-url";
         public const string CD_INFO_CD_GOOGLE_URL = "ma.company-infos.google-url";
         public const string CD_INFO_CD_FACEBOOK_URL = "ma.company-infos.facebook-url";
+        public const string CD_INFO_CD_SCRIPT_HEADER = "ma.company-infos.script-header";
+        public const string CD_INFO_CD_SCRIPT_FOOTER = "ma.company-infos.script-footer";
+        // Định nghĩa mã thuộc tính
+        public const string CD_PARAM_CD_ADM_LIMIT = "prm.adm.limit";
+        public const string CD_PARAM_CD_CLN_LIMIT = "prm.cln.limit";
     }
 }
