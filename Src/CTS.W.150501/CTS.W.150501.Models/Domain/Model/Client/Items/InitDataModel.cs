@@ -11,18 +11,20 @@ namespace CTS.W._150501.Models.Domain.Model.Client.Items
     /// <summary>
     /// InitDataModel
     /// </summary>
-    public class InitDataModel : BasicInfoModel
+    public class InitDataModel : PagerInfoModel<ItemObject>
     {
         [InputText]
         public string LinkName { get; set; }
-        [OutputList(IgnoreAttribute = false)]
-        public IList<ItemObject> ListItems { get; set; }
         [OutputText]
         public string MetaKey { get; set; }
         [OutputText]
         public string MetaTitle { get; set; }
         [OutputText]
         public string MetaDescription { get; set; }
+        [OutputText]
+        public string CategoryCd { get; set; }
+        [OutputText(Format = "{0:N0}")]
+        public decimal? LimitPager { get; set; }
 
     }
 }
