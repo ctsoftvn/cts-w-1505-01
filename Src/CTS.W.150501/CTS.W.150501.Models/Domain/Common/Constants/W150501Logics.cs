@@ -7,6 +7,7 @@
     {
         // Định nghĩa đường dẫn mặc định
         public const string PATH_DEFAULT_NO_IMAGE = "/res/cln/images/no-image.png";
+        public const string PATH_DEFAULT_ADVERTISING_NO_IMAGE = "/res/cln/images/adv-no-image.png";
         // Định nghĩa mã quyền
         public const string CD_ROLE_CD_ADM_MAIN = "adm.main";
         // Định nghĩa mã seo
