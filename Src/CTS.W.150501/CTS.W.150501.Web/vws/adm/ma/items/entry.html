@@ -45,29 +45,23 @@
             <cts-area tabindex="50" class="top-13 left-5 width-65 height-2" model="objLocale.MetaDesc" style="margin-top:-15px"></cts-area>
             <cts-label class="top-15 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.ENTRY.MetaKeys')}}" style="margin-top:-15px"></cts-label>
             <cts-area tabindex="60" class="top-15 left-5 width-65 height-2" model="objLocale.MetaKeys" style="margin-top:-15px"></cts-area>
-            <cts-button tabindex="80" class="top-17 left-5 width-8" text="{{$nm('ADM.MA.ITEMS.ENTRY.FixLocaleInfo')}}" style="margin-top:-15px" onclick="fixRow()"></cts-button>
-            <cts-button class="top-17 left-9 width-12" text="{{$nm('ADM.MA.ITEMS.ENTRY.CopyMainInfo')}}" style="margin-top:-15px" onclick="copyInfo()"></cts-button>
+            <cts-button tabindex="80" class="top-17 left-5 width-8" onclick="fixRow()" text="{{$nm('ADM.MA.ITEMS.ENTRY.FixLocaleInfo')}}" style="margin-top:-15px"></cts-button>
+            <cts-button class="top-17 left-9 width-12" onclick="copyInfo()" text="{{$nm('ADM.MA.ITEMS.ENTRY.CopyMainInfo')}}" data-original-title="{{$nm('ADM.MA.ITEMS.ENTRY.Tooltip.CopyMainInfo')}}" ui-jq="tooltip" style="margin-top:-15px"></cts-button>
         </cts-form-pane>
-        <cts-grid-Pane style="margin-top: -15px; margin-bottom: 10px;" class="p-top-16 ma-items-entry-tblResult">
+        <cts-grid-Pane style="margin-top: -15px;" class="p-top-16 ma-items-entry-tblResult">
             <table id="tblResult" dt-options="objEntry.tblResultOptions" datatable="ng">
                 <thead>
                 <tr>
                     <td width="100" text="{{$nm('ADM.MA.ITEMS.ENTRY.ColLocale')}}" cts-grid-header="true"></td>
                     <td width="200" text="{{$nm('ADM.MA.ITEMS.ENTRY.ColItemName')}}" cts-grid-header="true"></td>
-                    <td width="400" text="{{$nm('ADM.MA.ITEMS.ENTRY.ColNotes')}}" cts-grid-header="true"></td>
-                    <td width="300" text="{{$nm('ADM.MA.ITEMS.ENTRY.ColMetaTitle')}}" cts-grid-header="true"></td>
-                    <td width="400" text="{{$nm('ADM.MA.ITEMS.ENTRY.ColMetaDesc')}}" cts-grid-header="true"></td>
-                    <td width="400" text="{{$nm('ADM.MA.ITEMS.ENTRY.ColMetaKeys')}}" cts-grid-header="true"></td>
+                    <td width="400" text="{{$nm('ADM.MA.ITEMS.ENTRY.ColMetaTitle')}}" cts-grid-header="true"></td>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="obj in objEntry.ListLocale" ng-click="selectRow(obj.LocaleCd)">
                     <td>{{obj.LocaleName}}</td>
                     <td>{{obj.ItemName}}</td>
-                    <td>{{obj.Notes}}</td>
                     <td>{{obj.MetaTitle}}</td>
-                    <td>{{obj.MetaDesc}}</td>
-                    <td>{{obj.MetaKeys}}</td>
                 </tr>
                 </tbody>
             </table>
