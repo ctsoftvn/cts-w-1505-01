@@ -1,6 +1,6 @@
 UPDATE [MACategories]
 SET
-	[CategoryName] = @ItemName,
+	[CategoryName] = @CategoryName,
 	[SearchName] = @SearchName,
 	[LinkName] = @LinkName,
 	[SortKey] = @SortKey,
