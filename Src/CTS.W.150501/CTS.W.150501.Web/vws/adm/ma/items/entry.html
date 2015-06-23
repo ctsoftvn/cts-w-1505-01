@@ -13,7 +13,7 @@
             <cts-text tabindex="20" class="top-2 left-5 width-15" model="objEntry.DataInfo.ItemName" onblur="blurItemName(data, objEntry.DataInfo, true)" id="txtItemName"></cts-text>
             <cts-button tabindex="110" class="top-2 left-12 width-8" text="{{$nm('ADM.MA.ITEMS.ENTRY.UploadImage')}}" onclick="uploadImage(objEntry.DataInfo)" style="margin-left:-5px"></cts-button>
             <cts-label class="top-3 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.ENTRY.CategoryCd')}}"></cts-label>
-            <cts-select tabindex="30" class="top-3 left-5 width-10" model="objEntry.DataInfo.CategoryCd" options="data.CboCategories"></cts-select>
+            <cts-select tabindex="30" class="top-3 left-5 width-15" model="objEntry.DataInfo.CategoryCd" options="data.CboCategories"></cts-select>
             <cts-label class="top-4 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.ENTRY.LinkName')}}"></cts-label>
             <cts-text tabindex="40" class="top-4 left-5 width-15" model="objEntry.DataInfo.LinkName" tooltip="{ title: $nm('ADM.MA.ITEMS.ENTRY.Tooltip.LinkName'), trigger: 'focus', placement: 'right' }"></cts-text>
             <cts-label class="top-5 left-1 width-10" text="{{$nm('ADM.MA.ITEMS.ENTRY.Notes')}}"></cts-label>
