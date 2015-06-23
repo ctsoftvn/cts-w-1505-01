@@ -90,6 +90,10 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.ItemDetail
                 {
                     info.ItemImage = W150501Logics.PATH_DEFAULT_NO_IMAGE;
                 }
+                else
+                {
+                    info.ItemImage = info.ItemImage + "_normal";
+                }
 
             }
             // Lấy thông tin seo
