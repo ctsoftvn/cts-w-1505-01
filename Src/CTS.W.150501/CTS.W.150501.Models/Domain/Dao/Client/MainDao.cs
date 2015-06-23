@@ -5,6 +5,12 @@ using System.Text;
 using CTS.Data.Domain.Dao;
 using CTS.W._150501.Models.Domain.Common.Dao;
 using CTS.W._150501.Models.Domain.Object.Client.Main;
+using CTS.W._150501.Models.Domain.Model.Client.Items;
+using CTS.Com.Domain.Model;
+using CTS.Web.Com.Domain.Helper;
+using CTS.Data.Domain.Constants;
+using CTS.W._150501.Models.Domain.Common.Constants;
+using CTS.Com.Domain.Helper;
 
 namespace CTS.W._150501.Models.Domain.Dao.Client
 {
@@ -16,6 +22,22 @@ namespace CTS.W._150501.Models.Domain.Dao.Client
         public const string MAINDAO_GETITEMDETAIL_SQL = "MainDao_GetItemDetail.sql";
         public const string MAINDAO_GETITEMRELATED_SQL = "MainDao_GetItemRelated.sql";
         public const string MAINDAO_GETCATEGORYINFO_SQL = "MainDao_GetCategoryInfo.sql";
+        public const string MAINDAO_GETPAGERDATA_SQL = "MainDao_GetPagerData.sql";
+
+        /// <summary>
+        /// Lấy đối tượng pager
+        /// </summary>
+        public PagerInfoModel<ItemObject> GetPagerData<T>(T inputObject, object critial) where T : PagerInfoModel<ItemObject>
+        {
+            // Tạo đối tượng pager
+            var pagerInfo = new PagerInfoModel<ItemObject>();
+            // Sao chép thông tin pager
+            DataHelper.CopyPagerInfo(inputObject, pagerInfo);
+            // Gán tham số
+            pagerInfo.Critial = critial;
+            // Kết quả trả về
+            return GetPagerByFile<ItemObject>(MAINDAO_GETPAGERDATA_SQL, pagerInfo);
+        }
 
         /// <summary>
         /// Lấy danh sách dữ liệu đa ngôn ngữ
