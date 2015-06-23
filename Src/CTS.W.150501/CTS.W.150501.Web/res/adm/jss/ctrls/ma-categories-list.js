@@ -1,5 +1,5 @@
-﻿// MAItemsEntryCtrl
-ctrls.controller('MAItemsListCtrl', ['$scope', '$state', '$stateParams', '$window', function ($scope, $state, $stateParams, $window) {
+﻿// MACategoriesEntryCtrl
+ctrls.controller('MACategoriesListCtrl', ['$scope', '$state', '$stateParams', '$window', function ($scope, $state, $stateParams, $window) {
     /* Định nghĩa biến toàn cục */
     $scope.data = {};
     $scope.style = {};
@@ -9,19 +9,18 @@ ctrls.controller('MAItemsListCtrl', ['$scope', '$state', '$stateParams', '$windo
     $scope.data.HasAuth = false;
     $scope.variable.ShowSearchPane = true;
     $scope.tblResult.Page = 1;
-    $scope.tblResult.Options = $gridHelper.optBase({ width: 910 });
+    $scope.tblResult.Options = $gridHelper.optBase({ width: 700 });
     /* Định nghĩa phương thức xử lý */
     // Xử lý init
     $scope.init = function () {
         $pc({
-            url: '/ajx/adm/ma/items/list.aspx/InitLayout',
+            url: '/ajx/adm/ma/categories/list.aspx/InitLayout',
             data: {},
             success: function (data) {
                 // Ẩn/Hiện cửa sổ chính
                 $scope.$parent.showViewMain(true);
                 // Gán đối tượng dữ liệu 
                 $scope.data = data;
-                $scope.data.CategoryCd = data.CboCategoriesSeleted;
                 $scope.data.LocaleCd = data.CboLocalesSeleted;
                 $scope.data.DeleteFlag = data.CboDeleteFlagSeleted;
                 // Gán dữ liệu table
@@ -29,22 +28,21 @@ ctrls.controller('MAItemsListCtrl', ['$scope', '$state', '$stateParams', '$windo
                 // Xử lý filter dữ liệu
                 $scope.search();
                 // Áp dụng trình tự di chuyển tab
-                $ti('txtItemName');
+                $ti('txtCategoryName');
             }
         });
     };
     // Xử lý filter
     $scope.filter = function () {
         $pc({
-            url: '/ajx/adm/ma/items/list.aspx/Filter',
+            url: '/ajx/adm/ma/categories/list.aspx/Filter',
             data: function () {
                 // Lấy dữ liệu pager
                 var data = $gridHelper.getPagerData($scope.tblResult);
                 // Gán dữ liệu tìm kiếm
                 data.LocaleCd = $scope.data.HdnLocaleCd;
-                data.ItemName = $scope.data.HdnItemName;
+                data.CategoryName = $scope.data.HdnCategoryName;
                 data.LinkName = $scope.data.HdnLinkName;
-                data.CategoryCd = $scope.data.HdnCategoryCd;
                 data.DeleteFlag = $scope.data.HdnDeleteFlag;
                 // Kết quả trả về
                 return data;
@@ -58,19 +56,16 @@ ctrls.controller('MAItemsListCtrl', ['$scope', '$state', '$stateParams', '$windo
     // Xử lý lưu thông tin cập nhật
     $scope.saveBatch = function () {
         $pc({
-            url: '/ajx/adm/ma/items/list.aspx/SaveBatch',
+            url: '/ajx/adm/ma/categories/list.aspx/SaveBatch',
             data: function () {
                 // Khởi tạo biến cục bộ
                 var fnObjData = function (obj) {
                     return {
                         LocaleCd: obj.LocaleCd,
-                        ItemCd: obj.ItemCd,
-                        ItemName: obj.ItemName,
+                        CategoryCd: obj.CategoryCd,
+                        CategoryName: obj.CategoryName,
                         SearchName: obj.SearchName,
                         LinkName: obj.LinkName,
-                        CategoryCd: obj.CategoryCd,
-                        FileCd: obj.FileCd,
-                        Notes: obj.Notes,
                         MetaTitle: obj.MetaTitle,
                         MetaDesc: obj.MetaDesc,
                         MetaKeys: obj.MetaKeys,
@@ -94,7 +89,7 @@ ctrls.controller('MAItemsListCtrl', ['$scope', '$state', '$stateParams', '$windo
                     Status: 'add',
                     CallType: 'init'
                 };
-                $state.go('master_items_list_entry', params);
+                $state.go('master_categories_list_entry', params);
             });
         };
         if ($gridHelper.hasDataChanged($scope.tblResult)) {
@@ -116,9 +111,9 @@ ctrls.controller('MAItemsListCtrl', ['$scope', '$state', '$stateParams', '$windo
         });
     };
     // Xử lý thay đổi tên
-    $scope.blurItemName = function (obj) {
+    $scope.blurCategoryName = function (obj) {
         $pc(function () {
-            obj.SearchName = $dataHelper.toSearchName(obj.ItemName);
+            obj.SearchName = $dataHelper.toSearchName(obj.CategoryName);
         });
     };
     // Xử lý tìm kiếm
@@ -126,9 +121,8 @@ ctrls.controller('MAItemsListCtrl', ['$scope', '$state', '$stateParams', '$windo
         var fnYes = function () {
             $pc(function () {
                 $scope.data.HdnLocaleCd = $scope.data.LocaleCd;
-                $scope.data.HdnItemName = $scope.data.ItemName;
+                $scope.data.HdnCategoryName = $scope.data.CategoryName;
                 $scope.data.HdnLinkName = $scope.data.LinkName;
-                $scope.data.HdnCategoryCd = $scope.data.CategoryCd;
                 $scope.data.HdnDeleteFlag = $scope.data.DeleteFlag;
                 $scope.filter();
             });
@@ -145,9 +139,9 @@ ctrls.controller('MAItemsListCtrl', ['$scope', '$state', '$stateParams', '$windo
             var params = {
                 Status: 'edit',
                 CallType: 'init',
-                ItemCd: obj.ItemCd
+                CategoryCd: obj.CategoryCd
             };
-            $state.go('master_items_list_entry', params);
+            $state.go('master_categories_list_entry', params);
         });
     };
     // Xử lý sao chép
@@ -156,39 +150,9 @@ ctrls.controller('MAItemsListCtrl', ['$scope', '$state', '$stateParams', '$windo
             var params = {
                 Status: 'add',
                 CallType: 'copy',
-                ItemCd: obj.ItemCd
+                CategoryCd: obj.CategoryCd
             };
-            $state.go('master_items_list_entry', params);
-        });
-    };
-    // Hiển thị dialog tải lên
-    $scope.uploadImage = function (obj) {
-        $pc(function () {
-            obj.HasChanged = true;
-            var modalInstance = $dialogHelper.showDialogUpload({
-                LocaleCd: obj.LocaleCd,
-                FileCd: obj.FileCd,
-                HasGen: obj.HasGen,
-                FileGroupCd: 'stg.ma.items.file-cd'
-            });
-            // Lấy kết quả xử lý
-            modalInstance.result.then(function (result) {
-                obj.FileCd = result.data;
-                obj.HasGen = result.hasGen;
-            });
-        });
-    };
-    // Hiển thị dialog editor
-    $scope.editNotes = function (obj) {
-        $pc(function () {
-            obj.HasChanged = true;
-            var modalInstance = $dialogHelper.showDialogEditor({
-                Content: obj.Notes
-            });
-            // Lấy kết quả xử lý
-            modalInstance.result.then(function (result) {
-                obj.Notes = result.data;
-            });
+            $state.go('master_categories_list_entry', params);
         });
     };
     // Hiển thị dialog seo

@@ -73,4 +73,11 @@
 .ma-items-tblResult { top: 227px!important; }
 .ma-items-tblResult-full { top: 58px!important; }
 .ma-items-tblResult .row-fix { height: 250px!important; }
-.ma-items-tblResult-full .row-fix { height: 419px!important; } /* 227-58+250=444 */
+.ma-items-tblResult-full .row-fix { height: 419px!important; } /* 227-58+250=419 */
+/* -- adm/ma/categoris/entry.html -- */
+.ma-categoris-entry-tblResult .row-fix { height: 100px!important; }
+/* -- adm/ma/categoris/list.html -- */
+.ma-categoris-tblResult { top: 202px!important; }
+.ma-categoris-tblResult-full { top: 58px!important; }
+.ma-categoris-tblResult .row-fix { height: 250px!important; }
+.ma-categoris-tblResult-full .row-fix { height: 394px!important; } /* 202-58+250=394 */

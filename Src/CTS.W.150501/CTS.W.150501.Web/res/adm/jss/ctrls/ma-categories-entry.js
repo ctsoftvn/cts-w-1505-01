@@ -1,27 +1,25 @@
-﻿// MAItemsEntryCtrl
-ctrls.controller('MAItemsEntryCtrl', ['$scope', '$state', '$stateParams', '$window', function ($scope, $state, $stateParams, $window) {
+﻿// MACategoriesEntryCtrl
+ctrls.controller('MACategoriesEntryCtrl', ['$scope', '$state', '$stateParams', '$window', function ($scope, $state, $stateParams, $window) {
     /* Định nghĩa biến toàn cục */
     $scope.data = {};
     $scope.style = {};
     $scope.variable = {};
     $scope.objEntry = {};
     $scope.objLocale = {};
-    $scope.edtNotes = {};
     // Gán giá trị init
     $scope.data.HasAuth = false;
-    $scope.variable.ShowLinkBack = $state.is('master_items_list_entry');
+    $scope.variable.ShowLinkBack = $state.is('master_categories_list_entry');
     $scope.variable.BasicInfo = $dataHelper.toBasicInfo($stateParams);
     $scope.objEntry.tblResultOptions = $gridHelper.optBase({ width: 700 });
-    $scope.edtNotes.options = $pageHelper.EDT_OPT_DEF;
     /* Định nghĩa phương thức xử lý */
     // Xử lý init
     $scope.init = function () {
         $pc({
-            url: '/ajx/adm/ma/items/entry.aspx/InitLayout',
+            url: '/ajx/adm/ma/categories/entry.aspx/InitLayout',
             data: {
                 Status: $scope.variable.BasicInfo.Status,
                 CallType: $scope.variable.BasicInfo.CallType,
-                ItemCd: $stateParams.ItemCd
+                CategoryCd: $stateParams.CategoryCd
             },
             success: function (data) {
                 if (data.HasAuth === false) {
@@ -41,7 +39,7 @@ ctrls.controller('MAItemsEntryCtrl', ['$scope', '$state', '$stateParams', '$wind
                     // Xử lý select thông tin dòng đầu tiên
                     $scope.selectRow($scope.objLocale.LocaleCd);
                     // Xử lý focus
-                    $ti('txtItemName');
+                    $ti('txtCategoryName');
                 }
             }
         });
@@ -49,7 +47,7 @@ ctrls.controller('MAItemsEntryCtrl', ['$scope', '$state', '$stateParams', '$wind
     // Xử lý save
     $scope.save = function () {
         $pc({
-            url: '/ajx/adm/ma/items/entry.aspx/Save',
+            url: '/ajx/adm/ma/categories/entry.aspx/Save',
             data: {
                 Status: $scope.variable.BasicInfo.Status,
                 CallType: $scope.variable.BasicInfo.CallType,
@@ -76,38 +74,22 @@ ctrls.controller('MAItemsEntryCtrl', ['$scope', '$state', '$stateParams', '$wind
     // Xử lý back
     $scope.back = function () {
         $pc(function () {
-            $state.go('master_items_list');
+            $state.go('master_categories_list');
         });
     };
     // Tạo mới mã
-    $scope.genItemCd = function () {
+    $scope.genCategoryCd = function () {
         $pc({
-            url: '/ajx/adm/ma/items/entry.aspx/GenItemCd',
+            url: '/ajx/adm/ma/categories/entry.aspx/GenCategoryCd',
             data: {
                 Status: $scope.variable.BasicInfo.Status,
                 CallType: $scope.variable.BasicInfo.CallType
             },
             success: function (data) {
-                if ($scope.variable.BasicInfo.IsAdd && data.ItemCd) {
-                    $scope.objEntry.DataInfo.ItemCd = data.ItemCd;
+                if ($scope.variable.BasicInfo.IsAdd && data.CategoryCd) {
+                    $scope.objEntry.DataInfo.CategoryCd = data.CategoryCd;
                 }
             }
-        });
-    };
-    // Xử lý tải lên hình ảnh
-    $scope.uploadImage = function (obj) {
-        $pc(function () {
-            var modalInstance = $dialogHelper.showDialogUpload({
-                LocaleCd: obj.LocaleCd,
-                FileCd: obj.FileCd,
-                HasGen: obj.HasGen,
-                FileGroupCd: 'stg.ma.items.file-cd'
-            });
-            // Lấy kết quả xử lý
-            modalInstance.result.then(function (result) {
-                obj.FileCd = result.data;
-                obj.HasGen = result.hasGen;
-            });
         });
     };
     // Xử lý cố định dòng
@@ -117,7 +99,7 @@ ctrls.controller('MAItemsEntryCtrl', ['$scope', '$state', '$stateParams', '$wind
             var obj = $scope.objLocale;
             // Trường hợp là ngôn ngữ chuẩn
             if ($scope.data.BasicLocale === obj.LocaleCd) {
-                $dialogHelper.showDialogError($resourceHelper.getMessage('E.MSG.00004', 'ADM.MA.ITEMS.ENTRY.LocaleCd'));
+                $dialogHelper.showDialogError($resourceHelper.getMessage('E.MSG.00004', 'ADM.MA.CATEGORIES.ENTRY.LocaleCd'));
                 return;
             }
             // Cập nhật lại số dòng
@@ -139,10 +121,7 @@ ctrls.controller('MAItemsEntryCtrl', ['$scope', '$state', '$stateParams', '$wind
     $scope.clearRow = function () {
         $pc(function () {
             $scope.objLocale.RowNo = '';
-            $scope.objLocale.ItemName = '';
-            $scope.objLocale.FileCd = '';
-            $scope.objLocale.HasGen = true;
-            $scope.objLocale.Notes = '';
+            $scope.objLocale.CategoryName = '';
             $scope.objLocale.MetaTitle = '';
             $scope.objLocale.MetaDesc = '';
             $scope.objLocale.MetaKeys = '';
@@ -171,8 +150,7 @@ ctrls.controller('MAItemsEntryCtrl', ['$scope', '$state', '$stateParams', '$wind
     $scope.copyInfo = function () {
         var fnYes = function () {
             $pc(function () {
-                $scope.objLocale.ItemName = $scope.objEntry.DataInfo.ItemName;
-                $scope.objLocale.Notes = $scope.objEntry.DataInfo.Notes;
+                $scope.objLocale.CategoryName = $scope.objEntry.DataInfo.CategoryName;
                 $scope.objLocale.MetaTitle = $scope.objEntry.DataInfo.MetaTitle;
                 $scope.objLocale.MetaDesc = $scope.objEntry.DataInfo.MetaDesc;
                 $scope.objLocale.MetaKeys = $scope.objEntry.DataInfo.MetaKeys;
@@ -181,7 +159,7 @@ ctrls.controller('MAItemsEntryCtrl', ['$scope', '$state', '$stateParams', '$wind
         $dialogHelper.showDialogConfirm($ms('I.MSG.00002'), fnYes);
     };
     // Xử lý thay đổi tên
-    $scope.blurItemName = function (data, obj, genlink) {
+    $scope.blurCategoryName = function (data, obj, genlink) {
         $pc(function () {
             if (genlink) {
                 $scope.genLinkName(obj);
@@ -202,12 +180,12 @@ ctrls.controller('MAItemsEntryCtrl', ['$scope', '$state', '$stateParams', '$wind
     // Tạo tự động tên liên kết
     $scope.genLinkName = function (obj) {
         if ($checkHelper.isNull(obj.LinkName)) {
-            obj.LinkName = $dataHelper.toLinkName(obj.ItemName);
+            obj.LinkName = $dataHelper.toLinkName(obj.CategoryName);
         }
     };
     // Tạo tự động tên tìm kiếm
     $scope.genSearchName = function (obj) {
-        obj.SearchName = $dataHelper.toSearchName(obj.ItemName);
+        obj.SearchName = $dataHelper.toSearchName(obj.CategoryName);
     };
     /* Định nghĩa các events */
     // Ẩn/Hiện cửa sổ chính

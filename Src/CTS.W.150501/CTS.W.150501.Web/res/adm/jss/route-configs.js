@@ -11,6 +11,16 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             }
         }
     });
+    // Users|Profile
+    $stateProvider.state('users_profile', {
+        url: "/adm/users/profile",
+        views: {
+            main: {
+                templateUrl: "/vws/adm/users/profile.html",
+                controller: "UsersProfileCtrl"
+            }
+        }
+    });
     // Master|Items|List
     $stateProvider.state('master_items_list', {
         url: "/adm/ma/items/list",
@@ -40,13 +50,33 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             }
         }
     });
-    // Users|Profile
-    $stateProvider.state('users_profile', {
-        url: "/adm/users/profile",
+
+    // Master|Categories|List
+    $stateProvider.state('master_categories_list', {
+        url: "/adm/ma/categories/list",
         views: {
             main: {
-                templateUrl: "/vws/adm/users/profile.html",
-                controller: "UsersProfileCtrl"
+                templateUrl: "/vws/adm/ma/categories/list.html",
+                controller: "MACategoriesListCtrl"
+            }
+        }
+    });
+    // Master|Categories|Entry
+    $stateProvider.state('master_categories_entry', {
+        url: "/adm/ma/categories/entry",
+        views: {
+            main: {
+                templateUrl: "/vws/adm/ma/categories/entry.html",
+                controller: "MACategoriesEntryCtrl"
+            }
+        }
+    });
+    $stateProvider.state('master_categories_list_entry', {
+        url: "/adm/ma/categories/entry/{Status}/{CallType}/{CategoryCd}",
+        views: {
+            main: {
+                templateUrl: "/vws/adm/ma/categories/entry.html",
+                controller: "MACategoriesEntryCtrl"
             }
         }
     });
@@ -60,7 +90,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             }
         }
     });
-    // Settings|InfoSEO
+    // Settings|SEO
     $stateProvider.state('settings_seo', {
         url: "/adm/settings/seo",
         views: {
