@@ -3,6 +3,7 @@ SELECT
 	cd1.CodeName AS LocaleName,
 	mi.ItemCd,
 	mi.ItemName,
+	mi.SearchName,
 	mi.LinkName,
 	mi.CategoryCd,
 	mc.CategoryName,
