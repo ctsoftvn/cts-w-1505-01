@@ -181,6 +181,44 @@
     <value>Danh sách</value>
   </data>
 
+  <!-- adm/ma/categories -->
+  <data name="ADM_MA_CATEGORIES_00001" xml:space="preserve">
+    <value>Loại sản phẩm</value>
+  </data>
+  <data name="ADM_MA_CATEGORIES_00002" xml:space="preserve">
+    <value>Ngôn ngữ</value>
+  </data>
+  <data name="ADM_MA_CATEGORIES_00003" xml:space="preserve">
+    <value>Mã loại</value>
+  </data>
+  <data name="ADM_MA_CATEGORIES_00004" xml:space="preserve">
+    <value>Tên loại</value>
+  </data>
+  <data name="ADM_MA_CATEGORIES_00005" xml:space="preserve">
+    <value>Tên tìm kiếm</value>
+  </data>
+  <data name="ADM_MA_CATEGORIES_00006" xml:space="preserve">
+    <value>Tên liên kết</value>
+  </data>
+  <data name="ADM_MA_CATEGORIES_00007" xml:space="preserve">
+    <value>Thứ tự</value>
+  </data>
+  <data name="ADM_MA_CATEGORIES_00008" xml:space="preserve">
+    <value>Phiên bản</value>
+  </data>
+  <data name="ADM_MA_CATEGORIES_00009" xml:space="preserve">
+    <value>Trạng thái</value>
+  </data>
+  <data name="ADM_MA_CATEGORIES_00010" xml:space="preserve">
+    <value>Số dòng</value>
+  </data>
+  <data name="ADM_MA_CATEGORIES_00011" xml:space="preserve">
+    <value>Danh sách ngôn ngữ</value>
+  </data>
+  <data name="ADM_MA_CATEGORIES_00012" xml:space="preserve">
+    <value>Danh sách</value>
+  </data>
+
   <!-- cln/item-detail -->
   <data name="CLN_ITEMDETAIL_00001" xml:space="preserve">
     <value>Đặt lịch tư vấn</value>

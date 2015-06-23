@@ -79,6 +79,114 @@ namespace CTS.W._150501.Models.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loại sản phẩm.
+        /// </summary>
+        internal static string ADM_MA_CATEGORIES_00001 {
+            get {
+                return ResourceManager.GetString("ADM_MA_CATEGORIES_00001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ngôn ngữ.
+        /// </summary>
+        internal static string ADM_MA_CATEGORIES_00002 {
+            get {
+                return ResourceManager.GetString("ADM_MA_CATEGORIES_00002", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã loại.
+        /// </summary>
+        internal static string ADM_MA_CATEGORIES_00003 {
+            get {
+                return ResourceManager.GetString("ADM_MA_CATEGORIES_00003", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên loại.
+        /// </summary>
+        internal static string ADM_MA_CATEGORIES_00004 {
+            get {
+                return ResourceManager.GetString("ADM_MA_CATEGORIES_00004", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên tìm kiếm.
+        /// </summary>
+        internal static string ADM_MA_CATEGORIES_00005 {
+            get {
+                return ResourceManager.GetString("ADM_MA_CATEGORIES_00005", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên liên kết.
+        /// </summary>
+        internal static string ADM_MA_CATEGORIES_00006 {
+            get {
+                return ResourceManager.GetString("ADM_MA_CATEGORIES_00006", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thứ tự.
+        /// </summary>
+        internal static string ADM_MA_CATEGORIES_00007 {
+            get {
+                return ResourceManager.GetString("ADM_MA_CATEGORIES_00007", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phiên bản.
+        /// </summary>
+        internal static string ADM_MA_CATEGORIES_00008 {
+            get {
+                return ResourceManager.GetString("ADM_MA_CATEGORIES_00008", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trạng thái.
+        /// </summary>
+        internal static string ADM_MA_CATEGORIES_00009 {
+            get {
+                return ResourceManager.GetString("ADM_MA_CATEGORIES_00009", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số dòng.
+        /// </summary>
+        internal static string ADM_MA_CATEGORIES_00010 {
+            get {
+                return ResourceManager.GetString("ADM_MA_CATEGORIES_00010", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Danh sách ngôn ngữ.
+        /// </summary>
+        internal static string ADM_MA_CATEGORIES_00011 {
+            get {
+                return ResourceManager.GetString("ADM_MA_CATEGORIES_00011", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Danh sách.
+        /// </summary>
+        internal static string ADM_MA_CATEGORIES_00012 {
+            get {
+                return ResourceManager.GetString("ADM_MA_CATEGORIES_00012", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sản phẩm.
         /// </summary>
         internal static string ADM_MA_ITEMS_00001 {
