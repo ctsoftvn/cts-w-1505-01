@@ -15,6 +15,7 @@
                 if (resizeTimer) clearTimeout(resizeTimer);
                 resizeTimer = setTimeout("tz_init(" + "320)", 100);
             });
+
             function tz_init(defaultwidth) {
                 var contentWidth = jQuery('#content').width();
                 var columnWidth = defaultwidth;
@@ -37,15 +38,12 @@
 
                 if (newColCount > 1) {
                     newColWidth = Math.floor(contentWidth / newColCount);
-                    //featureColWidth = newColWidth * 2;
                     featureColWidth = newColWidth;
                 }
                 jQuery('.element').width(newColWidth);
                 jQuery('.tz_item').each(function () {
                     jQuery(this).find('img').first().attr('width', '100%');
                 });
-
-                jQuery('.tz_feature_item').width(featureColWidth);
                 var $container = jQuery('#portfolio');
                 $container.imagesLoaded(function () {
                     $container.isotope({
@@ -54,8 +52,8 @@
                         }
                     });
                 });
+
             }
-	
         </script>
         <div class="clear">
         </div>
@@ -65,7 +63,7 @@
                     <ul id="portfolio" class="wr-product hieuung-scroll">
                 </HeaderTemplate>
                 <ItemTemplate>
-                    <li class="element">
+                    <li class="element tz_item">
                         <div class="inner">
                             <a href='<%# "/" + WebContextHelper.LocaleCd + "/dich-vu/chi-tiet/" + ((HashMap)Container.DataItem)["LinkName"] %>'
                                 title='<%# ((HashMap)Container.DataItem)["ItemName"] %>'>
@@ -76,108 +74,63 @@
                 </ItemTemplate>
                 <FooterTemplate>
                     </ul>
+                    <div id="tz_append">
+                    </div>
+                    <div id="loadaj" style="display: none;">
+                        <a href='/ScrollPagerHandler.ashx?lang=<%=WebContextHelper.LocaleCd%>&c=<%=HdcatCd.Value%>&l=<%=hdLimit.Value %>&p=2'></a>
+                    </div>
+                    
+                    </session>
                 </FooterTemplate>
             </asp:Repeater>
             <!-- load scroll product -->
-            <%--<script type="text/javascript">
+            <script type="text/javascript">
                 var tz = jQuery.noConflict();
                 tz(function () {
                     var tzpage = 1;
-                    function getTags() {
-                        var tags = [];
-                        tz('#filter a').each(function (index) {
-                            tags.push(tz(this).attr('data-option-value').replace(".", ""));
-                        });
-                        return JSON.encode(tags);
-                    }
-
-
-
-                    var $container = tz('#portfolio');
-
+                    var $container = tz('#content');
                     $container.imagesLoaded(function () {
                         $container.isotope({
-                            itemSelector: '.element',
-                            getSortData: {
-                                name: function ($elem) {
-                                    var name = $elem.find('.name'),
-                                itemText = name.length ? name : $elem;
-                                    return itemText.text();
-                                },
-                                date: function ($elem) {
-                                    var number = $elem.hasClass('element') ?
-                              $elem.find('.create').text() :
-                              $elem.attr('data-date');
-                                    return number;
-
-                                }
-                            }
+                            itemSelector: '.element'
                         });
                     });
                     tz('#tz_append').css({ 'border': 0, 'background': 'none' });
-
                     $container.infinitescroll({
-                        navSelector: '#loadaj a',    // selector for the paged navigation
-                        nextSelector: '#loadaj a:first',  // selector for the NEXT link (to page 2)
-                        itemSelector: '.element',     // selector for all items you'll retrieve
-                        errorCallback: function () {
-                            tz('#tz_append').removeAttr('style').html('&lt;a class="tzNomore"&gt;&lt;/a&gt;');
-                            tz('#tz_append a').addClass('tzNomore');
+                            navSelector: '#loadaj a',    // selector for the paged navigation
+                            nextSelector: '#loadaj a:first',  // selector for the NEXT link (to page 2)
+                            itemSelector: '.element',     // selector for all items you'll retrieve
+                            errorCallback: function () {
+                                tz('#tz_append').removeAttr('style').html('<a class="tzNomore"></a>');
+                                tz('#tz_append a').addClass('tzNomore');
+                            },
+                            loading: {
+                                finishedMsg: '',
+                                img: '/res/cln/images/loading.gif',
+                                selector: '#tz_append'
+                            }
                         },
-                        loading: {
-                            finishedMsg: '',
-                            img: 'http://m.benhvienthammyaau.vn/templates/tz_vania/images/ajax-loader.gif',
-                            selector: '#tz_append'
+                        // call Isotope as a callback
+                        function (newElements) {
+                            var $newElems = tz(newElements).css({ opacity: 0 });
+                            // ensure that images load before adding to masonry layout
+                            $newElems.imagesLoaded(function () {
+                                // show elems now they're ready
+                                $newElems.animate({ opacity: 1 });
+                                tz_init(320);
+                                // trigger scroll again
+                                $container.isotope('appended', $newElems);
+                                tzpage++;
+                                tz.post('/ScrollPagerHandler.ashx?lang=<%=WebContextHelper.LocaleCd %>&c=<%=HdcatCd.Value %>&l=<%=hdLimit.Value %>&p=' + tzpage, function (data) {
+                                    if (data != null) {
+                                        tztag = tz(data);
+                                        tz('#portfolio').append(tztag);
+                                    }
+                                });
+                            });
                         }
-                    },
-                    // call Isotope as a callback
-                function (newElements) {
-
-                    var $newElems = tz(newElements).css({ opacity: 0 });
-
-                    // ensure that images load before adding to masonry layout
-                    $newElems.imagesLoaded(function () {
-                        // show elems now they're ready
-                        $newElems.animate({ opacity: 1 });
-
-                        tz_init(320);
-
-                        // trigger scroll again
-                        $container.isotope('appended', $newElems);
-
-                        tzpage++;
-                        tz.ajax({
-                            url: 'index.php?option=com_tz_portfolio&amp;task=portfolio.ajaxtags',
-                            data: {
-                                'tags': getTags(),
-                                'Itemid': '101',
-                                'page': tzpage
-                            }
-                        }).success(function (data) {
-                            if (data.length) {
-                                tztag = tz(data);
-                                tz('#filter').append(tztag);
-                                loadPortfolio();
-
-                            }
-                        });
-
-
-                        //if there still more item
-                        if ($newElems.length) {
-
-                            //move item-more to the end
-                            tz('div#tz_append').find('a:first').show();
-                        }
-                    });
-
-                }
-            );
-
+                    );
                 });
-
-
-            </script>--%>
+            </script>
             <!-- effect product -->
             <script type="text/javascript">
 
@@ -189,67 +142,20 @@
                     resizeTimer = setTimeout("tz_init(" + "320)", 100);
                 });
 
-                var $container = tz('#portfolio');
+                var $container = tz('#content');
                 $container.imagesLoaded(function () {
                     $container.isotope({
                         itemSelector: '.element',
-                        layoutMode: 'masonry',
-                        getSortData: {
-                            name: function ($elem) {
-                                var name = $elem.find('.name'),
-                        itemText = name.length ? name : $elem;
-                                return itemText.text();
-                            },
-                            date: function ($elem) {
-                                var number = $elem.hasClass('element') ?
-                      $elem.find('.create').text() :
-                      $elem.attr('data-date');
-                                return number;
-
-                            }
-                        }
+                        layoutMode: 'masonry'
                     });
                     tz_init(320);
                 });
-
-                function loadPortfolio() {
-                    var $optionSets = tz('#tz_options .option-set'),
-             $optionLinks = $optionSets.find('a');
-                    $optionLinks.click(function (event) {
-                        event.preventDefault();
-                        var $this = tz(this);
-                        // don't proceed if already selected
-                        if ($this.hasClass('selected')) {
-                            return false;
-                        }
-                        var $optionSet = $this.parents('.option-set');
-                        $optionSet.find('.selected').removeClass('selected');
-                        $this.addClass('selected');
-
-                        // make option object dynamically, i.e. { filter: '.my-filter-class' }
-                        var options = {},
-                key = $optionSet.attr('data-option-key'),
-                value = $this.attr('data-option-value');
-                        // parse 'false' as false boolean
-
-                        value = value === 'false' ? false : value;
-                        options[key] = value;
-                        if (key === 'layoutMode' && typeof changeLayoutMode === 'function') {
-
-                            // changes in layout modes need extra logic
-                            changeLayoutMode($this, options)
-                        } else {
-                            // otherwise, apply new options
-                            $container.isotope(options);
-                        }
-
-                        return false;
-                    });
-                }
-                //    isotopeinit();
-                loadPortfolio();
-
             </script>
         </div>
     </div>
+    <asp:HiddenField ID="HdcatCd" runat="server" />
+    <asp:HiddenField ID="hdTotal" runat="server" />
+    <asp:HiddenField ID="hdLimit" runat="server" />
+    <input type="hidden" value="2" id="pageIndex" />
+    <input type="hidden" value="false" id="hdProcessing" />
 </asp:Content>

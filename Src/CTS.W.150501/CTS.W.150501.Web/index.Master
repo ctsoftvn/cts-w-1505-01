@@ -22,12 +22,24 @@
     <script type="text/javascript" src="/res/cln/jss/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="/res/cln/jss/script-common.js"></script>
     <script type="text/javascript" src="/res/cln/jss/flaunt.js"></script>
-    <!--grid product-->
+    <!--scroll product-->
+    <script type="text/javascript" src="/res/cln/jss/jquery.infinitescroll.js"></script>
+    <script type="text/javascript" src="/res/cln/jss/jquery.isotope.js"></script>
     <script type="text/javascript" src="/res/cln/jss/jquery-grid.js"></script>
     <script type="text/javascript" src="/res/cln/jss/jquery-loading.js"></script>
     <!--menu mobi-->
     <link rel="stylesheet" type="text/css" href="/res/cln/css/mmenu-mb.all.css" />
     <script type="text/javascript" src="/res/cln/jss/jquery.mmenu.min.all.js"></script>
+    <script type="text/javascript">
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+  m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-56937024-1', 'auto');
+        ga('send', 'pageview');
+    </script>
     <asp:ContentPlaceHolder ID="ContentHead" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -50,8 +62,9 @@
                     </HeaderTemplate>
                     <ItemTemplate>
                         <li>
-                            <asp:LinkButton ID="lbtnLanguage" OnCommand="lbtnLanguage_Command" CommandArgument='<%# ((HashMap)Container.DataItem)["Code"] %>'
-                                runat="server" ToolTip='<%# ((HashMap)Container.DataItem)["Name"] %>'>
+                            <asp:LinkButton CausesValidation="false" ID="lbtnLanguage" OnCommand="lbtnLanguage_Command"
+                                CommandArgument='<%# ((HashMap)Container.DataItem)["Code"] %>' runat="server"
+                                ToolTip='<%# ((HashMap)Container.DataItem)["Name"] %>'>
                                 <img src='<%# "/res/cln/images/graphics/" + ((HashMap)Container.DataItem)["Code"] + ".png" %>' />
                             </asp:LinkButton>
                         </li>
@@ -141,6 +154,23 @@
                                 <asp:HyperLink ID="lkGoogle" runat="server" class="google" ToolTip="Google" Target="_blank">google</asp:HyperLink></li>
                         </ul>
                     </div>
+                </div>
+                <div class="script-footer">
+                    <asp:Literal ID="ltScriptFooter" runat="server"></asp:Literal>
+                    <script type="text/javascript">
+                        document.write(unescape("%3Cscript src=%27http://s10.histats.com/js15.js%27 type=%27text/javascript%27%3E%3C/script%3E"));
+                    </script>
+                    <a href="http://www.histats.com" target="_blank" title="">
+                        <script type="text/javascript">
+                            try {
+                                Histats.start(1, 3054009, 4, 511, 95, 18, "00000000");
+                                Histats.track_hits();
+                            } catch (err) { };
+                        </script>
+                    </a>
+                    <noscript>
+                        <a href="http://www.histats.com" target="_blank">
+                            <img src="http://sstatic1.histats.com/0.gif?3054009&101" alt="" border="0"></a></noscript>
                 </div>
             </div>
         </footer>

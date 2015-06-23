@@ -39,7 +39,6 @@ namespace CTS.W._150501.Web
 
             ltCompanyName.Text = PageCom.GetValue<string>(response, "CompanyName"); 
             ltSlogan.Text = PageCom.GetValue<string>(response, "Slogan"); 
-            ltCopyright.Text = PageCom.GetValue<string>(response, "Copyright"); 
             ltAdderess1.Text = PageCom.GetValue<string>(response, "Address1"); 
             ltAdderess2.Text = PageCom.GetValue<string>(response, "Address2"); 
             ltHotline.Text = PageCom.GetValue<string>(response, "Hotline"); 
@@ -49,8 +48,9 @@ namespace CTS.W._150501.Web
             lkfacebook.NavigateUrl = PageCom.GetValue<string>(response, "FacebookUrl"); 
 
             imgAdvertising.ImageUrl = PageCom.GetValue<string>(response, "AdvertisingFileCd"); 
-            hplAdvertising.NavigateUrl = PageCom.GetValue<string>(response, "AdvertisingFileUrl"); 
+            hplAdvertising.NavigateUrl = PageCom.GetValue<string>(response, "AdvertisingFileUrl");
 
+            ltScriptFooter.Text = PageCom.GetValue<string>(response, "ScriptFooter"); 
             lkMhome.NavigateUrl = Convert.ToString(Strings.CLN_MASTER_HOMEPAGE_LINK);
         }
         protected void lbtnLanguage_Command(object sender, CommandEventArgs e)
