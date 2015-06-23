@@ -18,13 +18,13 @@ namespace CTS.W._150501.Web.ajx.adm.ma.categories
             return response;
         }
 
-        //[WebMethod]
-        //public static object Save(object request)
-        //{
-        //    var logic = new SaveOperateLogic();
-        //    var response = Ajax.Invoke(logic, request, DataLogics.CD_APP_CD_ADM);
-        //    return response;
-        //}
+        [WebMethod]
+        public static object Save(object request)
+        {
+            var logic = new SaveOperateLogic();
+            var response = Ajax.Invoke(logic, request, DataLogics.CD_APP_CD_ADM);
+            return response;
+        }
 
         [WebMethod]
         public static object GenCategoryCd(object request)
