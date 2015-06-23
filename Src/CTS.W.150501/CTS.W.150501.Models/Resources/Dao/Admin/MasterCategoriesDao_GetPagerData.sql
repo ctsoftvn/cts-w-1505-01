@@ -33,6 +33,5 @@ WHERE
 	AND (mc.DeleteFlag = @DeleteFlag OR @DeleteFlag IS NULL)
 ORDER BY
 	\*OrderByClause*\,
-	cd1.SortKey ASC,
-	mc.LocaleCd ASC,
-	mc.SortKey ASC
+	mc.SortKey ASC,
+	cd1.SortKey ASC

@@ -16,9 +16,10 @@ SELECT
 	se.MetaDesc,
 	se.MetaKeys
 FROM [MAItems] mi
-	LEFT OUTER JOIN [MACategories] mc
+	INNER JOIN [MACategories] mc
 		ON (mc.LocaleCd = @ContextLocale
-			AND mc.CategoryCd = mi.CategoryCd)
+			AND mc.CategoryCd = mi.CategoryCd
+			AND mc.DeleteFlag = 0)
 	LEFT OUTER JOIN [MACodes] cd1
 		ON (cd1.LocaleCd = @ContextLocale
 			AND cd1.CodeGroupCd = @GrpCdLocales
@@ -41,6 +42,6 @@ WHERE
 	AND (mi.DeleteFlag = @DeleteFlag OR @DeleteFlag IS NULL)
 ORDER BY
 	\*OrderByClause*\,
-	cd1.SortKey ASC,
-	mi.LocaleCd ASC,
-	mi.SortKey ASC
+	mi.SortKey ASC,
+	cd1.SortKey ASC
+	
