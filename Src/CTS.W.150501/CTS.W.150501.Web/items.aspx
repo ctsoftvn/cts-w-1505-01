@@ -67,7 +67,7 @@
                         <div class="inner">
                             <a href='<%# "/" + WebContextHelper.LocaleCd + "/dich-vu/chi-tiet/" + ((HashMap)Container.DataItem)["LinkName"] %>'
                                 title='<%# ((HashMap)Container.DataItem)["ItemName"] %>'>
-                                <img src='<%# "/ImageResize.ashx?w=420&h=320&bgcolor=FFF&path=" + ((HashMap)Container.DataItem)["ItemImage"] + "_normal" %>' />
+                                <img src='<%# "/ImageResize.ashx?w=420&h=320&bgcolor=FFF&path=" + ((HashMap)Container.DataItem)["ItemImage"] %>' />
                             </a>
                         </div>
                     </li>

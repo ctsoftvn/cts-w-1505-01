@@ -31,7 +31,6 @@ namespace CTS.W._150501.Web
             Page.MetaKeywords = PageCom.GetValue<string>(response, "MetaKey"); 
             Page.MetaDescription = PageCom.GetValue<string>(response, "MetaDescription");
             btnSubmit.Text = Strings.CLN_BTN_SUBMIT;
-            btnReset.Text = Strings.CLN_BTN_RESER;
 
         }
         protected void btnSubmit_Command(object sender, CommandEventArgs e)
@@ -53,10 +52,6 @@ namespace CTS.W._150501.Web
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "clientscript", "<script> alert('" + Strings.CLN_ALERT_ERROR + "'); </script>");
             }
 
-        }
-        protected void btnReset_Command(object sender, CommandEventArgs e)
-        {
-            clearControls();
         }
 
         private void clearControls()

@@ -18,43 +18,43 @@
                 <div class="wr-datlich">
                     <h4>
                         <%= Strings.CLN_MASTER_ITEMDETAIL_EMAIL_SUBJECT%></h4>
-                    <ul>
-                <li>
-                    <label>
-                        <%= Strings.CLN_MASTER_MAIL_NAME%></label>
-                    <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="*" ControlToValidate="txtName"
-                        Display="Dynamic" ForeColor="#FF3300"></asp:RequiredFieldValidator>
-                </li>
-                <li>
-                    <label>
-                        <%= Strings.CLN_MASTER_MAIL_PHONE%></label>
-                    <asp:TextBox ID="txtPhone" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="rfvPhone" runat="server" ErrorMessage="*" ControlToValidate="txtPhone"
-                        Display="Dynamic" ForeColor="#FF3300"></asp:RequiredFieldValidator>
-                </li>
-                <li>
-                    <label>
-                        <%= Strings.CLN_MASTER_MAIL_EMAIL%></label>
-                    <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="*" ControlToValidate="txtEmail"
-                        Display="Dynamic" ForeColor="#FF3300"></asp:RequiredFieldValidator>
-                    <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="This information is invalid"
-                        ControlToValidate="txtEmail" Display="Dynamic" ForeColor="#FF3300" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
-                </li>
-                <li>
-                    <label>
-                        <%= Strings.CLN_MASTER_MAIL_DES%></label>
-                    <asp:TextBox ID="txtDescription" TextMode="MultiLine" runat="server" Columns="30"
-                        Rows="5"></asp:TextBox>
-                </li>
-                <li>
-                    <label>
-                        &nbsp;</label>
-                    <asp:Button ID="btnSubmit" runat="server" CssClass="button" OnCommand="btnSubmit_Command" />
-                    <asp:Button ID="btnReset" runat="server" CssClass="button" OnCommand="btnReset_Command" />
-                </li>
-            </ul>
+                    <ul class="contact_form">
+                        <li>
+                            <label>
+                                <%= Strings.CLN_MASTER_MAIL_NAME%></label>
+                            <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="*" ControlToValidate="txtName"
+                                Display="Dynamic" ForeColor="#FF3300" CssClass="alert_textbox_inputText"></asp:RequiredFieldValidator>
+                        </li>
+                        <li>
+                            <label>
+                                <%= Strings.CLN_MASTER_MAIL_PHONE%></label>
+                            <asp:TextBox ID="txtPhone" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="rfvPhone" runat="server" ErrorMessage="*" ControlToValidate="txtPhone"
+                                Display="Dynamic" ForeColor="#FF3300" CssClass="alert_textbox_inputText"></asp:RequiredFieldValidator>
+                        </li>
+                        <li>
+                            <label>
+                                <%= Strings.CLN_MASTER_MAIL_EMAIL%></label>
+                            <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="*" ControlToValidate="txtEmail"
+                                Display="Dynamic" ForeColor="#FF3300" CssClass="alert_textbox_inputText"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="This information is invalid"
+                                ControlToValidate="txtEmail" CssClass="alert_textbox_inputText" Display="Dynamic" ForeColor="#FF3300" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                        </li>
+                        <li>
+                            <label>
+                                <%= Strings.CLN_MASTER_MAIL_DES%></label>
+                            <asp:TextBox ID="txtDescription" TextMode="MultiLine" runat="server" Columns="30"
+                                Rows="5"></asp:TextBox>
+                        </li>
+                        <li>
+                            <label>
+                                &nbsp;</label>
+                            <asp:Button ID="btnSubmit" runat="server" CssClass="button" OnCommand="btnSubmit_Command" />
+                                <input id="Reset1" class="reset" onclick="hideValidator(); ResetForm();" type="button" value='<%= Strings.CLN_BTN_RESER%>' />
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="col-right">

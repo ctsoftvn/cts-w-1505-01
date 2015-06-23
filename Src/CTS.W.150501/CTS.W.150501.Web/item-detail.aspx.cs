@@ -36,7 +36,7 @@ namespace CTS.W._150501.Web
                 Page.MetaDescription = PageCom.GetValue<string>(response, "MetaDescription");
 
                 btnSubmit.Text = Strings.CLN_BTN_SUBMIT;
-                btnReset.Text = Strings.CLN_BTN_RESER;
+                
             }
             else
             {
@@ -61,10 +61,7 @@ namespace CTS.W._150501.Web
             }
 
         }
-        protected void btnReset_Command(object sender, CommandEventArgs e)
-        {
-            clearControls();
-        }
+
         
         private void clearControls()
         {
