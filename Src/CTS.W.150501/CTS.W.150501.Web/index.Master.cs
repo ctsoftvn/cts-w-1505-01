@@ -45,12 +45,13 @@ namespace CTS.W._150501.Web
 
             lkTwitter.NavigateUrl = PageCom.GetValue<string>(response, "TwitterUrl"); 
             lkGoogle.NavigateUrl = PageCom.GetValue<string>(response, "GoogleUrl"); 
-            lkfacebook.NavigateUrl = PageCom.GetValue<string>(response, "FacebookUrl"); 
+            lkfacebook.NavigateUrl = PageCom.GetValue<string>(response, "FacebookUrl");
 
-            imgAdvertising.ImageUrl = PageCom.GetValue<string>(response, "AdvertisingFileCd"); 
+            imgAdv.ImageUrl = PageCom.GetValue<string>(response, "AdvertisingFileCd"); 
             hplAdvertising.NavigateUrl = PageCom.GetValue<string>(response, "AdvertisingFileUrl");
 
-            ltScriptFooter.Text = PageCom.GetValue<string>(response, "ScriptFooter"); 
+            ltScriptFooter.Text = PageCom.GetValue<string>(response, "ScriptFooter");
+            ltScriptHeader.Text = PageCom.GetValue<string>(response, "ScriptHeader"); 
             lkMhome.NavigateUrl = Convert.ToString(Strings.CLN_MASTER_HOMEPAGE_LINK);
         }
         protected void lbtnLanguage_Command(object sender, CommandEventArgs e)

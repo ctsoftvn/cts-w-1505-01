@@ -13,6 +13,15 @@ namespace CTS.W._150501.Web {
     public partial class index {
         
         /// <summary>
+        /// ltScriptHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltScriptHeader;
+        
+        /// <summary>
         /// ContentHead control.
         /// </summary>
         /// <remarks>
@@ -94,13 +103,13 @@ namespace CTS.W._150501.Web {
         protected global::System.Web.UI.WebControls.HyperLink hplAdvertising;
         
         /// <summary>
-        /// imgAdvertising control.
+        /// imgAdv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgAdvertising;
+        protected global::System.Web.UI.WebControls.Image imgAdv;
         
         /// <summary>
         /// ltCopyright control.
