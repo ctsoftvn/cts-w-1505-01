@@ -43,6 +43,10 @@ namespace CTS.W._150501.Models.Domain.Model.Client.Main
         public string GoogleUrl { get; set; }
         [OutputText]
         public string FacebookUrl { get; set; }
+        [OutputText]
+        public string ScriptHeader { get; set; }
+        [OutputText]
+        public string ScriptFooter { get; set; }
         
 
     }
