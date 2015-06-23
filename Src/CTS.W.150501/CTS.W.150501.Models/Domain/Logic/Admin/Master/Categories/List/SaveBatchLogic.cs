@@ -10,11 +10,11 @@ using CTS.Data.Domain.Entity;
 using CTS.W._150501.Models.Domain.Common.Constants;
 using CTS.W._150501.Models.Domain.Common.Utils;
 using CTS.W._150501.Models.Domain.Dao.Admin;
-using CTS.W._150501.Models.Domain.Model.Admin.Master.Items.List;
-using CTS.W._150501.Models.Domain.Object.Admin.Master.Items;
+using CTS.W._150501.Models.Domain.Model.Admin.Master.Categories.List;
+using CTS.W._150501.Models.Domain.Object.Admin.Master.Categories;
 using CTS.Web.Com.Domain.Helper;
 
-namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.List
+namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Categories.List
 {
     /// <summary>
     /// SaveBatchLogic
@@ -51,7 +51,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.List
             var msgs = DataHelper.CreateList<Message>();
             // Kiểm tra bắt buộc
             if (DataCheckHelper.IsNull(inputObject.ListData)) {
-                msgs.Add(MessageHelper.GetMessage("E_MSG_00001", "ADM_MA_ITEMS_00015"));
+                msgs.Add(MessageHelper.GetMessage("E_MSG_00001", "ADM_MA_CATEGORIES_00012"));
             }
             // Kiểm tra danh sách lỗi
             if (!DataCheckHelper.IsNull(msgs)) {
@@ -67,27 +67,22 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.List
                 if (DataCheckHelper.IsNull(info.LocaleCd)) {
                     flagError = true;
                     msgs.Add(MessageHelper.GetMessageForList(
-                        "ADM_MA_ITEMS_00015", i, "E_MSG_00001", "ADM_MA_ITEMS_00012"));
-                }
-                if (DataCheckHelper.IsNull(info.ItemCd)) {
-                    flagError = true;
-                    msgs.Add(MessageHelper.GetMessageForList(
-                        "ADM_MA_ITEMS_00015", i, "E_MSG_00001", "ADM_MA_ITEMS_00002"));
-                }
-                if (DataCheckHelper.IsNull(info.ItemName)) {
-                    flagError = true;
-                    msgs.Add(MessageHelper.GetMessageForList(
-                        "ADM_MA_ITEMS_00015", i, "E_MSG_00001", "ADM_MA_ITEMS_00003"));
-                }
-                if (DataCheckHelper.IsNull(info.LinkName)) {
-                    flagError = true;
-                    msgs.Add(MessageHelper.GetMessageForList(
-                        "ADM_MA_ITEMS_00015", i, "E_MSG_00001", "ADM_MA_ITEMS_00005"));
+                        "ADM_MA_CATEGORIES_00012", i, "E_MSG_00001", "ADM_MA_CATEGORIES_00002"));
                 }
                 if (DataCheckHelper.IsNull(info.CategoryCd)) {
                     flagError = true;
                     msgs.Add(MessageHelper.GetMessageForList(
-                        "ADM_MA_ITEMS_00015", i, "E_MSG_00001", "ADM_MA_ITEMS_00006"));
+                        "ADM_MA_CATEGORIES_00012", i, "E_MSG_00001", "ADM_MA_CATEGORIES_00003"));
+                }
+                if (DataCheckHelper.IsNull(info.CategoryName)) {
+                    flagError = true;
+                    msgs.Add(MessageHelper.GetMessageForList(
+                        "ADM_MA_CATEGORIES_00012", i, "E_MSG_00001", "ADM_MA_CATEGORIES_00004"));
+                }
+                if (DataCheckHelper.IsNull(info.LinkName)) {
+                    flagError = true;
+                    msgs.Add(MessageHelper.GetMessageForList(
+                        "ADM_MA_CATEGORIES_00012", i, "E_MSG_00001", "ADM_MA_CATEGORIES_00006"));
                 }
                 // Trường hợp lỗi thì đi đến record tiếp theo
                 if (flagError) {
@@ -97,12 +92,12 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.List
                     continue;
                 }
                 // Kiểm tra dữ liệu tồn tại
-                var isExist = masterDataCom.IsExistItem(info.LocaleCd, info.ItemCd, true);
-                var isExistSEO = seoCom.IsExist(info.LocaleCd, W150501Logics.GRPSEO_MA_ITEMS, info.ItemCd, true);
+                var isExist = masterDataCom.IsExistCategory(info.LocaleCd, info.CategoryCd, true);
+                var isExistSEO = seoCom.IsExist(info.LocaleCd, W150501Logics.GRPSEO_MA_CATEGORIES, info.CategoryCd, true);
                 if (!isExist || !isExistSEO) {
                     flagError = true;
                     msgs.Add(MessageHelper.GetMessageForList(
-                        "ADM_MA_ITEMS_00015", i, "E_MSG_00016", "ADM_MA_ITEMS_00001"));
+                        "ADM_MA_CATEGORIES_00012", i, "E_MSG_00016", "ADM_MA_CATEGORIES_00001"));
                 }
                 // Trường hợp lỗi thì đi đến record tiếp theo
                 if (flagError) {
@@ -112,16 +107,16 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.List
                     continue;
                 }
                 // Kiểm tra giá trị duy nhất
-                var isUnique = masterDataCom.IsUniqueItem(info.ItemCd, info.LinkName);
-                var comparer = new KeyEqualityComparer<ItemObject>((k1, k2) =>
-                        k1.ItemCd != k2.ItemCd
+                var isUnique = masterDataCom.IsUniqueItem(info.CategoryCd, info.LinkName);
+                var comparer = new KeyEqualityComparer<CategoryObject>((k1, k2) =>
+                        k1.CategoryCd != k2.CategoryCd
                         && k1.LinkName == k2.LinkName
                 );
                 // Kiểm tra giá trị duy nhất
                 if (!isUnique || inputObject.ListData.Contains(info, comparer)) {
                     flagError = true;
                     msgs.Add(MessageHelper.GetMessageForList(
-                        "ADM_MA_ITEMS_00015", i, "E_MSG_00017", "ADM_MA_ITEMS_00005"));
+                        "ADM_MA_CATEGORIES_00012", i, "E_MSG_00017", "ADM_MA_CATEGORIES_00006"));
                 }
                 // Trường hợp lỗi thì đi đến record tiếp theo
                 if (flagError) {
@@ -148,9 +143,9 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.List
         {
             // Khởi tạo biến cục bộ
             var saveResult = new SaveBatchDataModel();
-            var processDao = new MasterItemsDao();
+            var processDao = new MasterCategoriesDao();
             var seoCom = new SEOCom();
-            var listUpdate = DataHelper.CreateList<ItemObject>();
+            var listUpdate = DataHelper.CreateList<CategoryObject>();
             // Map dữ liệu
             DataHelper.CopyObject(inputObject, saveResult);
             // Lấy ngôn ngữ chuẩn
@@ -162,11 +157,10 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.List
                 // Thêm vào danh sách cập nhật
                 listUpdate.Add(info);
                 // Lấy danh sách locale
-                var listLocaleDb = processDao.GetListOtherLocale(basicLocale, info.ItemCd);
+                var listLocaleDb = processDao.GetListOtherLocale(basicLocale, info.CategoryCd);
                 // Duyệt danh sách locale
                 foreach (var other in listLocaleDb) {
                     // Gán dữ liệu cập nhật
-                    other.ItemCd = info.ItemCd;
                     other.CategoryCd = info.CategoryCd;
                     other.LinkName = info.LinkName;
                     other.SortKey = info.SortKey;
@@ -178,8 +172,8 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.List
             // Lấy danh sách thông tin locale
             var listOtherLocale = inputObject.ListData.Where(o => o.LocaleCd != basicLocale);
             // Khởi tạo comparer
-            var comparer = new KeyEqualityComparer<ItemObject>((k1, k2) =>
-                k1.ItemCd == k2.ItemCd
+            var comparer = new KeyEqualityComparer<CategoryObject>((k1, k2) =>
+                k1.CategoryCd == k2.CategoryCd
                 && k1.LocaleCd == k2.LocaleCd
             );
             // Duyệt danh sách thông tin locale
@@ -188,13 +182,11 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.List
                     // Lấy thông tin cập nhật
                     var updateObj = listUpdate.Single(o =>
                             o.LocaleCd == info.LocaleCd
-                            && o.ItemCd == info.ItemCd);
+                            && o.CategoryCd == info.CategoryCd);
                     var idxObj = listUpdate.IndexOf(updateObj);
                     // Gán dữ liệu cập nhật
-                    listUpdate[idxObj].ItemName = info.ItemName;
+                    listUpdate[idxObj].CategoryName = info.CategoryName;
                     listUpdate[idxObj].SearchName = info.SearchName;
-                    listUpdate[idxObj].FileCd = info.FileCd;
-                    listUpdate[idxObj].Notes = info.Notes;
                 } else {
                     // Thêm vào danh sách cập nhật
                     listUpdate.Add(info);
@@ -223,15 +215,15 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.List
         /// <summary>
         /// Lấy đối tượng SEO
         /// </summary>
-        private SEOInfo GetSEOInfo(ItemObject param)
+        private SEOInfo GetSEOInfo(CategoryObject param)
         {
             // Khởi tạo biến cục bộ
             var sysDate = DateTime.Now;
             // Kết quả trả về
             var info = new SEOInfo() {
                 LocaleCd = param.LocaleCd,
-                GroupCd = W150501Logics.GRPSEO_MA_ITEMS,
-                SEOCd = param.ItemCd,
+                GroupCd = W150501Logics.GRPSEO_MA_CATEGORIES,
+                SEOCd = param.CategoryCd,
                 MetaTitle = param.MetaTitle,
                 MetaDesc = param.MetaDesc,
                 MetaKeys = param.MetaKeys,

@@ -9,10 +9,10 @@ using CTS.Data.MACodes.Domain.Utils;
 using CTS.W._150501.Models.Domain.Common.Constants;
 using CTS.W._150501.Models.Domain.Common.Utils;
 using CTS.W._150501.Models.Domain.Dao.Admin;
-using CTS.W._150501.Models.Domain.Model.Admin.Master.Items.Entry;
-using CTS.W._150501.Models.Domain.Object.Admin.Master.Items;
+using CTS.W._150501.Models.Domain.Model.Admin.Master.Categories.Entry;
+using CTS.W._150501.Models.Domain.Object.Admin.Master.Categories;
 
-namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
+namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Categories.Entry
 {
     /// <summary>
     /// InitLogic
@@ -50,17 +50,17 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
             var basicLocale = Logics.LOCALE_DEFAULT;
             // Trường hợp status là edit
             if (inputObject.IsEdit) {
-                if (DataCheckHelper.IsNull(inputObject.ItemCd)) {
-                    msgs.Add(MessageHelper.GetMessage("E_MSG_00013", "ADM_MA_ITEMS_00002"));
+                if (DataCheckHelper.IsNull(inputObject.CategoryCd)) {
+                    msgs.Add(MessageHelper.GetMessage("E_MSG_00013", "ADM_MA_CATEGORIES_00003"));
                 }
                 // Kiểm tra danh sách lỗi
                 if (!DataCheckHelper.IsNull(msgs)) {
                     throw new ExecuteException(msgs);
                 }
                 // Kiểm tra dữ liệu tồn tại
-                var isExist = masterDataCom.IsExistItem(basicLocale, inputObject.ItemCd, true);
+                var isExist = masterDataCom.IsExistCategory(basicLocale, inputObject.CategoryCd, true);
                 if (!isExist) {
-                    msgs.Add(MessageHelper.GetMessage("E_MSG_00016", "ADM_MA_ITEMS_00001"));
+                    msgs.Add(MessageHelper.GetMessage("E_MSG_00016", "ADM_MA_CATEGORIES_00001"));
                 }
                 // Kiểm tra danh sách lỗi
                 if (!DataCheckHelper.IsNull(msgs)) {
@@ -78,10 +78,9 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
         {
             // Khởi tạo biến cục bộ
             var getResult = new InitDataModel();
-            var processDao = new MasterItemsDao();
-            var masterDataCom = new MasterDataCom();
+            var processDao = new MasterCategoriesDao();
             var codeCom = new CodeCom();
-            var localeModel = new LocaleModel<ItemObject>();
+            var localeModel = new LocaleModel<CategoryObject>();
             // Map dữ liệu
             DataHelper.CopyObject(inputObject, getResult);
             // Lấy ngôn ngữ chuẩn
@@ -90,9 +89,9 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
             if (inputObject.IsEdit || inputObject.IsCopy) {
                 // Khởi tạo biến cục bộ
                 var seoCom = new SEOCom();
-                var listData = DataHelper.CreateList<ItemObject>();
+                var listData = DataHelper.CreateList<CategoryObject>();
                 // Lấy danh sách dữ liệu đa ngôn ngữ
-                var listLocale = processDao.GetListLocale(inputObject.ItemCd);
+                var listLocale = processDao.GetListLocale(inputObject.CategoryCd);
                 // Khởi tạo biến dùng trong loop
                 var rowNo = 0;
                 var localeName = string.Empty;
@@ -102,7 +101,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
                     // Lấy thông tin tên
                     localeName = codeCom.GetName(basicLocale, DataLogics.GRPCD_LOCALES, info.LocaleCd, false);
                     // Lấy thông tin SEO
-                    metaInfo = seoCom.GetInfo(info.LocaleCd, W150501Logics.GRPSEO_MA_ITEMS, info.ItemCd, true);
+                    metaInfo = seoCom.GetInfo(info.LocaleCd, W150501Logics.GRPSEO_MA_CATEGORIES, info.CategoryCd, true);
                     // Lấy số dòng
                     if (info.LocaleCd != basicLocale) {
                         info.RowNo = rowNo++;
@@ -114,9 +113,8 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
                     info.MetaKeys = metaInfo.MetaKeys;
                     // Xóa thông tin khi sao chép
                     if (inputObject.IsCopy) {
-                        info.ItemName = string.Empty;
+                        info.CategoryName = string.Empty;
                         info.SearchName = string.Empty;
-                        info.FileCd = string.Empty;
                     }
                     // Thêm vào danh sách kết quả
                     listData.Add(info);
@@ -126,11 +124,10 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
             }
             // Khởi tạo giá trị init
             if (inputObject.IsAdd) {
-                localeModel.DataInfo.ItemCd = DataHelper.GetUniqueKey();
-                localeModel.DataInfo.ItemName = string.Empty;
+                localeModel.DataInfo.CategoryCd = DataHelper.GetUniqueKey();
+                localeModel.DataInfo.CategoryName = string.Empty;
                 localeModel.DataInfo.SearchName = string.Empty;
                 localeModel.DataInfo.LinkName = string.Empty;
-                localeModel.DataInfo.FileCd = string.Empty;
                 localeModel.DataInfo.LocaleCd = basicLocale;
                 localeModel.DataInfo.SortKey = decimal.One;
                 localeModel.DataInfo.DeleteFlag = false;
@@ -139,17 +136,13 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
                 }
             }
             // Lấy danh sách code
-            var listCategories = masterDataCom.GetDivCategory(basicLocale, null, false, false);
             var listLocales = codeCom.GetDiv(basicLocale, DataLogics.GRPCD_LOCALES, basicLocale, false, false);
             var listDeleteFlag = codeCom.GetDivDeleteFlag(basicLocale, false);
             // Lấy giá trị combo
-            var cbCategories = DataHelper.ToComboItems(listCategories, localeModel.DataInfo.CategoryCd);
             var cbLocales = DataHelper.ToComboItems(listLocales, string.Empty);
             var cbDeleteFlag = DataHelper.ToComboItems(listDeleteFlag, localeModel.DataInfo.DeleteFlag);
             // Gán giá trị trả về
             getResult.LocaleModel = localeModel;
-            getResult.CboCategories = cbCategories.ListItems;
-            getResult.LocaleModel.DataInfo.CategoryCd = cbCategories.SeletedValue;
             getResult.CboLocales = cbLocales.ListItems;
             getResult.CboLocalesSeleted = cbLocales.SeletedValue;
             getResult.CboDeleteFlag = cbDeleteFlag.ListItems;

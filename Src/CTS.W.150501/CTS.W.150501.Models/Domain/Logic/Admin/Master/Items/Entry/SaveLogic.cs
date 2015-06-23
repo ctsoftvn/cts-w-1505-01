@@ -84,7 +84,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Master.Items.Entry
             }
             // Kiểm tra dữ liệu tồn tại
             var isExist = masterDataCom.IsExistItem(dataInfo.LocaleCd, dataInfo.ItemCd, true);
-            var isExistSEO = seoCom.IsExist(dataInfo.LocaleCd, dataInfo.ItemCd, W150501Logics.GRPSEO_MA_ITEMS, true);
+            var isExistSEO = seoCom.IsExist(dataInfo.LocaleCd, W150501Logics.GRPSEO_MA_ITEMS, dataInfo.ItemCd, true);
             // Kiểm tra dữ liệu tồn tại trường hợp status là add
             if (inputObject.IsAdd && (isExist || isExistSEO)) {
                 msgs.Add(MessageHelper.GetMessage("E_MSG_00017", "ADM_MA_ITEMS_00001"));
