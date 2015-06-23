@@ -5,7 +5,7 @@ jQuery(function () {
     jQuery('nav#menu_mb_ll').mmenu();
 });
 jQuery(document).ready(function () {
-    jQuery('.flags').prepend(jQuery('.flags li:last'));
+    //jQuery('.flags').prepend(jQuery('.flags li:last'));
     menu_cate();
 });
 function menu_cate() {
@@ -58,3 +58,64 @@ jQuery(function () {
     });
 
 });
+
+
+
+
+///////////////////////////////
+var isBoolean = function (data) {
+    return data === true
+      || data === 'True'
+      || data === 'true'
+      || data === false
+      || data === 'False'
+      || data === 'false';
+};
+var toBoolean = function (data) {
+    return data === true
+      || data === 'True'
+      || data === 'true'
+      || data === '1';
+};
+var toJSON = function (data) {
+    // Khởi tạo biến cục bộ
+    var json = {}, array = [];
+    // Duyệt danh sách dữ liệu 
+    for (var i in data) {
+        // Khởi tạo biến cục bộ
+        var obj = data[i];
+        // Trường hợp kiểu dữ liệu là đối tượng
+        if (jQuery.isPlainObject(obj)) {
+            // Khởi tạo biến cục bộ
+            var pn = obj.name || obj.key || obj.Key;
+            var pv = obj.value || obj.Value;
+            // Gán giá trị vào đối tượng json
+            if (jQuery.isArray(pv)) {
+                json[pn] = toJSON(pv);
+            } else {
+                if (typeof (pv) === 'string') {
+                    if (isBoolean(pv)) {
+                        pv = toBoolean(pv);
+                    }
+                }
+                json[pn] = pv;
+            }
+        } // Trường hợp kiểu dữ liệu là mảng
+        else if (jQuery.isArray(obj)) {
+            // Thêm vào dữ liệu vào mảng
+            array.push(toJSON(obj));
+        } // Trường hợp kiểu dữ liệu là chuỗi
+        else if (typeof (obj) === 'string') {
+            if (isBoolean(obj)) {
+                obj = toBoolean(obj);
+            }
+            array.push(obj);
+        }
+    }
+    // Trường hợp dữ liệu là mảng
+    if (array.length !== 0) {
+        return array;
+    }
+    // Kết quả xử lý
+    return json;
+};
