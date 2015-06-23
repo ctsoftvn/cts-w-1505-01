@@ -1,0 +1,62 @@
+﻿<cts-title text="{{$nm('ADM.MA.CATEGORIES.LIST.Title')}}"></cts-title>
+<cts-toolbar>
+    <cts-toolbar-item onclick="add()" class="left-1" src="$res.Icons.Add" data-original-title="{{$nm('ADM.MA.CATEGORIES.LIST.Tooltip.Add')}}" ui-jq="tooltip"></cts-toolbar-item>
+    <cts-toolbar-item onclick="saveBatch()" class="left-2" src="$res.Icons.SaveBatch" data-original-title="{{$nm('ADM.MA.CATEGORIES.LIST.Tooltip.SaveBatch')}}" ui-jq="tooltip"></cts-toolbar-item>
+    <cts-toolbar-item onclick="showHideSearchPanel()" class="right-1" src="$res.Icons.ShowHide" data-original-title="{{$nm('ADM.MA.ITEMS.LIST.Tooltip.ShowHideSearch')}}" ui-jq="tooltip"></cts-toolbar-item>
+</cts-toolbar>
+<cts-form-pane class="df-fp p-height-5" ng-show="variable.ShowSearchPane" cts-tabgroup="true">
+    <cts-label class="top-1 left-1 width-10" text="{{$nm('ADM.MA.CATEGORIES.LIST.CategoryName')}}"></cts-label>
+    <cts-text tabindex="10" class="top-1 left-5 width-15" model="data.CategoryName" id="txtCategoryName"></cts-text>
+    <cts-label class="top-2 left-1 width-10" text="{{$nm('ADM.MA.CATEGORIES.LIST.LinkName')}}"></cts-label>
+    <cts-text tabindex="20" class="top-2 left-5 width-15" model="data.LinkName"></cts-text>
+    <cts-label class="top-3 left-1 width-10" text="{{$nm('ADM.MA.CATEGORIES.LIST.LocaleCd')}}"></cts-label>
+    <cts-select tabindex="30" class="top-3 left-5 width-10" model="data.LocaleCd" options="data.CboLocales"></cts-select>
+    <cts-label class="top-4 left-1 width-10" text="{{$nm('ADM.MA.CATEGORIES.LIST.DeleteFlag')}}"></cts-label>
+    <cts-select tabindex="40" class="top-4 left-5 width-8" model="data.DeleteFlag" options="data.CboDeleteFlag"></cts-select>
+    <cts-button tabindex="50" class="top-5 left-5 width-8" id="btnSearch" text="{{$nm('ADM.MA.CATEGORIES.LIST.Search')}}" onclick="search()"></cts-button>
+</cts-form-pane>
+<cts-grid-Pane ng-class="{'ma-categories-tblResult': variable.ShowSearchPane, 'ma-categories-tblResult-full': !variable.ShowSearchPane}">
+    <table dt-options="tblResult.Options" datatable="ng">
+        <thead>
+        <tr>
+            <td width="30"></td>
+            <td width="30"></td>
+            <td width="30"></td>
+            <td width="30"></td>
+            <td width="100" text="{{$nm('ADM.MA.CATEGORIES.LIST.ColLocale')}}"  cts-grid-header="true"></td>
+            <td width="150" text="{{$nm('ADM.MA.CATEGORIES.LIST.ColCategoryName')}}"  cts-grid-header="true"></td>
+            <td width="150" text="{{$nm('ADM.MA.CATEGORIES.LIST.ColLinkName')}}"  cts-grid-header="true"></td>
+            <td width="80" text="{{$nm('ADM.MA.CATEGORIES.LIST.ColSortKey')}}"  cts-grid-header="true"></td>
+            <td width="100" text="{{$nm('ADM.MA.CATEGORIES.LIST.ColDeleteFlag')}}" cts-grid-header="true"></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="obj in tblResult.ListData">
+            <td><input type="checkbox" ng-model="obj.HasChanged"/></td>
+            <td>
+                <cts-image ng-show="obj.LocaleCd == data.BasicLocale" src="$res.Icons.Edit" onclick="edit(obj)" style="width: 16px;" data-original-title="{{$nm('ADM.MA.CATEGORIES.LIST.Tooltip.Edit')}}" ui-jq="tooltip"></cts-image>
+            </td>
+            <td>
+                <cts-image ng-show="obj.LocaleCd == data.BasicLocale" src="$res.Icons.Copy" onclick="copy(obj)" style="width: 16px;" data-original-title="{{$nm('ADM.MA.CATEGORIES.LIST.Tooltip.Copy')}}" ui-jq="tooltip"></cts-image>
+            </td>
+            <td class="editable">
+                <cts-image src="$res.Icons.SEOInfo" onclick="editSEOInfo(obj)" style="width: 16px;" data-original-title="{{$nm('ADM.MA.CATEGORIES.LIST.Tooltip.SEOInfo')}}" ui-jq="tooltip"></cts-image>
+            </td>
+            <td>{{obj.LocaleName}}</td>
+            <td class="editable">
+                <cts-text model="obj.CategoryName" onchange="tblResultChange(data, obj)" onblur="blurCategoryName(obj)"></cts-text>
+            </td>
+            <td ng-class="{'editable': obj.LocaleCd == data.BasicLocale}">
+                <cts-text disabled="obj.LocaleCd != data.BasicLocale" model="obj.LinkName" onchange="tblResultChange(data, obj)" tooltip="{ title: $nm('ADM.MA.CATEGORIES.LIST.Tooltip.LinkName'), trigger: 'focus', placement: 'right' }"></cts-text>
+            </td>
+            <td ng-class="{'editable': obj.LocaleCd == data.BasicLocale}">
+                <cts-number disabled="obj.LocaleCd != data.BasicLocale" option="{ min: 0, max: 9999 }" model="obj.SortKey" onchange="tblResultChange(data, obj)"></cts-number>
+            </td>
+            <td ng-class="{'editable': obj.LocaleCd == data.BasicLocale}">
+                <cts-select disabled="obj.LocaleCd != data.BasicLocale" model="obj.DeleteFlag" options="data.CboGrdDeleteFlag" onchange="tblResultChange(data, obj)"></cts-select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <cts-pager boundary="false" direction="true" model="tblResult" onchange="filter()"></cts-pager>
+</cts-grid-Pane>

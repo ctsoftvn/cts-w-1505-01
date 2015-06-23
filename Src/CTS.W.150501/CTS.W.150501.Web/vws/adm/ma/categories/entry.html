@@ -1,0 +1,62 @@
+﻿<cts-title text="{{$nm('ADM.MA.CATEGORIES.ENTRY.Title')}}"></cts-title>
+<cts-toolbar>
+    <cts-toolbar-item onclick="save()" class="left-1" src="$res.Icons.Save" data-original-title="{{$nm('ADM.MA.CATEGORIES.ENTRY.Tooltip.Save')}}" ui-jq="tooltip"></cts-toolbar-item>
+    <cts-toolbar-item onclick="back()" class="right-1" src="$res.Icons.Back" data-original-title="{{$nm('ADM.MA.CATEGORIES.ENTRY.Tooltip.Back')}}" ui-jq="tooltip" ng-show="variable.ShowLinkBack"></cts-toolbar-item>
+</cts-toolbar>
+<tabset class="df-fp cts-tabset-pane">
+    <tab heading="{{$nm('ADM.MA.CATEGORIES.ENTRY.TabMain')}}">
+        <cts-form-pane class="p-height-10" cts-tabgroup="true">
+            <cts-label class="top-1 left-1 width-10" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.CategoryCd')}}"></cts-label>
+            <cts-label class="top-1 left-5 width-10" text="{{objEntry.DataInfo.CategoryCd}}"></cts-label>
+            <cts-button class="top-1 left-8 width-8" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.GenCategoryCd')}}" onclick="genCategoryCd()" ng-hide="variable.BasicInfo.IsEdit" disabled="variable.BasicInfo.IsEdit" style="margin-left:-5px"></cts-button>
+            <cts-label class="top-2 left-1 width-10" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.CategoryName')}}"></cts-label>
+            <cts-text tabindex="20" class="top-2 left-5 width-15" model="objEntry.DataInfo.CategoryName" onblur="blurCategoryName(data, objEntry.DataInfo, true)" id="txtCategoryName"></cts-text>
+            <cts-label class="top-3 left-1 width-10" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.LinkName')}}"></cts-label>
+            <cts-text tabindex="30" class="top-3 left-5 width-15" model="objEntry.DataInfo.LinkName" tooltip="{ title: $nm('ADM.MA.CATEGORIES.ENTRY.Tooltip.LinkName'), trigger: 'focus', placement: 'right' }"></cts-text>
+            <cts-label class="top-4 left-1 width-10" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.MetaTitle')}}"></cts-label>
+            <cts-text tabindex="40" class="top-4 left-5 width-25" model="objEntry.DataInfo.MetaTitle"></cts-text>
+            <cts-label class="top-5 left-1 width-10" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.MetaDesc')}}"></cts-label>
+            <cts-area tabindex="50" class="top-5 left-5 width-65 height-2" model="objEntry.DataInfo.MetaDesc"></cts-area>
+            <cts-label class="top-7 left-1 width-10" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.MetaKeys')}}"></cts-label>
+            <cts-area tabindex="60" class="top-7 left-5 width-65 height-2" model="objEntry.DataInfo.MetaKeys"></cts-area>
+            <cts-label class="top-9 left-1 width-10" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.SortKey')}}"></cts-label>
+            <cts-number tabindex="70" class="top-9 left-5 width-7" option="{ min: 0, max: 9999 }" model="objEntry.DataInfo.SortKey"></cts-number>
+            <cts-label class="top-10 left-1 width-10" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.DeleteFlag')}}"></cts-label>
+            <cts-select tabindex="80" class="top-10 left-5 width-8" model="objEntry.DataInfo.DeleteFlag" options="data.CboDeleteFlag"></cts-select>
+        </cts-form-pane>
+    </tab>
+    <tab heading="{{$nm('ADM.MA.CATEGORIES.ENTRY.TabLang')}}">
+        <cts-form-pane class="p-height-8" cts-tabgroup="true">
+            <cts-label class="top-1 left-1 width-10" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.LocaleCd')}}"></cts-label>
+            <cts-select tabindex="10" class="top-1 left-5 width-10" model="objLocale.LocaleCd" options="data.CboLocales"></cts-select>
+            <cts-label class="top-2 left-1 width-10" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.CategoryName')}}"></cts-label>
+            <cts-text tabindex="20" class="top-2 left-5 width-15" model="objLocale.CategoryName" onblur="blurCategoryName(data, objLocale, false)"></cts-text>
+            <cts-label class="top-3 left-1 width-10" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.MetaTitle')}}"></cts-label>
+            <cts-text tabindex="30" class="top-3 left-5 width-25" model="objLocale.MetaTitle"></cts-text>
+            <cts-label class="top-4 left-1 width-10" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.MetaDesc')}}"></cts-label>
+            <cts-area tabindex="40" class="top-4 left-5 width-65 height-2" model="objLocale.MetaDesc"></cts-area>
+            <cts-label class="top-6 left-1 width-10" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.MetaKeys')}}"></cts-label>
+            <cts-area tabindex="50" class="top-6 left-5 width-65 height-2" model="objLocale.MetaKeys"></cts-area>
+            <cts-button tabindex="60" class="top-8 left-5 width-8" onclick="fixRow()" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.FixLocaleInfo')}}"></cts-button>
+            <cts-button class="top-8 left-9 width-12" onclick="copyInfo()" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.CopyMainInfo')}}" data-original-title="{{$nm('ADM.MA.CATEGORIES.ENTRY.Tooltip.CopyMainInfo')}}" ui-jq="tooltip"></cts-button>
+        </cts-form-pane>
+        <cts-grid-Pane class="p-top-8 ma-categories-entry-tblResult">
+            <table id="tblResult" dt-options="objEntry.tblResultOptions" datatable="ng">
+                <thead>
+                <tr>
+                    <td width="100" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.ColLocale')}}" cts-grid-header="true"></td>
+                    <td width="200" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.ColCategoryName')}}" cts-grid-header="true"></td>
+                    <td width="400" text="{{$nm('ADM.MA.CATEGORIES.ENTRY.ColMetaTitle')}}" cts-grid-header="true"></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="obj in objEntry.ListLocale" ng-click="selectRow(obj.LocaleCd)">
+                    <td>{{obj.LocaleName}}</td>
+                    <td>{{obj.CategoryName}}</td>
+                    <td>{{obj.MetaTitle}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </cts-grid-Pane>
+    </tab>
+</tabset>
