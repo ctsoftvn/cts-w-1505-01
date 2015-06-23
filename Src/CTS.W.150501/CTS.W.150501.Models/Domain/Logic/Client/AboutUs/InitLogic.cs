@@ -74,7 +74,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.AboutUs
             var aboutUsDescription = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_ABOUTUS_CONTENT, false);
             // Lấy thông tin seo
 
-            var infoSeo = seoCom.GetInfo(WebContextHelper.LocaleCd, W150501Logics.CD_SEO_CD_PAGE_ABOUT, W150501Logics.GRPSEO_CLN_PAGES, false);
+            var infoSeo = seoCom.GetInfo(WebContextHelper.LocaleCd, W150501Logics.GRPSEO_CLN_PAGES, W150501Logics.CD_SEO_CD_PAGE_ABOUT, false);
             seoInfo.MetaTitle = infoSeo.MetaTitle;
             seoInfo.MetaKeys = infoSeo.MetaKeys;
             seoInfo.MetaDesc = infoSeo.MetaDesc;

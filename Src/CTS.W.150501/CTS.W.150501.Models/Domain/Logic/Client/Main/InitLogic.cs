@@ -80,6 +80,14 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.Main
                     WebContextHelper.LocaleCd,
                     advertisingFileCd,
                     false);
+            if (DataCheckHelper.IsNull(advertisingImage))
+            {
+                advertisingImage = W150501Logics.PATH_DEFAULT_ADVERTISING_NO_IMAGE;
+            }
+            else
+            {
+                advertisingImage = advertisingImage.ToString();
+            }
             var advertisingFileUrl = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_ADVERTISING_URL, false);
 
             var address1 = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_ADDRESS_1, false);
@@ -91,6 +99,9 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.Main
             var twitterUrl = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_TWITTER_URL, false);
             var googleUrl = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_GOOGLE_URL, false);
             var facebookUrl = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_FACEBOOK_URL, false);
+
+            var scriptHeader = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_SCRIPT_HEADER, false);
+            var scriptFooter = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_SCRIPT_FOOTER, false);
             // Gán giá trị trả về
             getResult.CboLocales = cbLocales.ListItems;
             getResult.CboLocalesSeleted = cbLocales.SeletedValue;
@@ -106,6 +117,8 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.Main
             getResult.TwitterUrl = twitterUrl;
             getResult.FacebookUrl = facebookUrl;
             getResult.GoogleUrl = googleUrl;
+            getResult.ScriptHeader = scriptHeader;
+            getResult.ScriptFooter = scriptFooter;
             // Kết quả trả về
             return getResult;
         }

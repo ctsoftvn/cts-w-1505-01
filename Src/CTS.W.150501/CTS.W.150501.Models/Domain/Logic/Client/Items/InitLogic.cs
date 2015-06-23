@@ -14,6 +14,8 @@ using CTS.W._150501.Models.Domain.Common.Constants;
 using CTS.Com.Domain.Exceptions;
 using CTS.Data.APSEOInfos.Domain.Utils;
 using CTS.Com.Domain.Model;
+using CTS.Data.MACompanyInfos.Domain.Utils;
+using CTS.Data.MAParameters.Domain.Utils;
 
 namespace CTS.W._150501.Models.Domain.Logic.Client.Items
 {
@@ -67,10 +69,14 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.Items
             // Khởi tạo biến cục bộ
             var getResult = new InitDataModel();
             var processDao = new MainDao();
-            var storageFileCom = new StorageFileCom();
+            //var storageFileCom = new StorageFileCom();
             var seoCom = new SEOCom();
             var categoryCd = string.Empty;
             var seoInfo = new BaseSEO();
+            var storageFileCom = new StorageFileCom();
+            var parameterCom = new ParameterCom();
+            // Lấy giá trị giới hạn trên grid
+            var limit = parameterCom.GetNumber(W150501Logics.CD_PARAM_CD_CLN_LIMIT, false);
             // Map dữ liệu
             DataHelper.CopyObject(inputObject, getResult);
             // Lấy thông tin loại
@@ -80,8 +86,63 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.Items
                 categoryCd = categoryInfo.CategoryCd;
             }
             // Lấy danh sách menu
-            var listItems = processDao.GetListItems(WebContextHelper.LocaleCd, categoryCd);
-            foreach (var item in listItems)
+            inputObject.CategoryCd = categoryCd;
+            inputObject.Limit = limit.Value;
+            // Lấy đối tượng pager
+            var pagerData = GetPagerData(inputObject);
+
+            // Lấy thông tin seo
+            if (DataCheckHelper.IsNull(categoryCd))
+            {
+                var info = seoCom.GetInfo(WebContextHelper.LocaleCd, W150501Logics.CD_SEO_CD_PAGE_INDEX, W150501Logics.GRPSEO_CLN_PAGES, false);
+                if (info != null)
+                {
+                    seoInfo.MetaTitle = info.MetaTitle;
+                    seoInfo.MetaKeys = info.MetaKeys;
+                    seoInfo.MetaDesc = info.MetaDesc;
+                }
+            }
+            else
+            {
+                var info = seoCom.GetInfo(WebContextHelper.LocaleCd, categoryCd, W150501Logics.GRPSEO_MA_CATEGORIES, false);
+                if (info != null)
+                {
+                    seoInfo.MetaTitle = info.MetaTitle;
+                    seoInfo.MetaKeys = info.MetaKeys;
+                    seoInfo.MetaDesc = info.MetaDesc;
+                }
+            }
+
+            // Gán giá trị trả về
+            getResult.ListData = pagerData.ListData;
+            getResult.Total = pagerData.Total;
+            getResult.MetaTitle = seoInfo.MetaTitle;
+            getResult.MetaKey = seoInfo.MetaKeys;
+            getResult.MetaDescription = seoInfo.MetaDesc;
+            getResult.CategoryCd = categoryCd;
+            getResult.LimitPager = limit;
+            // Kết quả trả về
+            return getResult;
+        }
+
+        /// <summary>
+        /// Lấy đối tượng pager
+        /// </summary>
+        private PagerInfoModel<ItemObject> GetPagerData(InitDataModel inputObject)
+        {
+            // Khởi tạo biến cục bộ
+            var pagerResult = new PagerInfoModel<ItemObject>();
+            var processDao = new MainDao();
+            var storageFileCom = new StorageFileCom();
+            // Tạo tham số
+            var critial = new
+            {
+                LocaleCd = WebContextHelper.LocaleCd,
+                CategoryCd = inputObject.CategoryCd
+            };
+            // Lấy đối tượng pager
+            var pagerData = processDao.GetPagerData(inputObject, critial);
+            foreach (var item in pagerData.ListData)
             {
                 item.ItemImage = storageFileCom.GetFileName(
                     WebContextHelper.LocaleCd,
@@ -91,31 +152,16 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.Items
                 {
                     item.ItemImage = W150501Logics.PATH_DEFAULT_NO_IMAGE;
                 }
+                else {
+                    item.ItemImage = item.ItemImage + "_normal";
+                }
 
             }
-            // Lấy thông tin seo
-            if (DataCheckHelper.IsNull(categoryCd))
-            {
-                var info = seoCom.GetInfo(WebContextHelper.LocaleCd, W150501Logics.CD_SEO_CD_PAGE_INDEX, W150501Logics.GRPSEO_CLN_PAGES, false);
-                seoInfo.MetaTitle = info.MetaTitle;
-                seoInfo.MetaKeys = info.MetaKeys;
-                seoInfo.MetaDesc = info.MetaDesc;
-            }
-            else
-            {
-                var info = seoCom.GetInfo(WebContextHelper.LocaleCd, categoryCd, W150501Logics.GRPSEO_MA_CATEGORIES, false);
-                seoInfo.MetaTitle = info.MetaTitle;
-                seoInfo.MetaKeys = info.MetaKeys;
-                seoInfo.MetaDesc = info.MetaDesc;
-            }
-
             // Gán giá trị trả về
-            getResult.ListItems = listItems;
-            getResult.MetaTitle = seoInfo.MetaTitle;
-            getResult.MetaKey = seoInfo.MetaKeys;
-            getResult.MetaDescription = seoInfo.MetaDesc;
+            pagerResult.ListData = pagerData.ListData;
+            pagerResult.Total = pagerData.Total;
             // Kết quả trả về
-            return getResult;
+            return pagerResult;
         }
         #endregion
     }
