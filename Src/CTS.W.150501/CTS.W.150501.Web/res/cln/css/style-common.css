@@ -121,7 +121,7 @@ nav { margin: 0px 0px 0px 0px; position: relative; z-index: 1000; width:100%; ma
 
 
 /*===== FOOTER =====*/
-footer { clear:both; font-size:95%; width:100%; padding:15px 0;}
+footer { clear:both; font-size:95%; width:100%; padding:15px 0;float:left}
 footer .copyright{ text-align:center; width:100%; }
 footer .copyright a{ color:#b6c8eb;}
 footer .copyright a:hover{ color:#ce0101; text-decoration:underline}
@@ -146,9 +146,10 @@ footer .copyright p span.claw { width:16px; height:18px; background: url(/res/cl
 .no-touch, .cd-top:hover {   opacity: 1;}
 /**/
 .wr-qc { bottom: 32px; float: left; font-size: 100%; max-height: 75px; position: fixed;  width: 100%; z-index:999999;	text-align:center; display:none;}
+.wr-qc input{width:100%}
 .wr-qc a:hover { opacity:0.7}
-.wr-qc img { border-top: 2px dashed rgba(255, 184, 249, 0.8); border-bottom: 2px dashed rgba(255, 184, 249, 0.8);}
-.wr-qc a:hover img {border-top: 2px dashed rgba(119, 2, 126, 1); border-bottom: 2px dashed rgba(0, 0, 0, 1);}
+.wr-qc img,.wr-qc input { border-top: 2px dashed rgba(255, 184, 249, 0.8); border-bottom: 2px dashed rgba(255, 184, 249, 0.8);}
+.wr-qc a:hover img,.wr-qc a:hover input {border-top: 2px dashed rgba(119, 2, 126, 1); border-bottom: 2px dashed rgba(0, 0, 0, 1);}
 .floatmenu { background: #791185 none repeat scroll 0 0; border-bottom: 1px solid rgba(0, 0, 0, 0.1); bottom: 0; color: #fff; float: left; font-size: 100%; height: 35px; line-height: 35px;  position: fixed; width: 100%; z-index:999999;}
 .fixhotline { float: left; width: 44%;}
 .hotline { float: right; margin-top:8px;	font-size:12px;}
@@ -221,8 +222,8 @@ input[type="reset"]:hover,
 
 .wr-map { width:100%; position:relative;}
 
-.wr-lienhe { width:50%; position:relative; z-index:99999; padding:20px;   min-height:520px; background: url(/res/cln/images/graphics/bg-dk.jpg) no-repeat center center; background-size: cover; -webkit-border-radius: 12px; -moz-border-radius: 12px; border-radius: 12px; -webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.4); -moz-box-shadow:  0px 0px 5px 0px rgba(50, 50, 50, 0.4); box-shadow:  0px 0px 5px 0px rgba(50, 50, 50, 0.4); text-align:center;}
-
+.wr-lienhe { width:50%; position:relative; z-index:99999; padding:20px;   min-height:520px; background: url(/res/cln/images/graphics/bg-dk.jpg) no-repeat center center; background-size: cover; -webkit-border-radius: 12px; -moz-border-radius: 12px; border-radius: 12px; -webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.4); -moz-box-shadow:  0px 0px 5px 0px rgba(50, 50, 50, 0.4); box-shadow:  0px 0px 5px 0px rgba(50, 50, 50, 0.4); text-align:center;float:left;margin-right:10px}
+.wr-chitiet iframe{float:left;width:45%}
 .wr-lienhe h4{ color:#ffcd00; font-size:24px; line-height:30px; font-weight:normal; text-transform:uppercase; text-align:left; font-family: "UTM American Sans", Arial, sans-serif; margin-bottom:20px; width:100%;}
 
 .wr-lienhe ul{ padding:  0; margin: 0; list-style: none;/* float:left;*/ display:inline-block; text-align:center;}
@@ -330,3 +331,5 @@ input[type="reset"]:hover,
 .flags li a { display:inline-block;line-height:0;}
 .flags li a img {vertical-align:middle; height:24px; width:24px; }
 .flags li a:hover, .flag a.active { opacity:0.8;  transition: all linear 0.3s; filter: grayscale(100%); -webkit-filter: grayscale(100%);-moz-filter: grayscale(100%);	-o-filter: grayscale(100%);	-ms-filter: grayscale(100%) }
+/**/
+.script-footer{float:right;bottom:0}

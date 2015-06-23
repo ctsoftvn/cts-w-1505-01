@@ -8,6 +8,10 @@
 .info-kontakt { width:100%;}
 footer{  padding:3% 0; float:left}
 }
+@media screen and (max-width: 1190px) 
+{
+.wr-chitiet iframe{width:100%;margin-top:20px}	
+	}
 
 @media screen and (max-width: 1024px){	
 .wr-nav { display:none;}  /*   hide main menu     */
