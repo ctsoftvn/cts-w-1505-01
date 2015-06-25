@@ -16,7 +16,7 @@ ctrls.controller('UsersProfileCtrl', ['$scope', '$state', '$window', function ($
                     $window.open('/adm/main.html', '_self');
                 } else {
                     $scope.data = data;
-                    $ti();
+                    $ti('pwPass');
                 }
             }
         });
@@ -31,6 +31,7 @@ ctrls.controller('UsersProfileCtrl', ['$scope', '$state', '$window', function ($
                 ConfirmPassword: $scope.data.ConfirmPassword
             },
             success: function (data) {
+                $scope.init();
             }
         });
     };

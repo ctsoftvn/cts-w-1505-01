@@ -2,9 +2,9 @@
 <cts-toolbar>
     <cts-toolbar-item onclick="save()" class="left-1" src="$res.Icons.Save" data-original-title="{{$nm('ADM.USERS.PROFILE.Save')}}" ui-jq="tooltip"></cts-toolbar-item>
 </cts-toolbar>
-<cts-form-pane class="df-fp p-height-4">
+<cts-form-pane class="df-fp p-height-4" cts-tabgroup="true">
     <cts-label class="top-1 left-1 width-10" text="{{$nm('ADM.USERS.PROFILE.Password')}}"></cts-label>
-    <cts-password class="top-1 left-5 width-15" tabindex="10" model="data.Password"></cts-password>
+    <cts-password class="top-1 left-5 width-15" tabindex="10" model="data.Password" id="pwPass"></cts-password>
     <cts-label class="top-2 left-1 width-10" text="{{$nm('ADM.USERS.PROFILE.NewPassword')}}"></cts-label>
     <cts-password class="top-2 left-5 width-15" tabindex="20" model="data.NewPassword"></cts-password>
     <cts-label class="top-3 left-1 width-10" text="{{$nm('ADM.USERS.PROFILE.ConfirmPassword')}}"></cts-label>
