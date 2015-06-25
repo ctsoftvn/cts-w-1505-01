@@ -22,36 +22,36 @@ namespace CTS.W._150501.Web
             rptCategories.DataSource = listMenu;
             rptCategories.DataBind();
 
-            var listLocales = PageCom.GetValue<IList<object>>(response, "CboLocales"); 
+            var listLocales = PageCom.GetValue<IList<object>>(response, "CboLocales");
             rptLanguages.DataSource = listLocales;
             rptLanguages.DataBind();
 
-            var companyName = PageCom.GetValue<string>(response, "CompanyName"); 
+            var companyName = PageCom.GetValue<string>(response, "CompanyName");
             var copyright = string.Format(Strings.CLN_MASTER_COPYRIGHT, companyName);
             ltCopyright.Text = copyright;
 
             lkHome.NavigateUrl = Convert.ToString(Strings.CLN_MASTER_HOMEPAGE_LINK);
-            lkHome.ToolTip = PageCom.GetValue<string>(response, "CompanyName"); 
+            lkHome.ToolTip = PageCom.GetValue<string>(response, "CompanyName");
 
             lkFhome.NavigateUrl = Convert.ToString(Strings.CLN_MASTER_HOMEPAGE_LINK);
             lkFaboutUs.NavigateUrl = Convert.ToString(Strings.CLN_MASTER_ABOUTUS_LINK);
             lkFcontactUs.NavigateUrl = Convert.ToString(Strings.CLN_MASTER_CONTACTUS_LINK);
 
-            ltCompanyName.Text = PageCom.GetValue<string>(response, "CompanyName"); 
-            ltSlogan.Text = PageCom.GetValue<string>(response, "Slogan"); 
-            ltAdderess1.Text = PageCom.GetValue<string>(response, "Address1"); 
-            ltAdderess2.Text = PageCom.GetValue<string>(response, "Address2"); 
-            ltHotline.Text = PageCom.GetValue<string>(response, "Hotline"); 
+            ltCompanyName.Text = PageCom.GetValue<string>(response, "CompanyName");
+            ltSlogan.Text = PageCom.GetValue<string>(response, "Slogan");
+            ltAdderess1.Text = PageCom.GetValue<string>(response, "Address1");
+            ltAdderess2.Text = PageCom.GetValue<string>(response, "Address2");
+            ltHotline.Text = PageCom.GetValue<string>(response, "Hotline");
 
-            lkTwitter.NavigateUrl = PageCom.GetValue<string>(response, "TwitterUrl"); 
-            lkGoogle.NavigateUrl = PageCom.GetValue<string>(response, "GoogleUrl"); 
+            lkTwitter.NavigateUrl = PageCom.GetValue<string>(response, "TwitterUrl");
+            lkGoogle.NavigateUrl = PageCom.GetValue<string>(response, "GoogleUrl");
             lkfacebook.NavigateUrl = PageCom.GetValue<string>(response, "FacebookUrl");
 
-            imgAdv.ImageUrl = PageCom.GetValue<string>(response, "AdvertisingFileCd"); 
+            imgAdv.ImageUrl = PageCom.GetValue<string>(response, "AdvertisingFileCd");
             hplAdvertising.NavigateUrl = PageCom.GetValue<string>(response, "AdvertisingFileUrl");
 
             ltScriptFooter.Text = PageCom.GetValue<string>(response, "ScriptFooter");
-            ltScriptHeader.Text = PageCom.GetValue<string>(response, "ScriptHeader"); 
+            ltScriptHeader.Text = PageCom.GetValue<string>(response, "ScriptHeader");
             lkMhome.NavigateUrl = Convert.ToString(Strings.CLN_MASTER_HOMEPAGE_LINK);
         }
         protected void lbtnLanguage_Command(object sender, CommandEventArgs e)
@@ -59,7 +59,10 @@ namespace CTS.W._150501.Web
             var strRawURL = Request.RawUrl;
             var newLang = string.Format("/{0}/", Convert.ToString(e.CommandArgument));
             var oldLang = string.Format("/{0}/", WebContextHelper.LocaleCd);
-
+            if (strRawURL == "/")
+            {
+                strRawURL = string.Format("/{0}/trang-chu", oldLang);
+            }
             if (newLang != oldLang)
             {
                 if (strRawURL.IndexOf(oldLang) < 0)
