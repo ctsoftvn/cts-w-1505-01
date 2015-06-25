@@ -86,7 +86,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.Main
             }
             else
             {
-                advertisingImage = advertisingImage.ToString();
+                advertisingImage = advertisingImage + "_normal";
             }
             var advertisingFileUrl = companyCom.GetString(WebContextHelper.LocaleCd, W150501Logics.CD_INFO_CD_ADVERTISING_URL, false);
 
