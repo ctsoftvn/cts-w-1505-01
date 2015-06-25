@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using CTS.Web.Com.Domain.Controller;
 using CTS.W._150501.Models.Domain.Logic.Client.Main;
-using CTS.Com.Domain.Model;
+using CTS.Web.Com.Domain.Controller;
 using CTS.Web.Com.Domain.Helper;
 using Resources;
 
@@ -56,33 +52,27 @@ namespace CTS.W._150501.Web
         }
         protected void lbtnLanguage_Command(object sender, CommandEventArgs e)
         {
-            var strRawURL = Request.RawUrl;
+            var homePage = "/trang-chu";
             var newLang = string.Format("/{0}/", Convert.ToString(e.CommandArgument));
             var oldLang = string.Format("/{0}/", WebContextHelper.LocaleCd);
-            if (strRawURL == "/")
-            {
-                strRawURL = string.Format("/{0}/trang-chu", oldLang);
+            var strRawURL = Request.RawUrl;
+            strRawURL = strRawURL.Replace("/items.aspx", homePage);
+            strRawURL = strRawURL.Replace("/about-us.aspx", "/gioi-thieu");
+            strRawURL = strRawURL.Replace("/contact-us.aspx", "/lien-he");
+            if (strRawURL.TrimEnd('/').Length == 0) {
+                strRawURL = oldLang.TrimEnd('/') + homePage;
             }
-            if (newLang != oldLang)
-            {
-                if (strRawURL.IndexOf(oldLang) < 0)
-                {
+            if (newLang != oldLang) {
+                if (strRawURL.IndexOf(oldLang) < 0) {
                     strRawURL = newLang + strRawURL.TrimStart('/');
-                }
-                else
-                {
+                } else {
                     strRawURL = strRawURL.Replace(oldLang, newLang);
                 }
             }
-            if (strRawURL.TrimEnd('/').Length == 0)
-            {
-                strRawURL = string.Format("/{0}/trang-chu", oldLang);
+            var baseUrl = string.Format("{0}://{1}{2}/", Request.Url.Scheme, Request.Url.Authority, Request.ApplicationPath.TrimEnd('/'));
+            if (!string.IsNullOrEmpty(baseUrl)) {
+                strRawURL = baseUrl + strRawURL.TrimStart('/');
             }
-
-            strRawURL = strRawURL.Replace("/items.aspx", "/trang-chu");
-            strRawURL = strRawURL.Replace("/about-us.aspx", "/gioi-thieu");
-            strRawURL = strRawURL.Replace("/contact-us.aspx", "/lien-he");
-
             Response.Redirect(strRawURL, true);
         }
     }
