@@ -37,7 +37,19 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Login
         /// </summary>
         /// <param name="inputObject">DataModel</param>
         private void Check(AuthDataModel inputObject)
-        {
+        {// Khởi tạo biến cục bộ
+            var msgs = DataHelper.CreateList<Message>();
+            // Kiểm tra bắt buộc
+            if (DataCheckHelper.IsNull(inputObject.UserName)) {
+                msgs.Add(MessageHelper.GetMessage("E_MSG_00001", "ADM_LOGIN_00001"));
+            }
+            if (DataCheckHelper.IsNull(inputObject.Password)) {
+                msgs.Add(MessageHelper.GetMessage("E_MSG_00001", "ADM_LOGIN_00002"));
+            }
+            // Kiểm tra danh sách lỗi
+            if (!DataCheckHelper.IsNull(msgs)) {
+                throw new ExecuteException(msgs);
+            }
         }
 
         /// <summary>
@@ -56,7 +68,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Admin.Login
             // Lấy thông tin xác thực
             var userInfo = userCom.AuthInfo(DataLogics.CD_APP_CD_ADM, inputObject.UserName, inputObject.Password);
             // Trường hợp không tồn tại thông tin xác thực
-            if (userInfo.IsEmpty) {
+            if (userInfo == null || userInfo.IsEmpty) {
                 throw new ExecuteException("E_MSG_00014");
             }
             // Xác thực quyền hạn trang quản trị
