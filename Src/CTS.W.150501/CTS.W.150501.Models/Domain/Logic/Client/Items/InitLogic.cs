@@ -94,7 +94,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.Items
             // Lấy thông tin seo
             if (DataCheckHelper.IsNull(categoryCd))
             {
-                var info = seoCom.GetInfo(WebContextHelper.LocaleCd, W150501Logics.CD_SEO_CD_PAGE_INDEX, W150501Logics.GRPSEO_CLN_PAGES, false);
+                var info = seoCom.GetInfo(WebContextHelper.LocaleCd, W150501Logics.GRPSEO_CLN_PAGES, W150501Logics.CD_SEO_CD_PAGE_INDEX, false);
                 if (info != null)
                 {
                     seoInfo.MetaTitle = info.MetaTitle;
@@ -104,7 +104,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.Items
             }
             else
             {
-                var info = seoCom.GetInfo(WebContextHelper.LocaleCd, categoryCd, W150501Logics.GRPSEO_MA_CATEGORIES, false);
+                var info = seoCom.GetInfo(WebContextHelper.LocaleCd, W150501Logics.GRPSEO_MA_CATEGORIES,categoryCd,false);
                 if (info != null)
                 {
                     seoInfo.MetaTitle = info.MetaTitle;
