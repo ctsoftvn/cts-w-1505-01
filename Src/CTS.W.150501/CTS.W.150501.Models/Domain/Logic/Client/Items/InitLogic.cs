@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CTS.W._150501.Models.Domain.Model.Client.Items;
+﻿using CTS.Com.Domain.Exceptions;
 using CTS.Com.Domain.Helper;
-using CTS.W._150501.Models.Domain.Object.Client.Main;
-using CTS.W._150501.Models.Domain.Dao.Client;
-using CTS.Data.APLocales.Domain.Utils;
-using CTS.Data.Domain.Constants;
-using CTS.Web.Com.Domain.Helper;
-using CTS.Data.APStorageFiles.Domain.Utils;
-using CTS.W._150501.Models.Domain.Common.Constants;
-using CTS.Com.Domain.Exceptions;
-using CTS.Data.APSEOInfos.Domain.Utils;
 using CTS.Com.Domain.Model;
-using CTS.Data.MACompanyInfos.Domain.Utils;
+using CTS.Data.APSEOInfos.Domain.Utils;
+using CTS.Data.APStorageFiles.Domain.Utils;
 using CTS.Data.MAParameters.Domain.Utils;
+using CTS.W._150501.Models.Domain.Common.Constants;
+using CTS.W._150501.Models.Domain.Dao.Client;
+using CTS.W._150501.Models.Domain.Model.Client.Items;
+using CTS.W._150501.Models.Domain.Object.Client.Main;
+using CTS.Web.Com.Domain.Helper;
 
 namespace CTS.W._150501.Models.Domain.Logic.Client.Items
 {
@@ -53,8 +46,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.Items
             // Lấy thông tin sản phẩm
             var categoryInfo = processDao.GetCategoryInfo(WebContextHelper.LocaleCd, inputObject.LinkName);
             // Kiểm tra dữ liệu tồn tại
-            if (categoryInfo == null && !DataCheckHelper.IsNull(inputObject.LinkName))
-            {
+            if (categoryInfo == null && !DataCheckHelper.IsNull(inputObject.LinkName)) {
                 throw new ExecuteException("I_MSG_00008");
             }
         }
@@ -81,8 +73,7 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.Items
             DataHelper.CopyObject(inputObject, getResult);
             // Lấy thông tin loại
             var categoryInfo = processDao.GetCategoryInfo(WebContextHelper.LocaleCd, inputObject.LinkName);
-            if (categoryInfo != null)
-            {
+            if (categoryInfo != null) {
                 categoryCd = categoryInfo.CategoryCd;
             }
             // Lấy danh sách menu
@@ -92,21 +83,16 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.Items
             var pagerData = GetPagerData(inputObject);
 
             // Lấy thông tin seo
-            if (DataCheckHelper.IsNull(categoryCd))
-            {
+            if (DataCheckHelper.IsNull(categoryCd)) {
                 var info = seoCom.GetInfo(WebContextHelper.LocaleCd, W150501Logics.GRPSEO_CLN_PAGES, W150501Logics.CD_SEO_CD_PAGE_INDEX, false);
-                if (info != null)
-                {
+                if (info != null) {
                     seoInfo.MetaTitle = info.MetaTitle;
                     seoInfo.MetaKeys = info.MetaKeys;
                     seoInfo.MetaDesc = info.MetaDesc;
                 }
-            }
-            else
-            {
-                var info = seoCom.GetInfo(WebContextHelper.LocaleCd, W150501Logics.GRPSEO_MA_CATEGORIES,categoryCd,false);
-                if (info != null)
-                {
+            } else {
+                var info = seoCom.GetInfo(WebContextHelper.LocaleCd, W150501Logics.GRPSEO_MA_CATEGORIES, categoryCd, false);
+                if (info != null) {
                     seoInfo.MetaTitle = info.MetaTitle;
                     seoInfo.MetaKeys = info.MetaKeys;
                     seoInfo.MetaDesc = info.MetaDesc;
@@ -135,27 +121,22 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.Items
             var processDao = new MainDao();
             var storageFileCom = new StorageFileCom();
             // Tạo tham số
-            var critial = new
-            {
+            var critial = new {
                 LocaleCd = WebContextHelper.LocaleCd,
                 CategoryCd = inputObject.CategoryCd
             };
             // Lấy đối tượng pager
             var pagerData = processDao.GetPagerData(inputObject, critial);
-            foreach (var item in pagerData.ListData)
-            {
+            foreach (var item in pagerData.ListData) {
                 item.ItemImage = storageFileCom.GetFileName(
                     WebContextHelper.LocaleCd,
                     item.FileCd,
                     false);
-                if (DataCheckHelper.IsNull(item.ItemImage))
-                {
+                if (DataCheckHelper.IsNull(item.ItemImage)) {
                     item.ItemImage = W150501Logics.PATH_DEFAULT_NO_IMAGE;
-                }
-                else {
+                } else {
                     item.ItemImage = item.ItemImage + "_normal";
                 }
-
             }
             // Gán giá trị trả về
             pagerResult.ListData = pagerData.ListData;

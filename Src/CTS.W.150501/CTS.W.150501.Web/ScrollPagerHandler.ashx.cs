@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Text;
-using CTS.Web.Com.Domain.Model;
-using CTS.Web.Com.Domain.Utils;
+using System.Web;
+using CTS.Com.Domain.Model;
 using CTS.W._150501.Models.Domain.Logic.Client.Items;
 using CTS.Web.Com.Domain.Helper;
-using CTS.Com.Domain.Model;
+using CTS.Web.Com.Domain.Model;
+using CTS.Web.Com.Domain.Utils;
 
 namespace CTS.W._150501.Web
 {
@@ -33,8 +32,7 @@ namespace CTS.W._150501.Web
             request.Add("Limit", limit);
             var logic = new FilterOperateLogic();
             var response = pageCom.Invoke(logic, request);
-            if (response.ResultFlag)
-            {
+            if (response.ResultFlag) {
                 var listItems = pageCom.GetValue<IList<object>>(response, "ListData");
                 context.Response.Write(GenerateHTML(listItems));
             }
@@ -52,8 +50,7 @@ namespace CTS.W._150501.Web
             var pageCom = new PageCom();
             StringBuilder strHTML = new StringBuilder();
 
-            for (int i = 0; i < lstItems.Count; i++)
-            {
+            for (int i = 0; i < lstItems.Count; i++) {
                 var obj = (HashMap)lstItems[i];
                 //Begin
                 strHTML.AppendLine(@"<li class='element tz_item'>");
@@ -62,7 +59,7 @@ namespace CTS.W._150501.Web
                 var linkName = pageCom.GetValue<string>(obj, "LinkName");
                 strHTML.AppendLine("<a href='/" + WebContextHelper.LocaleCd + "/dich-vu/chi-tiet/" + linkName + "'" + "title='" + itemName + "'>");
                 var itemImage = pageCom.GetValue<string>(obj, "ItemImage");
-                strHTML.AppendLine("<img src='" + itemImage + "'/>");
+                strHTML.AppendLine("<img src='/ImageResize.ashx?w=420&h=320&bgcolor=FFF&path=" + itemImage + "'/>");
                 strHTML.AppendLine("</a>");
                 strHTML.AppendLine("</div>");
                 strHTML.AppendLine("</li>");

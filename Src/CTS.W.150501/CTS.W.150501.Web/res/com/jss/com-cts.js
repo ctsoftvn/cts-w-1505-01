@@ -66,6 +66,13 @@ var $pc = function (obj) {
     cts.helper.PageHelper.process(obj);
 };
 /** 
+* Xử lý handler chính
+* @param obj: đối tượng xử lý
+*/
+var $pchl = function (obj) {
+    cts.helper.PageHelper.processHandler(obj);
+};
+/** 
 * Chuyển hướng đến địa chỉ trang cụ thể với tham số
 * @param id: id của trang
 * @param url: địa chỉ trang

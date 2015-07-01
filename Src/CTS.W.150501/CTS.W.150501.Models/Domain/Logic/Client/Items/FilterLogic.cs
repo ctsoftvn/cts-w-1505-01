@@ -1,11 +1,11 @@
 ﻿using CTS.Com.Domain.Helper;
 using CTS.Com.Domain.Model;
+using CTS.Data.APStorageFiles.Domain.Utils;
+using CTS.W._150501.Models.Domain.Common.Constants;
 using CTS.W._150501.Models.Domain.Dao.Client;
 using CTS.W._150501.Models.Domain.Model.Client.Items;
 using CTS.W._150501.Models.Domain.Object.Client.Main;
 using CTS.Web.Com.Domain.Helper;
-using CTS.W._150501.Models.Domain.Common.Constants;
-using CTS.Data.APStorageFiles.Domain.Utils;
 
 namespace CTS.W._150501.Models.Domain.Logic.Client.Items
 {
@@ -70,24 +70,22 @@ namespace CTS.W._150501.Models.Domain.Logic.Client.Items
             var processDao = new MainDao();
             var storageFileCom = new StorageFileCom();
             // Tạo tham số
-            var critial = new
-            {
+            var critial = new {
                 LocaleCd = WebContextHelper.LocaleCd,
                 CategoryCd = inputObject.CategoryCd
             };
             // Lấy đối tượng pager
             var pagerData = processDao.GetPagerData(inputObject, critial);
-            foreach (var item in pagerData.ListData)
-            {
+            foreach (var item in pagerData.ListData) {
                 item.ItemImage = storageFileCom.GetFileName(
                     WebContextHelper.LocaleCd,
                     item.FileCd,
                     false);
-                if (DataCheckHelper.IsNull(item.ItemImage))
-                {
+                if (DataCheckHelper.IsNull(item.ItemImage)) {
                     item.ItemImage = W150501Logics.PATH_DEFAULT_NO_IMAGE;
+                } else {
+                    item.ItemImage = item.ItemImage + "_normal";
                 }
-
             }
             // Gán giá trị trả về
             pagerResult.ListData = pagerData.ListData;
