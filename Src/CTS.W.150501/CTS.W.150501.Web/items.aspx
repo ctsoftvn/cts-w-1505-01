@@ -73,22 +73,21 @@
                     </li>
                 </ItemTemplate>
                 <FooterTemplate>
-                    </ul>
-                    <div id="tz_append">
-                    </div>
-                    <div id="loadaj" style="display: none;">
-                        <a href='/ScrollPagerHandler.ashx?lang=<%=WebContextHelper.LocaleCd%>&c=<%=HdcatCd.Value%>&l=<%=hdLimit.Value %>&p=2'></a>
-                    </div>
-                    
-                    </session>
+                   </ul>
+                   <div id="tz_append">
+                   </div>
+                   <div id="loadaj" style="display: none;">
+                      <a href='/ScrollPagerHandler.ashx?lang=<%=WebContextHelper.LocaleCd%>&c=<%=HdcatCd.Value%>&l=<%=hdLimit.Value %>&p=2'></a>
+                   </div>
                 </FooterTemplate>
             </asp:Repeater>
+			 
             <!-- load scroll product -->
             <script type="text/javascript">
                 var tz = jQuery.noConflict();
                 tz(function () {
                     var tzpage = 1;
-                    var $container = tz('#content');
+                    var $container = tz('#portfolio');
                     $container.imagesLoaded(function () {
                         $container.isotope({
                             itemSelector: '.element'
@@ -96,20 +95,20 @@
                     });
                     tz('#tz_append').css({ 'border': 0, 'background': 'none' });
                     $container.infinitescroll({
-                            navSelector: '#loadaj a',    // selector for the paged navigation
-                            nextSelector: '#loadaj a:first',  // selector for the NEXT link (to page 2)
-                            itemSelector: '.element',     // selector for all items you'll retrieve
-                            errorCallback: function () {
-                                tz('#tz_append').removeAttr('style').html('<a class="tzNomore"></a>');
-                                tz('#tz_append a').addClass('tzNomore');
-                            },
-                            loading: {
-                                finishedMsg: '',
-                                img: '/res/cln/images/loading.gif',
-                                selector: '#tz_append'
-                            }
+                        navSelector: '#loadaj a',    // selector for the paged navigation
+                        nextSelector: '#loadaj a:first',  // selector for the NEXT link (to page 2)
+                        itemSelector: '.element',     // selector for all items you'll retrieve
+                        errorCallback: function () {
+                            tz('#tz_append').removeAttr('style').html('<a class="tzNomore"></a>');
+                            tz('#tz_append a').addClass('tzNomore');
                         },
-                        // call Isotope as a callback
+                        loading: {
+                            finishedMsg: '',
+                            img: '/res/cln/images/loading.gif',
+                            selector: '#tz_append'
+                        }
+                    },
+                    // call Isotope as a callback
                         function (newElements) {
                             var $newElems = tz(newElements).css({ opacity: 0 });
                             // ensure that images load before adding to masonry layout
@@ -120,12 +119,13 @@
                                 // trigger scroll again
                                 $container.isotope('appended', $newElems);
                                 tzpage++;
-                                tz.post('/ScrollPagerHandler.ashx?lang=<%=WebContextHelper.LocaleCd %>&c=<%=HdcatCd.Value %>&l=<%=hdLimit.Value %>&p=' + tzpage, function (data) {
-                                    if (data != null) {
-                                        tztag = tz(data);
-                                        tz('#portfolio').append(tztag);
-                                    }
-                                });
+                                //tz.post('/ScrollPagerHandler.ashx?lang=<%=WebContextHelper.LocaleCd %>&c=<%=HdcatCd.Value %>&l=<%=hdLimit.Value %>&p=' + tzpage, function (data) {
+                                //if (data != null) {
+                                // tztag = tz(data);
+                                // tz('#portfolio').append(tztag);
+                                // tz('#portfolio li:last').after(tztag);
+                                //}
+                                //});
                             });
                         }
                     );
@@ -142,7 +142,7 @@
                     resizeTimer = setTimeout("tz_init(" + "320)", 100);
                 });
 
-                var $container = tz('#content');
+                var $container = tz('#portfolio');
                 $container.imagesLoaded(function () {
                     $container.isotope({
                         itemSelector: '.element',
